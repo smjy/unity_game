@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour {
 
-    public float z_para = 80f;
+    public float z_para = 20f;
 
     MainPlayer_Single mm;
     Rigidbody rb;

@@ -80,7 +80,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - _AlphaVal: 0.46
+    - _AlphaVal: 0.36
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
