@@ -12,7 +12,6 @@ public class Follow : MonoBehaviour {
     void Start()
     {
         mm = MainPlayer_Single.me;
-        Debug.Log(mm);
         rb = mm.GetComponent<Rigidbody>();
     }
     // Use this for initialization
