@@ -16,7 +16,7 @@ namespace Lib
         }
         public static void Hello()
         {
-            Debug.Log("Hello");
+ 
         }
     }
 }
