@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         for (int i = 0; i < particles_num; i++) {
-            GameObject g = Instantiate(particles);
-            g.transform.SetParent(particle_parent);
+            Instantiate(particles, particle_parent);
         }
     }
 	

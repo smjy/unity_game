@@ -31,8 +31,7 @@ public class FontEffectManager : MonoBehaviour {
     void create(char c, Vector3 position, Vector3 direction,float force)
     {
         direction.Normalize();
-        GameObject w = Instantiate(word,position,Random.rotation);
-        w.transform.SetParent(font_parent);
+        GameObject w = Instantiate(word,position,Random.rotation,font_parent);
         WordController wc = w.GetComponent<WordController>();
         wc.target_text = target_text;
         wc.Init(c, force * direction, force * 0.01f, target_text);
@@ -49,7 +48,9 @@ public class FontEffectManager : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (Input.GetMouseButtonDown(0)) {
+        //测试鼠标点击生成
+        //if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             Vector3 mp = Input.mousePosition;
             mp.z = 100f;
             Vector3 pos = Camera.main.ScreenToWorldPoint(mp);
@@ -59,6 +60,9 @@ public class FontEffectManager : MonoBehaviour {
                 create(c, pos, Random.onUnitSphere, Random.Range(default_force * 0.7f, default_force * 1.4f));
             }
         }
+
+        
+
         
     }
 
