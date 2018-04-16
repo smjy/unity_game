@@ -11,9 +11,12 @@ namespace Lib
         {
             return new Color(Random.Range(0f, 254f), Random.Range(0f, 254f), Random.Range(0f, 254f), Random.Range(0f, 1f));
         }
+        public static Color setAlpha() {
+            return new Color();
+        }
         public static void Hello()
         {
-            Debug.Log("Hello");
+ 
         }
     }
 }

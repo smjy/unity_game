@@ -24,7 +24,6 @@ public class Particles : MonoBehaviour
             color = DUlib.randColor();
             sr.color = color;
         }
-        DUlib.Hello();
         float x = Random.Range(0f, Screen.width);
         float y = Random.Range(0f, Screen.height);
         float z = Random.Range(100f, 150f);
