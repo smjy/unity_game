@@ -125,7 +125,7 @@ Material:
     - _GSteepness: {r: 1, g: 1, b: 1, a: 1}
     - _HorizonColor: {r: 0.172, g: 0.463, b: 0.435, a: 1}
     - _InvFadeParemeter: {r: 0.15, g: 0.15, b: 0.5, a: 1}
-    - _MainTint: {r: 0.43793252, g: 0.7172027, b: 0.99264705, a: 1}
+    - _MainTint: {r: 0.7205882, g: 0.8612577, b: 1, a: 1}
     - _ReflectionColor: {r: 0.54, g: 0.95, b: 0.99, a: 0.5}
     - _RefrColor: {r: 0.34, g: 0.85, b: 0.92, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
