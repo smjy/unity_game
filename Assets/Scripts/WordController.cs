@@ -62,7 +62,7 @@ public class WordController : MonoBehaviour {
             Vector3 direction = (target - transform.position).normalized;
             float distance = (target - transform.position).magnitude;
             float frac = time / (50f * follow_time);
-            frac = Mathf.Pow(frac, 2.4f);
+            frac = frac*frac;
             transform.position = Vector3.Lerp(transform.position, target, frac);
             if ((transform.position - target).magnitude < 10f || time >= 50f * follow_time) {
                 //加钱

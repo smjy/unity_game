@@ -28,6 +28,7 @@ public class BulletController : MonoBehaviour {
         if (time / 50f > decrease_after) speed = Mathf.Max(speed - speed_decrease, 0f);
         if (time / 50f > life) Destroy(gameObject);
         transform.Translate(speed*direction,Space.World);
+        
 
    	}
 }

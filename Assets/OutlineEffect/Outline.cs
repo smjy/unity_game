@@ -26,6 +26,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
+
 namespace cakeslice
 {
     [ExecuteInEditMode]
@@ -68,6 +69,8 @@ namespace cakeslice
 			foreach (OutlineEffect effect in effects)
             {
                 effect.RemoveOutline(this);
+                
+                
             }
         }
     }
