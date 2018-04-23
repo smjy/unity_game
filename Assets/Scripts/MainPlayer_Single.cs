@@ -11,7 +11,7 @@ public class MainPlayer_Single : MonoBehaviour
     public float maxSpeed = 500f;
     public float friction_extra = 20f;
     float friction;
-    Rigidbody rb;
+    public Rigidbody rb;
 
     void Start()
     {
