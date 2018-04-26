@@ -5,19 +5,18 @@ using UnityEngine;
 public class MapBoundsController : MonoBehaviour {
 
 	public GameObject mapBoundSingle;
-	float left,right,top,bottom,width,height;
 	// Use this for initialization
 	void Start () {	
 		
 	}
 	public void Init(float width,float height, float startx,float starty,int boundtype = MapManager.BOUND_NORMAL) {
 
-		this.width = width;
-		this.height = height;
-		this.left = startx;
-		this.right = startx+width;
-		this.top = starty+height;
-		this.bottom = starty;
+		// this.width = width;
+		// this.height = height;
+		// this.left = startx;
+		// this.right = startx+width;
+		// this.top = starty+height;
+		// this.bottom = starty;
 
 		//初始化四条边
 		GameObject bound_left = Instantiate(mapBoundSingle,transform);

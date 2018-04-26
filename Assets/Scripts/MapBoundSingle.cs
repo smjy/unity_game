@@ -11,6 +11,9 @@ public class MapBoundSingle : MonoBehaviour {
 	}
 	
 	public void Init(int boundtype = MapManager.BOUND_NORMAL) {
+		
+		LineRenderer lr = GetComponent<LineRenderer>();
+
 		switch(boundtype) {
 			//TODO 边缘的类型(材质)
 			case MapManager.BOUND_NORMAL: {
@@ -18,7 +21,7 @@ public class MapBoundSingle : MonoBehaviour {
 			} break;
 			
 		}
-		LineRenderer lr = GetComponent<LineRenderer>();
+		
 		Vector3[] ps = new Vector3[2];
 		lr.GetPositions(ps);
 		if (ps.Length != 2) throw new UnityException("Linerenderer of MapBoundSingle must have 2 points on it.");
