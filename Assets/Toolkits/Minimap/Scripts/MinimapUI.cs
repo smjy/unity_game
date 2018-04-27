@@ -18,6 +18,5 @@ public class MinimapUI : MonoBehaviour
 		float x = character.rb.velocity.y / character.maxSpeed * rotateScale;
         float y = character.rb.velocity.x / character.maxSpeed * rotateScale;
         transform.rotation = Quaternion.Euler(Mathf.Clamp(x,-15,15), Mathf.Clamp(y,-15,15), 0);
-		print(x+" "+y);
     }
 }
