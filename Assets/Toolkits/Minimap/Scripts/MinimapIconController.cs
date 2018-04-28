@@ -16,6 +16,6 @@ public class MinimapIconController : MonoBehaviour {
 	void Update () {
         rect = GetComponent<RectTransform>();
 		Vector2 pos = Camera.main.WorldToViewportPoint(target.transform.position);
-		transform.localPosition = new Vector2(Mathf.Clamp((pos.x-0.5f)*180,-90,90),Mathf.Clamp((pos.y - 0.5f) * 180, -90, 90));
+		transform.localPosition = new Vector2(Mathf.Clamp((pos.x-0.5f)*90,-90,90),Mathf.Clamp((pos.y - 0.5f) * 90, -90, 90));
 	}
 }
