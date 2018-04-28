@@ -44,6 +44,10 @@ public class MapBoundsController : MonoBehaviour {
 		bound_bottom.GetComponent<MapBoundSingle>().Init(boundtype);
 
 	}
+
+	public void setRegion() {
+		
+	}
 	// Update is called once per frame
 	void Update () {
 		
