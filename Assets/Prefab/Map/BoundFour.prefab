@@ -53,3 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapBoundSingle: {fileID: 1980520161707128, guid: 01404aa4724d74c4883c9dd0bc96d92e,
     type: 2}
+  mapBoundSingleMinimap: {fileID: 1368086836668054, guid: 21e22d4ef9f8ae5469ebf94823514ab5,
+    type: 2}

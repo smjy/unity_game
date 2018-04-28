@@ -5,6 +5,7 @@ using UnityEngine;
 public class MapBoundsController : MonoBehaviour {
 
 	public GameObject mapBoundSingle;
+	public GameObject mapBoundSingleMinimap;
 	// Use this for initialization
 	void Start () {	
 		
@@ -42,6 +43,27 @@ public class MapBoundsController : MonoBehaviour {
 		Vector3[] bottompos = {new Vector3(startx,starty,100f),new Vector3(startx+width,starty,100f)};
 		lr_bottom.SetPositions(bottompos);
 		bound_bottom.GetComponent<MapBoundSingle>().Init(boundtype);
+
+		//小地图用粗边缘
+		GameObject mini_bound_left = Instantiate(mapBoundSingleMinimap,transform);
+		LineRenderer mini_lr_left = mini_bound_left.GetComponent<LineRenderer>();
+		mini_lr_left.SetPositions(leftpos);
+		mini_bound_left.GetComponent<MapBoundSingleMinimap>().Init(boundtype);
+
+		GameObject mini_bound_right = Instantiate(mapBoundSingleMinimap,transform);
+		LineRenderer mini_lr_right = mini_bound_right.GetComponent<LineRenderer>();
+		mini_lr_right.SetPositions(rightpos);
+		mini_bound_right.GetComponent<MapBoundSingleMinimap>().Init(boundtype);
+
+		GameObject mini_bound_top = Instantiate(mapBoundSingleMinimap,transform);
+		LineRenderer mini_lr_top = mini_bound_top.GetComponent<LineRenderer>();
+		mini_lr_top.SetPositions(toppos);
+		mini_bound_top.GetComponent<MapBoundSingleMinimap>().Init(boundtype);
+
+		GameObject mini_bound_bottom = Instantiate(mapBoundSingleMinimap,transform);
+		LineRenderer mini_lr_bottom = mini_bound_bottom.GetComponent<LineRenderer>();
+		mini_lr_bottom.SetPositions(bottompos);
+		mini_bound_bottom.GetComponent<MapBoundSingleMinimap>().Init(boundtype);
 
 	}
 

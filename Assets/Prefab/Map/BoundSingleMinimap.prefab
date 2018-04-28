@@ -9,59 +9,59 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1720136601303192}
+  m_RootGameObject: {fileID: 1368086836668054}
   m_IsPrefabParent: 1
---- !u!1 &1720136601303192
+--- !u!1 &1368086836668054
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4068129622631412}
-  - component: {fileID: 120509080413021050}
-  - component: {fileID: 114619644063267900}
-  m_Layer: 9
-  m_Name: Bound
+  - component: {fileID: 4667375416640462}
+  - component: {fileID: 120907047581075756}
+  - component: {fileID: 114051366960474324}
+  m_Layer: 10
+  m_Name: BoundSingleMinimap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4068129622631412
+--- !u!4 &4667375416640462
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1720136601303192}
+  m_GameObject: {fileID: 1368086836668054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114619644063267900
+--- !u!114 &114051366960474324
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1720136601303192}
+  m_GameObject: {fileID: 1368086836668054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd123cab40cfa404cb6166d413d22821, type: 3}
+  m_Script: {fileID: 11500000, guid: dcc13cada570f114589b35c696f1368a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!120 &120509080413021050
+--- !u!120 &120907047581075756
 LineRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1720136601303192}
+  m_GameObject: {fileID: 1368086836668054}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -87,13 +87,11 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 1000, z: 1}
-  - {x: 2000, y: 1000, z: 1}
-  - {x: 2000, y: 0, z: 1}
+  - {x: 0, y: 0, z: 100}
+  - {x: 0, y: 500, z: 100}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 13.93
+    widthMultiplier: 30
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -105,7 +103,7 @@ LineRenderer:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -135,10 +133,10 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 1
+    numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 3
+    textureMode: 0
     generateLightingData: 0
-  m_UseWorldSpace: 0
-  m_Loop: 1
+  m_UseWorldSpace: 1
+  m_Loop: 0
