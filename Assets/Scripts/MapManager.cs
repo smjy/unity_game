@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour {
 
-	//地图边界样式
-	public const int BOUND_NORMAL = 1;
-	public const int BOUND_START = 2;
+	
 
 	[Header("地图边界参数")]
 	[Tooltip("正方形边长")] public float square_length = 500f; 
 	[Tooltip("边界内缩边距")] public float square_indent = 1f;
+	[Tooltip("默认边界材质")] public Material default_material;
 
 	[Header("区域类型集合")]
 	[Tooltip("所有可用区域类型集合")] public Region[] available_regions;
@@ -26,10 +25,12 @@ public class MapManager : MonoBehaviour {
 	public Transform bound_parent;
 	public Transform region_parent;
 	
+
 	int seed = 123; //根据种子生成地图
 	int x_seed = 1;
 	int y_seed = 1000;
 	Dictionary<Vector2,Region> Regions = new Dictionary<Vector2,Region>();
+	
 	//地图生成局部种子设定: 已知全局种子和区块的x,y，则该区块的区域类型局部种子为全局种子+x*x_seed+y*y_seed
 	//区域类型设定: 已知x,y,四周区域类型，根据四周区域类型和深度depth生成权重 取权重最大者决定区域
 	//生成顺序如下图
@@ -41,45 +42,76 @@ public class MapManager : MonoBehaviour {
 	struct RectBounds {
 		public float left,right,top,bottom;
 	}
+	public static MapManager main;
+	private void Awake() {
+        if (main == null)
+            main = this;
+        else if (main != this)
+            Destroy(gameObject);  
+    }
 
-	RectBounds[] rectBounds;
+	void Start () {
+		HashSet<Vector2> hs = new HashSet<Vector2>();
+		HashSet<Vector2> hs2 = new HashSet<Vector2>();
+
+		// hs2.Add(new Vector2(1,1));
+		// hs2.Add(new Vector2(1,3));
+		// Debug.Log(hs2.Contains(new Vector2(1,2)));
+		// Debug.Log(hs2.Count);
+
+		Random.InitState(seed);
+		real_length = square_length - 2* square_indent;
+		PriorRegions();
+		GenerateMapWithinDepth(2);
+
+		// Dictionary<Vector2,int> testd = new Dictionary<Vector2,int>();
+		// testd.Add(new Vector2(0,0),1);
+		// Debug.Log(testd.ContainsKey(new Vector2(0,0)));
+		// Debug.Log(testd.ContainsKey(new Vector2(0,1)));
+		
+
+	}
+
 	public bool regionGeneratedAt(int x,int y) {
 		return Regions.ContainsKey(new Vector2(x,y));
 	}
 	public Region regionAt(int x,int y) {
 		return Regions[new Vector2(x,y)];
 	}
-
-	void Start () {
-		Random.InitState(seed);
-		real_length = square_length - 2* square_indent;
-		InstantiateBoundsAt(0,0,BOUND_NORMAL);
-		GenerateMapOfDepth(2);
+	public Region regionAt(Vector2 v) {
+		return Regions[v];
 	}
+	
 	//预先决定的区域
 	void PriorRegions() {
 		
+		GenerateMapAt(0,0,available_regions[0]);
 	}
 	
 	//边界生成
-	void InstantiateBoundsAt(int x,int y,int boundtype = BOUND_NORMAL) {
-		//原点为0,0 x从左向右 y从下向上
-		
-		InstantiateBounds(real_length,real_length,square_length*x-square_length/2+square_indent,square_length*y-square_length/2+square_indent);
+	MapBoundsController InstantiateBoundsAt(int x,int y,Material bound_material,float width_multiplier = 1f) {
+		//原点为0,0 x从左向右 y从下向上	
+		return InstantiateBounds(real_length,real_length,square_length*x-square_length/2+square_indent,square_length*y-square_length/2+square_indent,bound_material,width_multiplier);
 	}
-	void InstantiateBounds(RectBounds rb,int boundtype = BOUND_NORMAL) {
-		InstantiateBounds(rb.right-rb.left,rb.top-rb.bottom,rb.left,rb.bottom,boundtype);
+	MapBoundsController InstantiateBounds(RectBounds rb,Material bound_material,float width_multiplier = 1f) {
+		return InstantiateBounds(rb.right-rb.left,rb.top-rb.bottom,rb.left,rb.bottom,bound_material,width_multiplier);
 	}
-	void InstantiateBounds(float width,float height, float startx,float starty,int boundtype = BOUND_NORMAL) {
+	MapBoundsController InstantiateBounds(float width,float height, float startx,float starty,Material bound_material,float width_multiplier = 1f) {
 		GameObject b = Instantiate(bound,bound_parent);
-		b.GetComponent<MapBoundsController>().Init(width,height,startx,starty,boundtype);
-		
+		MapBoundsController mbc = b.GetComponent<MapBoundsController>();
+		mbc.Init(width,height,startx,starty,bound_material,width_multiplier);
+		return mbc;
 	}
 
+	//生成第depth环以内的区块
+	void GenerateMapWithinDepth(int depth) {
+		if (depth<1) return;
+		for (int i=1;i<=depth;i++) GenerateMapOfDepth(i);
+	}
 	//生成第depth环的区块
 	void GenerateMapOfDepth(int depth) {
 		if (depth == 1) {
-			GenerateMapAt(0,0);
+			GenerateMapAt(0,0,depth);
 			return;
 		}
 		//int start = 4*depth*depth-12*depth+9;
@@ -87,7 +119,7 @@ public class MapManager : MonoBehaviour {
 		int x = 2 - depth;
 		int y = depth - 1;
 		while(true) {
-			GenerateMapAt(x,y);
+			GenerateMapAt(x,y,depth);
 			//Debug.Log(x.ToString()+" "+y.ToString());
 			if (y == depth-1) {
 				if (x == 1-depth) break;
@@ -104,12 +136,44 @@ public class MapManager : MonoBehaviour {
 		}
 		
 	}
-	// 2 0 1 3 -1 2 4 -2 3
-	void GenerateMapAt(int x,int y) {
-		if (regionGeneratedAt(x,y)) return;
-		//TODO:生成地图
+	//生成第x,y位置的区块
+	void GenerateMapAt(int x,int y,int depth) {
+		
+		if (regionGeneratedAt(x,y)) {
+			//Debug.Log("地图已经在 ("+x+","+y+")位置生成!");
+			return;
+		}
+		if (available_regions.Length == 0) {
+			Debug.Log("请设置生成区域数组!");
+			return;
+		}
+		int maxpower = 0;
+		Region mr = available_regions[0];
+		foreach (Region region in available_regions) {
+			int p = region.getPower(x,y,depth,seed);
+			//Debug.Log(p);
+			if (p>maxpower) mr = region;
+		}
 
-		InstantiateBoundsAt(x,y,BOUND_NORMAL);
+		Region r = Instantiate(mr,region_parent) as Region;
+		r.addBlock(x,y);
+		Regions.Add(new Vector2(x,y),r);
+		MapBoundsController mbc = InstantiateBoundsAt(x,y,r.material,r.width);
+		r.mapBoundsController = mbc;
+	}
+
+	void GenerateMapAt(int x,int y,Region region) {
+		
+		if (regionGeneratedAt(x,y)) {
+			//Debug.Log("地图已经在 ("+x+","+y+")位置生成!");
+			return;
+		}
+		Region r = Instantiate(region,region_parent) as Region;
+		r.addBlock(x,y);		
+		Regions.Add(new Vector2(x,y),r);
+		MapBoundsController mbc = InstantiateBoundsAt(x,y,r.material,r.width);
+		r.mapBoundsController = mbc;
+
 	}
 
 

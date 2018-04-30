@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class StartRegion : Region {
 
-	// Use this for initialization
+	public override int getPower(int x,int y,int depth,int seed) {
+        return 1;
+    }
 	void Start () {
-		
+
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	
 }
