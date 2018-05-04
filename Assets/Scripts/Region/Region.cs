@@ -5,26 +5,41 @@ using UnityEngine;
 
 public abstract class Region : MonoBehaviour {
 
-    protected bool visited = false; //主角是否进入过该区域
-    protected bool has_user = false; //主角当前是否在该区域
-    protected HashSet<Vector2> block_list = new HashSet<Vector2>(); //区块位置
-    protected MapBoundsController map_bounds;
-    protected Vector2 pos = new Vector2();
+    protected bool _visited = false; //主角是否进入过该区域
+    protected bool _hasUser = false; //主角当前是否在该区域
+    protected HashSet<Vector2> _blockList = new HashSet<Vector2>(); //区块位置
+    protected MapBoundsController _mapBoundsController;
+    protected Vector2 _pos = new Vector2();
 
     public HashSet<Vector2> blockList {
         get {
-            return block_list;
+            return _blockList;
         }
         set {
-            block_list = value;
+            _blockList = value;
         }
     }
     public MapBoundsController mapBoundsController {
         get {
-            return map_bounds;
+            return _mapBoundsController;
         }
         set {
-            map_bounds = value;
+            _mapBoundsController = value;
+        }
+    }
+    public bool visited {
+        get {
+            return _visited;
+        }
+    }
+    public bool has_user {
+        get {
+            return _hasUser;
+        }
+    }
+    public Vector2 pos {
+        get {
+            return _pos;
         }
     }
 
@@ -56,65 +71,68 @@ public abstract class Region : MonoBehaviour {
         return 0;
     }
     
+    //设定该区域存在的区块位置
     public void addBlock(int x,int y) {
 
-        pos = new Vector2(x,y);
-        block_list.Add(new Vector2(x,y));
+        _pos = new Vector2(x,y);
+        _blockList.Add(new Vector2(x,y));
 
         if (MapManager.main.regionGeneratedAt(x-1,y) && MapManager.main.regionAt(x-1,y).GetType() == this.GetType()) {
-            block_list.UnionWith(MapManager.main.regionAt(x-1,y).blockList);
+            _blockList.UnionWith(MapManager.main.regionAt(x-1,y).blockList);
         }
-
         if (MapManager.main.regionGeneratedAt(x+1,y) && MapManager.main.regionAt(x+1,y).GetType() == this.GetType()) {
-            block_list.UnionWith(MapManager.main.regionAt(x+1,y).blockList);
+            _blockList.UnionWith(MapManager.main.regionAt(x+1,y).blockList);
         }
         if (MapManager.main.regionGeneratedAt(x,y-1) && MapManager.main.regionAt(x,y-1).GetType() == this.GetType()) {
-            block_list.UnionWith(MapManager.main.regionAt(x,y-1).blockList); 
+            _blockList.UnionWith(MapManager.main.regionAt(x,y-1).blockList); 
         }
         if (MapManager.main.regionGeneratedAt(x,y+1) && MapManager.main.regionAt(x,y+1).GetType() == this.GetType()) {      
-            block_list.UnionWith(MapManager.main.regionAt(x,y+1).blockList);
+            _blockList.UnionWith(MapManager.main.regionAt(x,y+1).blockList);
         }
         
 
         if (MapManager.main.regionGeneratedAt(x-1,y) && MapManager.main.regionAt(x-1,y).GetType() == this.GetType()) {
             HashSet<Vector2> bl = MapManager.main.regionAt(x-1,y).blockList;
             foreach (Vector2 v in bl) {
-                if(v == pos) continue;                          
-                MapManager.main.regionAt(v).blockList = block_list;
+                if(v == _pos) continue;                          
+                MapManager.main.regionAt(v).blockList = _blockList;
             }
         }    
         if (MapManager.main.regionGeneratedAt(x+1,y) && MapManager.main.regionAt(x+1,y).GetType() == this.GetType()) {
             HashSet<Vector2> bl = MapManager.main.regionAt(x+1,y).blockList;
             foreach (Vector2 v in bl) {
-                if(v == pos) continue;                          
-                MapManager.main.regionAt(v).blockList = block_list;
+                if(v == _pos) continue;                          
+                MapManager.main.regionAt(v).blockList = _blockList;
             }
         }
         if (MapManager.main.regionGeneratedAt(x,y-1) && MapManager.main.regionAt(x,y-1).GetType() == this.GetType()) {
             HashSet<Vector2> bl = MapManager.main.regionAt(x,y-1).blockList;
             foreach (Vector2 v in bl) {
-                if(v == pos) continue;                          
-                MapManager.main.regionAt(v).blockList = block_list;
+                if(v == _pos) continue;                          
+                MapManager.main.regionAt(v).blockList = _blockList;
             }
         }
         if (MapManager.main.regionGeneratedAt(x,y+1) && MapManager.main.regionAt(x,y+1).GetType() == this.GetType()) {
             HashSet<Vector2> bl = MapManager.main.regionAt(x,y+1).blockList;
             foreach (Vector2 v in bl) {
-                if(v == pos) continue;    
-                MapManager.main.regionAt(v).blockList = block_list;
+                if(v == _pos) continue;    
+                MapManager.main.regionAt(v).blockList = _blockList;
             }
         }      
     }
+
     void Start () {
 
 	}
 
     void Update() {
-        if (map_bounds.inside(MainPlayer_Single.me.transform.position)) {
-            visited = true;
-            has_user = true;
+
+        //判断玩家位置
+        if (_mapBoundsController.inside(MainPlayer_Single.me.transform.position)) {
+            _visited = true;
+            _hasUser = true;
         } else {
-            has_user = false;
+            _hasUser = false;
         }
     }
 	

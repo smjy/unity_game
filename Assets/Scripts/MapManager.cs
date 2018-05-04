@@ -14,7 +14,6 @@ public class MapManager : MonoBehaviour {
 	[Header("区域类型集合")]
 	[Tooltip("所有可用区域类型集合")] public Region[] available_regions;
 	
-
 	[Header("区域生成算法")]
 	[Tooltip("初始生成范围的网格矩形边长")] public int init_block_length = 5;
 	[Tooltip("主机接近已生成区域边境该距离后开始补充生成")] public int continue_length_when_close = 2;
@@ -24,7 +23,6 @@ public class MapManager : MonoBehaviour {
 	public GameObject bound;
 	public Transform bound_parent;
 	public Transform region_parent;
-	
 
 	int seed = 123; //根据种子生成地图
 	int x_seed = 1;
@@ -51,24 +49,10 @@ public class MapManager : MonoBehaviour {
     }
 
 	void Start () {
-		HashSet<Vector2> hs = new HashSet<Vector2>();
-		HashSet<Vector2> hs2 = new HashSet<Vector2>();
-
-		// hs2.Add(new Vector2(1,1));
-		// hs2.Add(new Vector2(1,3));
-		// Debug.Log(hs2.Contains(new Vector2(1,2)));
-		// Debug.Log(hs2.Count);
-
 		Random.InitState(seed);
 		real_length = square_length - 2* square_indent;
 		PriorRegions();
 		GenerateMapWithinDepth(2);
-
-		// Dictionary<Vector2,int> testd = new Dictionary<Vector2,int>();
-		// testd.Add(new Vector2(0,0),1);
-		// Debug.Log(testd.ContainsKey(new Vector2(0,0)));
-		// Debug.Log(testd.ContainsKey(new Vector2(0,1)));
-		
 
 	}
 
@@ -136,7 +120,7 @@ public class MapManager : MonoBehaviour {
 		}
 		
 	}
-	//生成第x,y位置的区块
+	//生成第x,y位置的区块 计算其区域并赋予
 	void GenerateMapAt(int x,int y,int depth) {
 		
 		if (regionGeneratedAt(x,y)) {
@@ -161,7 +145,7 @@ public class MapManager : MonoBehaviour {
 		MapBoundsController mbc = InstantiateBoundsAt(x,y,r.material,r.width);
 		r.mapBoundsController = mbc;
 	}
-
+	//生成第x,y位置的区块并赋予其区域region
 	void GenerateMapAt(int x,int y,Region region) {
 		
 		if (regionGeneratedAt(x,y)) {

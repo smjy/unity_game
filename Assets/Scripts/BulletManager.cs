@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour {
 
     public GameObject bullet;
+    public Transform carnoon;
     public Transform bullet_parent;
 
     public float start_speed = 3f;
@@ -19,7 +20,12 @@ public class BulletManager : MonoBehaviour {
 
     
 	void Start () {
-		
+		Debug.Log(carnoon.rotation);
+		Debug.Log(carnoon.localRotation);
+        
+        Debug.Log(carnoon.eulerAngles);
+
+        Debug.Log(carnoon.localEulerAngles);
 	}
 	
 	// Update is called once per frame
@@ -29,6 +35,16 @@ public class BulletManager : MonoBehaviour {
             shoot();
             time = 0;
         }
+        Vector3 mv = Input.mousePosition;
+        mv.z = 100f;
+        Vector3 diff = Camera.main.ScreenToWorldPoint(mv)-MainPlayer_Single.me.transform.position;
+        //Vector3 diff = Camera.main.ScreenToWorldPoint(mv);
+        Vector3 angle;
+        if (diff.x>=0) angle = new Vector3(0,0,Mathf.Atan(diff.y/diff.x)*180f/Mathf.PI);
+        else angle = new Vector3(0,0,-Mathf.Atan(-diff.y/diff.x)*180f/Mathf.PI+180f);
+        carnoon.eulerAngles = angle;
+        
+
     }
     void shoot() {
         Vector3 mp = Input.mousePosition;
