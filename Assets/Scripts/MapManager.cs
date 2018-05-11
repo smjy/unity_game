@@ -13,6 +13,8 @@ public class MapManager : MonoBehaviour {
 
 	[Header("区域类型集合")]
 	[Tooltip("所有可用区域类型集合")] public Region[] available_regions;
+	[Tooltip("起始区域")] public Region start_region;
+	[Tooltip("虚空区域")] public Region empty_region;
 	
 	[Header("区域生成算法")]
 	[Tooltip("初始生成范围的网格矩形边长")] public int init_block_length = 5;
@@ -52,7 +54,7 @@ public class MapManager : MonoBehaviour {
 		Random.InitState(seed);
 		real_length = square_length - 2* square_indent;
 		PriorRegions();
-		GenerateMapWithinDepth(2);
+		GenerateMapWithinDepth(3);
 
 	}
 
@@ -69,7 +71,7 @@ public class MapManager : MonoBehaviour {
 	//预先决定的区域
 	void PriorRegions() {
 		
-		GenerateMapAt(0,0,available_regions[0]);
+		GenerateMapAt(0,0,start_region);
 	}
 	
 	//边界生成
@@ -131,14 +133,13 @@ public class MapManager : MonoBehaviour {
 			Debug.Log("请设置生成区域数组!");
 			return;
 		}
-		int maxpower = 0;
-		Region mr = available_regions[0];
+		int maxpower = -1;
+		Region mr = empty_region;
 		foreach (Region region in available_regions) {
 			int p = region.getPower(x,y,depth,seed);
 			//Debug.Log(p);
 			if (p>maxpower) mr = region;
 		}
-
 		Region r = Instantiate(mr,region_parent) as Region;
 		r.addBlock(x,y);
 		Regions.Add(new Vector2(x,y),r);

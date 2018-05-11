@@ -7,6 +7,7 @@ public class TestRegion : Region {
   
     //获取权重
     public override int getPower(int x,int y,int depth,int seed) {
+        if (fullSurrounding(x,y)) return -1;
         return 5;
     }
  

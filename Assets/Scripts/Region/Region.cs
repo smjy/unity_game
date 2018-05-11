@@ -50,9 +50,10 @@ public abstract class Region : MonoBehaviour {
     }
     int d = 0;
     [Header("区域设定")]
+    [SerializeField] [Tooltip("区域的唯一标志名")] string region_name = "default";
     [SerializeField] [Tooltip("区域边界材质")] Material bound_material;
     [SerializeField] [Tooltip("区域边界粗细倍数")] float width_multiplier = 1;
-    [SerializeField] [Tooltip("区域区块数量最大值")] int max_block = 3;
+    [SerializeField] [Tooltip("区域区块数量最大值(0为不限制)")] int max_block = 3;
     [SerializeField] [Tooltip("区域区块数量靠近最大值的概率阈值")] float block_param = 0.5f;
     [SerializeField] [Tooltip("区域包含事件及权重")] RegionEvent[] region_events;
 
@@ -66,11 +67,35 @@ public abstract class Region : MonoBehaviour {
             return width_multiplier;
         }
     }
-    //获取权重
+    protected bool fullSurrounding(int x,int y) {
+        if (MapManager.main.regionGeneratedAt(x-1,y) && MapManager.main.regionAt(x-1,y).GetType() == this.GetType() && MapManager.main.regionAt(x-1,y).full()) {
+            return true;
+        }
+        if (MapManager.main.regionGeneratedAt(x+1,y) && MapManager.main.regionAt(x+1,y).GetType() == this.GetType() && MapManager.main.regionAt(x+1,y).full()) {
+            return true;
+        }
+        if (MapManager.main.regionGeneratedAt(x,y-1) && MapManager.main.regionAt(x,y-1).GetType() == this.GetType() && MapManager.main.regionAt(x,y-1).full()) {
+            return true;
+        }
+        if (MapManager.main.regionGeneratedAt(x,y+1) && MapManager.main.regionAt(x,y+1).GetType() == this.GetType() && MapManager.main.regionAt(x,y+1).full()) {      
+            return true;
+        }
+
+        return false;
+    }
+    //获取权重,若为-1则绝对不会生成
     public virtual int getPower(int x,int y,int depth,int seed) {
+        
         return 0;
     }
-    
+
+    //是否已达到最大连续区块数量
+    public bool full() {
+        // Debug.Log(this.GetType().ToString());
+        // Debug.Log(max_block+" "+_blockList.Count);
+        if (max_block == 0) return false;
+        return max_block == _blockList.Count;
+    }
     //设定该区域存在的区块位置
     public void addBlock(int x,int y) {
 
