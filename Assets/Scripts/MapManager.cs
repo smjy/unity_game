@@ -68,10 +68,14 @@ public class MapManager : MonoBehaviour {
 		return Regions[v];
 	}
 	
-	//预先决定的区域
-	void PriorRegions() {
-		
-		GenerateMapAt(0,0,start_region);
+	//某位置上下左右包含某一区域的数量
+	public int surrounds(int x,int y,string region_name) {
+		int s = 0;
+		if (regionGeneratedAt(x+1,y) && regionAt(x+1,y).regionName == region_name) s++;
+		if (regionGeneratedAt(x-1,y) && regionAt(x-1,y).regionName == region_name) s++;
+		if (regionGeneratedAt(x,y+1) && regionAt(x,y+1).regionName == region_name) s++;
+		if (regionGeneratedAt(x,y-1) && regionAt(x,y-1).regionName == region_name) s++;
+		return s;
 	}
 	
 	//边界生成
@@ -89,6 +93,10 @@ public class MapManager : MonoBehaviour {
 		return mbc;
 	}
 
+	//预先决定的区域
+	void PriorRegions() {
+		GenerateMapAt(0,0,start_region);
+	}
 	//生成第depth环以内的区块
 	void GenerateMapWithinDepth(int depth) {
 		if (depth<1) return;
@@ -135,8 +143,9 @@ public class MapManager : MonoBehaviour {
 		}
 		int maxpower = -1;
 		Region mr = empty_region;
+		int region_seed = seed + x * x_seed + y * y_seed;
 		foreach (Region region in available_regions) {
-			int p = region.getPower(x,y,depth,seed);
+			int p = region.getPower(x,y,depth,region_seed);
 			//Debug.Log(p);
 			if (p>maxpower) mr = region;
 		}

@@ -54,7 +54,7 @@ public abstract class Region : MonoBehaviour {
     [SerializeField] [Tooltip("区域边界材质")] Material bound_material;
     [SerializeField] [Tooltip("区域边界粗细倍数")] float width_multiplier = 1;
     [SerializeField] [Tooltip("区域区块数量最大值(0为不限制)")] int max_block = 3;
-    [SerializeField] [Tooltip("区域区块数量靠近最大值的概率阈值")] float block_param = 0.5f;
+    //[SerializeField] [Tooltip("区域区块数量靠近最大值的概率阈值")] float max_block_param = 0.5f; //弃用，因为逻辑冲突
     [SerializeField] [Tooltip("区域包含事件及权重")] RegionEvent[] region_events;
 
     public Material material {
@@ -65,6 +65,11 @@ public abstract class Region : MonoBehaviour {
     public float width {
         get {
             return width_multiplier;
+        }
+    }
+    public string regionName {
+        get {
+            return region_name;
         }
     }
     protected bool fullSurrounding(int x,int y) {
@@ -83,12 +88,8 @@ public abstract class Region : MonoBehaviour {
 
         return false;
     }
-    //获取权重,若为-1则绝对不会生成
-    public virtual int getPower(int x,int y,int depth,int seed) {
-        
-        return 0;
-    }
 
+   
     //是否已达到最大连续区块数量
     public bool full() {
         // Debug.Log(this.GetType().ToString());
@@ -159,6 +160,14 @@ public abstract class Region : MonoBehaviour {
         } else {
             _hasUser = false;
         }
+    }
+
+    //----------虚函数部分-------------------
+
+     //获取权重,若为-1则绝对不会生成
+    public virtual int getPower(int x,int y,int depth,int seed) {
+        
+        return 0;
     }
 	
 }
