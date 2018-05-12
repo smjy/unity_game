@@ -55,5 +55,8 @@ MonoBehaviour:
   bound_material: {fileID: 2100000, guid: 2f260be040a31a24fb420a08c5b7e123, type: 2}
   width_multiplier: 1
   max_block: 2
-  block_param: 0.5
-  region_events: []
+  region_events:
+  - e: {fileID: 0}
+    power: 0
+  - e: {fileID: 0}
+    power: 0
