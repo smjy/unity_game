@@ -7,7 +7,6 @@ public class BulletController : MonoBehaviour {
     float speed_decrease;
     float decrease_after;
     float life = 4f;
-    public bool isDestroy_DEBUG = false;
     Vector3 direction;
 
     int time;
@@ -27,7 +26,7 @@ public class BulletController : MonoBehaviour {
 	void FixedUpdate () {
         time++;
         if (time / 50f > decrease_after) speed = Mathf.Max(speed - speed_decrease, 0f);
-        if (time / 50f > life && isDestroy_DEBUG) Destroy(gameObject);
+        if (time / 50f > life) Destroy(gameObject);
         transform.Translate(speed*direction,Space.World);
         
 
