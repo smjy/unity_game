@@ -16,6 +16,7 @@ public class Particles : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
         sr = GetComponent<SpriteRenderer>();
         size = Random.Range(minSize, maxSize);
         if (Random.Range(1, 11) < 2)
