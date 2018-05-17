@@ -29,7 +29,10 @@ public class MapManager : MonoBehaviour {
 	int seed = 123; //根据种子生成地图
 	int x_seed = 1;
 	int y_seed = 1000;
+	Vector2 oldPlayerAt;
 	Dictionary<Vector2,Region> Regions = new Dictionary<Vector2,Region>();
+	HashSet<Vector2> visitedRegions = new HashSet<Vector2>(); //访问过的区域
+	HashSet<Vector2> activeRegions = new HashSet<Vector2>(); //被激活的区域(3*3)
 	
 	//地图生成局部种子设定: 已知全局种子和区块的x,y，则该区块的区域类型局部种子为全局种子+x*x_seed+y*y_seed
 	//区域类型设定: 已知x,y,四周区域类型，根据四周区域类型和深度depth生成权重 取权重最大者决定区域
@@ -51,6 +54,7 @@ public class MapManager : MonoBehaviour {
     }
 
 	void Start () {
+		oldPlayerAt = new Vector2(0,0);
 		Random.InitState(seed);
 		real_length = square_length - 2* square_indent;
 		PriorRegions();
@@ -68,6 +72,19 @@ public class MapManager : MonoBehaviour {
 		return Regions[v];
 	}
 	
+	//玩家当前所在的位置
+	public Vector2 playerAt() {
+		int x,y;
+		Vector3 p = MainPlayer_Single.me.transform.position;
+		x = Mathf.FloorToInt(p.x/square_length+0.5f);
+		y = Mathf.FloorToInt(p.y/square_length+0.5f);
+		return new Vector2(x,y);
+	}
+	//玩家当前所在的区域
+	public Region playerAtRegion() {
+		return regionAt(playerAt());
+	}
+
 	//某位置上下左右包含某一区域的数量
 	public int surrounds(int x,int y,string region_name) {
 		int s = 0;
@@ -92,6 +109,7 @@ public class MapManager : MonoBehaviour {
 		mbc.Init(width,height,startx,starty,bound_material,width_multiplier);
 		return mbc;
 	}
+
 
 	//预先决定的区域
 	void PriorRegions() {
@@ -174,6 +192,16 @@ public class MapManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+		if (!visitedRegions.Contains(playerAt())) {
+			visitedRegions.Add(playerAt());
+			playerAtRegion().visited = true;
+		}
+
+		if (playerAt() != oldPlayerAt) {
+			
+			regionAt(oldPlayerAt).has_user = false;
+			playerAtRegion().has_user = true;
+			oldPlayerAt = playerAt();
+		}
 	}
 }

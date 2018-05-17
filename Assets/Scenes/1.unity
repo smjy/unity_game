@@ -148,7 +148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.024156094}
+  m_AnchoredPosition: {x: 0, y: 0.023254633}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &11429971
@@ -894,8 +894,10 @@ GameObject:
   - component: {fileID: 290575750}
   - component: {fileID: 290575749}
   - component: {fileID: 290575748}
+  - component: {fileID: 290575753}
+  - component: {fileID: 290575752}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: OutlineCubeTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -967,6 +969,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &290575752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 290575747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08be5e420f65c84886c7a6a2709c04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &290575753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 290575747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0.84559584, g: 0.20225997, b: 0.9485294, a: 1}
+  outlineWidth: 6.07
 --- !u!1 &319459456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1029,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.074993, y: 32.17473}
+  m_AnchoredPosition: {x: 18.074993, y: 32.173187}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &319459458
@@ -1698,7 +1725,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1879201469}
+  m_TargetTexture: {fileID: 1647628663}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -2685,7 +2712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 1795466828}
   rotateScale: 20
---- !u!84 &1602658072
+--- !u!84 &1647628663
 RenderTexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2696,8 +2723,8 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
-  m_Width: 828
-  m_Height: 466
+  m_Width: 860
+  m_Height: 484
   m_AntiAliasing: 1
   m_DepthFormat: 1
   m_ColorFormat: 0
@@ -2709,7 +2736,7 @@ RenderTexture:
   m_TextureSettings:
     serializedVersion: 2
     m_FilterMode: 1
-    m_Aniso: 1
+    m_Aniso: 0
     m_MipBias: 0
     m_WrapU: 1
     m_WrapV: 1
@@ -3065,37 +3092,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!84 &1879201469
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 828
-  m_Height: 466
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &1931364603 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4385908807068238, guid: d49aa5a6d5bf65f4b9600a707ca36531,
@@ -3208,24 +3204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78da3f00f3328541b4526c0b0b5ec5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineThickness: 2.06
-  lineIntensity: 0.72
-  fillAmount: 0
-  lineColor0: {r: 1, g: 0, b: 0, a: 1}
-  lineColor1: {r: 0, g: 1, b: 0, a: 1}
-  lineColor2: {r: 0, g: 0, b: 1, a: 1}
-  additiveRendering: 0
-  backfaceCulling: 1
-  cornerOutlines: 0
-  addLinesBetweenColors: 0
-  scaleWithScreenSize: 1
-  alphaCutoff: 0.5
-  flipY: 0
-  sourceCamera: {fileID: 1935459677}
-  outlineCamera: {fileID: 659438710}
-  outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1879201469}
-  extraRenderTexture: {fileID: 1602658072}
 --- !u!1 &1948435029
 GameObject:
   m_ObjectHideFlags: 0
@@ -3434,56 +3412,6 @@ Prefab:
       propertyPath: bullet_parent
       value: 
       objectReference: {fileID: 350784983}
-    - target: {fileID: 198603742272102288, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 13.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 198603742272102288, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 198603742272102288, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198603742272102288, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198603742272102288, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198603742272102288, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198603742272102288, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198603742272102288, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
-      value: 1.533537
-      objectReference: {fileID: 0}
-    - target: {fileID: 198603742272102288, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outSlope
-      value: 1.533537
-      objectReference: {fileID: 0}
-    - target: {fileID: 54697129580462382, guid: 22277cd26280efb47a632d8611a72f04,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 120
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 22277cd26280efb47a632d8611a72f04, type: 2}
   m_IsPrefabParent: 0

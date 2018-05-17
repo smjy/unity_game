@@ -31,10 +31,16 @@ public abstract class Region : MonoBehaviour {
         get {
             return _visited;
         }
+        set {
+            _visited = value;
+        }
     }
     public bool has_user {
         get {
             return _hasUser;
+        }
+        set {
+            _hasUser = value;
         }
     }
     public Vector2 pos {
@@ -48,6 +54,11 @@ public abstract class Region : MonoBehaviour {
         public Event e;
         public int power;
     }
+    [System.Serializable] 
+    public struct RegionEffect {
+        public Effect e;
+        public int power;
+    }
     int d = 0;
     [Header("区域设定")]
     [SerializeField] [Tooltip("区域的唯一标志名")] string region_name = "default";
@@ -56,6 +67,11 @@ public abstract class Region : MonoBehaviour {
     [SerializeField] [Tooltip("区域区块数量最大值(0为不限制)")] int max_block = 3;
     //[SerializeField] [Tooltip("区域区块数量靠近最大值的概率阈值")] float max_block_param = 0.5f; //弃用，因为逻辑冲突
     [SerializeField] [Tooltip("区域包含事件及权重")] RegionEvent[] region_events;
+    [SerializeField] [Tooltip("区域包含事件最大值")] int max_events = 20;
+
+    [SerializeField] [Tooltip("区域包含背景特效及权重")] RegionEffect[] region_effects;
+    [SerializeField] [Tooltip("区域包含背景特效最大值")] int max_effects = 20;
+
 
     public Material material {
         get {
@@ -153,13 +169,13 @@ public abstract class Region : MonoBehaviour {
 
     void Update() {
 
-        //判断玩家位置
-        if (_mapBoundsController.inside(MainPlayer_Single.me.transform.position)) {
-            _visited = true;
-            _hasUser = true;
-        } else {
-            _hasUser = false;
-        }
+        // 判断玩家位置
+        // if ()) {
+        //     _visited = true;
+        //     _hasUser = true;
+        // } else {
+        //     _hasUser = false;
+        // }
     }
 
     //----------虚函数部分-------------------

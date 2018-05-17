@@ -19,11 +19,12 @@ public class Particles : MonoBehaviour
         
         sr = GetComponent<SpriteRenderer>();
         size = Random.Range(minSize, maxSize);
-        if (Random.Range(1, 11) < 2)
+        //if (Random.Range(1, 11) < 2)
+        if (true)
         {
 
-            color = DUlib.randColor();
-            sr.color = color;
+            color = DUlib.randMainColor();
+            sr.material.color = color;
         }
         float x = Random.Range(0f, Screen.width);
         float y = Random.Range(0f, Screen.height);

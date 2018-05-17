@@ -283,7 +283,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294964959
+    m_Bits: 1024
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: a75093c3cb75caf4f8c7ebcee2394119, type: 2}
   m_TargetDisplay: 0
@@ -472,7 +472,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!64 &64151456598667418
 MeshCollider:
@@ -615,7 +615,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.84
+      scalar: 0.6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1168,7 +1168,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 9.23
+      scalar: 13.8
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1262,8 +1262,8 @@ ParticleSystem:
         - serializedVersion: 2
           time: 0
           value: 0
-          inSlope: 2
-          outSlope: 2
+          inSlope: 1.533537
+          outSlope: 1.533537
           tangentMode: 0
         - serializedVersion: 2
           time: 1
@@ -1273,7 +1273,7 @@ ParticleSystem:
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_RotationOrder: 0
       minCurve:
         serializedVersion: 2
         m_Curve:
