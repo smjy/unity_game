@@ -18,8 +18,8 @@ public class MapManager : MonoBehaviour {
 	
 	[Header("区域生成算法")]
 	[Tooltip("初始生成范围的网格矩形边长")] public int init_block_length = 5;
-	[Tooltip("主机接近已生成区域边境该距离后开始补充生成")] public int continue_length_when_close = 2;
-	[Tooltip("补充生成的圈数")] public int continue_block_length = 2;
+	[Tooltip("开始补充生成的主机抵达层数与已生成层数差值")] public int continue_length_when_close = 1;
+	[Tooltip("补充生成的圈数")] public int continue_block_length = 1;
 	float real_length;
 
 	public GameObject bound;
@@ -33,6 +33,7 @@ public class MapManager : MonoBehaviour {
 	Dictionary<Vector2,Region> Regions = new Dictionary<Vector2,Region>();
 	HashSet<Vector2> visitedRegions = new HashSet<Vector2>(); //访问过的区域
 	HashSet<Vector2> activeRegions = new HashSet<Vector2>(); //被激活的区域(3*3)
+	int currDepth = 0;
 	
 	//地图生成局部种子设定: 已知全局种子和区块的x,y，则该区块的区域类型局部种子为全局种子+x*x_seed+y*y_seed
 	//区域类型设定: 已知x,y,四周区域类型，根据四周区域类型和深度depth生成权重 取权重最大者决定区域
@@ -79,6 +80,15 @@ public class MapManager : MonoBehaviour {
 		x = Mathf.FloorToInt(p.x/square_length+0.5f);
 		y = Mathf.FloorToInt(p.y/square_length+0.5f);
 		return new Vector2(x,y);
+	}
+	public int playerX() {
+		return Mathf.FloorToInt(MainPlayer_Single.me.transform.position.x/square_length+0.5f);
+	}
+	public int playerY() {
+		return Mathf.FloorToInt(MainPlayer_Single.me.transform.position.y/square_length+0.5f);
+	}
+	public int playerDepth() {
+		return xyToDepth(playerX(),playerY());
 	}
 	//玩家当前所在的区域
 	public Region playerAtRegion() {
@@ -146,7 +156,14 @@ public class MapManager : MonoBehaviour {
 			} else y++;
 			if (y == depth) break;
 		}
+		currDepth = Mathf.Max(currDepth,depth);
 		
+	}
+	void GenerateMoreDepth() {
+		GenerateMapOfDepth(currDepth+1);
+	}
+	void GenerateMoreDepths(int depth) {
+		for (int i=0;i<depth;i++) GenerateMoreDepth();
 	}
 	//生成第x,y位置的区块 计算其区域并赋予
 	void GenerateMapAt(int x,int y,int depth) {
@@ -187,21 +204,29 @@ public class MapManager : MonoBehaviour {
 		r.mapBoundsController = mbc;
 
 	}
-
+	int xyToDepth(int x,int y) {
+		return Mathf.Max(Mathf.Abs(x),Mathf.Abs(y))+1;
+	}
 
 
 	// Update is called once per frame
 	void Update () {
-		if (!visitedRegions.Contains(playerAt())) {
-			visitedRegions.Add(playerAt());
+
+		Vector2 pa = playerAt();
+		if (!visitedRegions.Contains(pa)) {
+			visitedRegions.Add(pa);
 			playerAtRegion().visited = true;
 		}
 
-		if (playerAt() != oldPlayerAt) {
+		if (pa != oldPlayerAt) {
 			
 			regionAt(oldPlayerAt).has_user = false;
 			playerAtRegion().has_user = true;
-			oldPlayerAt = playerAt();
+			oldPlayerAt = pa;
+		}
+
+		if (playerDepth() == currDepth-continue_length_when_close) {
+			GenerateMoreDepths(continue_block_length);
 		}
 	}
 }
