@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class TestUiEvent : MonoBehaviour
-{
+
+public class ButtonStatus : MonoBehaviour {
+
+	
     public Material hoverMt;
     public Material normalMt;
 
@@ -23,12 +25,8 @@ public class TestUiEvent : MonoBehaviour
             Debug.Log(gb.name + " OnMOuseExit");
             gb.GetComponent<Image>().material = normalMt;
         };
+        
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -11,4 +11,5 @@ public class VoiceEnable : MonoBehaviour {
     {       
        voiceSlider.interactable = !voiceSlider.interactable;
     }
+    
 }
