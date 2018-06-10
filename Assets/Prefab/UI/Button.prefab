@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.53676474, g: 0.44598836, b: 0.44598836, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -242,7 +242,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7EE7  \u7EED"
+  m_Text: "\u786E\u5B9A\n"
 --- !u!114 &114880788467834960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,7 +308,7 @@ RectTransform:
   m_GameObject: {fileID: 1032746165140142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.6861799, y: 2.6861799, z: 2.6861799}
+  m_LocalScale: {x: 1.4146521, y: 1.5502928, z: 1.5502928}
   m_Children:
   - {fileID: 224220661954138864}
   - {fileID: 4432251996226056}
@@ -317,6 +317,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 106}
+  m_AnchoredPosition: {x: 451, y: -466}
   m_SizeDelta: {x: -1760, y: -1050}
   m_Pivot: {x: 0.5, y: 0.5}
