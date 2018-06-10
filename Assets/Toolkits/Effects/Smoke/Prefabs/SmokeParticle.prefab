@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4385908807068238}
   - component: {fileID: 198301544033534364}
   - component: {fileID: 199328423351740080}
+  - component: {fileID: 114991086898008658}
   m_Layer: 0
   m_Name: SmokeParticle
   m_TagString: Untagged
@@ -35,12 +36,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1413583219976342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 81.9}
+  m_LocalPosition: {x: -74, y: 0, z: 81.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114991086898008658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413583219976342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef668d96fa3308943a96f9e01cf8d77e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disappear: 1
 --- !u!198 &198301544033534364
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -101,7 +114,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -322311085
+  randomSeed: 944624968
   InitialModule:
     serializedVersion: 3
     enabled: 1

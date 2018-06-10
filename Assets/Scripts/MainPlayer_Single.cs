@@ -14,10 +14,14 @@ public class MainPlayer_Single : MonoBehaviour
 
     [HideInInspector]
     public Rigidbody rb;
-
+    void Awake() {
+        if (me == null)
+            me = this;
+        else if (me != this)
+            Destroy(gameObject);  
+    }
     void Start()
     {
-        me = this;
         transform.position = new Vector3(0, 0, 100);
         friction = (force - friction_extra) / (maxSpeed * maxSpeed);
         rb = GetComponent<Rigidbody>();

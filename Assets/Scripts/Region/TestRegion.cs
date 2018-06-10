@@ -25,9 +25,5 @@ public class TestRegion : Region {
         return power;
     }
  
-    void Start () {
-
-	}
-	
 
 }

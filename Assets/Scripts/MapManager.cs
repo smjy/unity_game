@@ -30,11 +30,11 @@ public class MapManager : MonoBehaviour {
 	int x_seed = 1;
 	int y_seed = 1000;
 	Vector2 oldPlayerAt;
+	Vector2 olderPlayerAt;
 	Dictionary<Vector2,Region> Regions = new Dictionary<Vector2,Region>();
 	HashSet<Vector2> visitedRegions = new HashSet<Vector2>(); //访问过的区域
-	HashSet<Vector2> activeRegions = new HashSet<Vector2>(); //被激活的区域(3*3)
 	int currDepth = 0;
-	
+	bool enteredNewMap = false;
 	//地图生成局部种子设定: 已知全局种子和区块的x,y，则该区块的区域类型局部种子为全局种子+x*x_seed+y*y_seed
 	//区域类型设定: 已知x,y,四周区域类型，根据四周区域类型和深度depth生成权重 取权重最大者决定区域
 	//生成顺序如下图
@@ -60,6 +60,8 @@ public class MapManager : MonoBehaviour {
 		real_length = square_length - 2* square_indent;
 		PriorRegions();
 		GenerateMapWithinDepth(3);
+
+		playerAtRegion().has_user = true;
 
 	}
 
@@ -208,7 +210,7 @@ public class MapManager : MonoBehaviour {
 		return Mathf.Max(Mathf.Abs(x),Mathf.Abs(y))+1;
 	}
 
-
+	
 	// Update is called once per frame
 	void Update () {
 
@@ -219,10 +221,35 @@ public class MapManager : MonoBehaviour {
 		}
 
 		if (pa != oldPlayerAt) {
-			
+			// if (!enteredNewMap) {
+			// 	enteredNewMap = true;
+			// } else {
+				
+			// }
+			Vector2 diff = pa - oldPlayerAt;
+			if (Mathf.Abs(diff.x) < 0.5) {
+				float directionY = diff.y / Mathf.Abs(diff.y);
+				Quaternion r = Quaternion.Euler(90,0,0);
+				Vector3 force = 20000f * new Vector3(0,directionY,0);
+				MainPlayer_Single.me.GetComponent<Rigidbody>().AddForce(force);
+				Instantiate(EffectManager.main.entering_effect,MainPlayer_Single.me.transform.position,r,EffectManager.main.effect_parent);
+			} else {
+				float directionX = diff.x / Mathf.Abs(diff.x);
+				Quaternion r = Quaternion.Euler(0,90,0);
+				Vector3 force = 20000f * new Vector3(0,directionX,0);
+				MainPlayer_Single.me.GetComponent<Rigidbody>().AddForce(force);
+				Instantiate(EffectManager.main.entering_effect,MainPlayer_Single.me.transform.position,r,EffectManager.main.effect_parent);
+			}
+			//玩家进入新区域
 			regionAt(oldPlayerAt).has_user = false;
 			playerAtRegion().has_user = true;
+
+			//切换activeRegions
+			regionAt(oldPlayerAt).enabled = false;
+			playerAtRegion().enabled = true;
 			oldPlayerAt = pa;
+
+
 		}
 
 		if (playerDepth() == currDepth-continue_length_when_close) {

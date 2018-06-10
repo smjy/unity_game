@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1006202146142524}
+  m_RootGameObject: {fileID: 1968299478122958}
   m_IsPrefabParent: 1
---- !u!1 &1006202146142524
+--- !u!1 &1968299478122958
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4267476214602108}
-  - component: {fileID: 114528655207404482}
+  - component: {fileID: 4989101131596888}
+  - component: {fileID: 114144274517670204}
   m_Layer: 0
-  m_Name: StartRegion
+  m_Name: DebrisEffectGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4267476214602108
+--- !u!4 &4989101131596888
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1006202146142524}
+  m_GameObject: {fileID: 1968299478122958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,28 +40,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114528655207404482
+--- !u!114 &114144274517670204
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1006202146142524}
+  m_GameObject: {fileID: 1968299478122958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e9d2157d4e56f54486492a53b0742d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 590d194e60ba2bc41bd92452114f9f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  region_name: start
-  bound_material: {fileID: 2100000, guid: b5a175220f69ed2489956a163ada30eb, type: 2}
-  width_multiplier: 3
-  max_block: 1
-  region_events:
-  - e: {fileID: 0}
-    power: 0
-  max_events: 20
-  region_effects:
-  - eg: {fileID: 114144274517670204, guid: fbaeed25fe18c204191a41530f91327e, type: 2}
-    power: 5
-  - eg: {fileID: 114144274517670204, guid: fbaeed25fe18c204191a41530f91327e, type: 2}
-    power: 5
-  max_effects: 3
+  max_effect: 1
+  generate_outside: 1
+  outside_max_distance: 800
+  outside_min_distance: 200
+  effects:
+  - {fileID: 114688023661784402, guid: 5952dad664fa3b241ae9113e31f346a6, type: 2}
+  - {fileID: 114920317594447352, guid: c12e95484520f124ebdffc1ad559aad2, type: 2}
+  generate_time: 1000
+  scale_min: 0.5
+  scale_max: 1.5
+  start_speed: 0

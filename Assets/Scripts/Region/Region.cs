@@ -10,7 +10,9 @@ public abstract class Region : MonoBehaviour {
     protected HashSet<Vector2> _blockList = new HashSet<Vector2>(); //区块位置
     protected MapBoundsController _mapBoundsController;
     protected Vector2 _pos = new Vector2();
-
+    protected GameObject obj_effects;
+    protected GameObject obj_events;
+        
     public HashSet<Vector2> blockList {
         get {
             return _blockList;
@@ -56,7 +58,7 @@ public abstract class Region : MonoBehaviour {
     }
     [System.Serializable] 
     public struct RegionEffect {
-        public Effect e;
+        public EffectGenerator eg;
         public int power;
     }
     int d = 0;
@@ -162,20 +164,45 @@ public abstract class Region : MonoBehaviour {
             }
         }      
     }
-
+    
     void Start () {
 
+        //生成子空物体
+        obj_effects =  new GameObject("RegionEffects");
+        obj_effects.transform.SetParent(transform);
+        obj_events = new GameObject("RegionEvents");
+        obj_events.transform.SetParent(transform);
+
+        //初始化区域特效
+        //概率分布为超几何分布
+        //TODO::BUG
+        int i = max_effects;
+        int sumpower = 0;
+        foreach(RegionEffect re in region_effects) {
+            sumpower += re.power;
+        }
+        while(i>0) {
+            int rpower = Mathf.FloorToInt(Random.value*sumpower);
+            foreach(RegionEffect re in region_effects) {
+                rpower -= re.power;
+                if (rpower<=0) {
+                    generateEffect(re);
+                    break;
+                }
+            }
+            i--;
+        }
+        
 	}
 
+    void generateEffect(RegionEffect re) {
+        EffectGenerator eg = Instantiate(re.eg,obj_effects.transform);
+        eg.setRegion(this);
+        //eg.init(this,_mapBoundsController.left,_mapBoundsController.right,_mapBoundsController.top,_mapBoundsController.bottom);
+    }
     void Update() {
 
-        // 判断玩家位置
-        // if ()) {
-        //     _visited = true;
-        //     _hasUser = true;
-        // } else {
-        //     _hasUser = false;
-        // }
+  
     }
 
     //----------虚函数部分-------------------

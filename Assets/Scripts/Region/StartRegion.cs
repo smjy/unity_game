@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class StartRegion : Region {
 
-	void Start () {
-
-	}
 	
 }

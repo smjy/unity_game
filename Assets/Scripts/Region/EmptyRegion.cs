@@ -8,9 +8,6 @@ public class EmptyRegion : Region {
 	public override int getPower(int x,int y,int depth,int seed) {
         return 1;
     }
-	void Start () {
 
-	}
-	
 	
 }

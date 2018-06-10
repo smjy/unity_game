@@ -8,7 +8,7 @@ public class MapBoundsController : MonoBehaviour {
 	public GameObject mapBoundSingle;
 	public GameObject mapBoundSingleMinimap;
 	
-	float left,right,top,bottom;
+	[HideInInspector] public float left,right,top,bottom;
 	// Use this for initialization
 	void Start () {	
 		
