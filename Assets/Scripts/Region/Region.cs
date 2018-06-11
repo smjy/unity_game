@@ -165,7 +165,7 @@ public abstract class Region : MonoBehaviour {
         }      
     }
     
-    void Start () {
+    protected virtual void Start () {
 
         //生成子空物体
         obj_effects =  new GameObject("RegionEffects");
@@ -194,8 +194,14 @@ public abstract class Region : MonoBehaviour {
         }
         
 	}
+    //玩家进入时触发
 
-    void generateEffect(RegionEffect re) {
+    public void enter() {
+
+    }
+
+
+    protected void generateEffect(RegionEffect re) {
         EffectGenerator eg = Instantiate(re.eg,obj_effects.transform);
         eg.setRegion(this);
         //eg.init(this,_mapBoundsController.left,_mapBoundsController.right,_mapBoundsController.top,_mapBoundsController.bottom);

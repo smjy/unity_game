@@ -60,3 +60,6 @@ MonoBehaviour:
     power: 0
   - e: {fileID: 0}
     power: 0
+  max_events: 20
+  region_effects: []
+  max_effects: 20

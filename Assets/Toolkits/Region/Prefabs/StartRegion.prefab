@@ -62,6 +62,4 @@ MonoBehaviour:
   region_effects:
   - eg: {fileID: 114144274517670204, guid: fbaeed25fe18c204191a41530f91327e, type: 2}
     power: 5
-  - eg: {fileID: 114144274517670204, guid: fbaeed25fe18c204191a41530f91327e, type: 2}
-    power: 5
-  max_effects: 3
+  max_effects: 5

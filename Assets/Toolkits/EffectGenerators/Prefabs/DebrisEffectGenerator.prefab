@@ -51,14 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590d194e60ba2bc41bd92452114f9f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_effect: 1
+  max_effect: 30
   generate_outside: 1
   outside_max_distance: 800
-  outside_min_distance: 200
   effects:
-  - {fileID: 114688023661784402, guid: 5952dad664fa3b241ae9113e31f346a6, type: 2}
-  - {fileID: 114920317594447352, guid: c12e95484520f124ebdffc1ad559aad2, type: 2}
+  - {fileID: 114618047160488310, guid: fa4953e6abd45364f9eee1e47c0c0a50, type: 2}
+  - {fileID: 114791407176965334, guid: c12e95484520f124ebdffc1ad559aad2, type: 2}
   generate_time: 1000
   scale_min: 0.5
   scale_max: 1.5
-  start_speed: 0
+  has_speed: 1
+  start_speed: 20
+  speed_z: 1
