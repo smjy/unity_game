@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ButtonStatus : MonoBehaviour {
 
 	
-    public Material hoverMt;
-    public Material normalMt;
+    public Sprite hoverMt;
+    public Sprite normalMt;
 
     // Use this for initialization
     void Start()
@@ -16,13 +16,24 @@ public class ButtonStatus : MonoBehaviour {
         UIEventListener btnListener = btn.gameObject.AddComponent<UIEventListener>();
 
         btnListener.OnMouseEnter += delegate (GameObject gb) {
-           
-            gb.GetComponent<Image>().material = hoverMt;
+
+            Debug.Log("in");
+            gb.GetComponent<Image>().sprite = hoverMt;
+            gb.GetComponentInChildren<Text>().color = Color.white;
         };
 
         btnListener.OnMouseExit += delegate (GameObject gb) {
-            
-            gb.GetComponent<Image>().material = normalMt;
+            Debug.Log("out");
+            gb.GetComponent<Image>().sprite = normalMt;
+            Color32 color32= new Color32(0, 160, 233, 255);
+            gb.GetComponentInChildren<Text>().color = color32;
+        };
+
+        btnListener.OnClick += delegate (GameObject gb) {
+            Debug.Log("out");
+            gb.GetComponent<Image>().sprite = normalMt;
+            Color32 color32 = new Color32(77, 50, 109, 255);
+            gb.GetComponentInChildren<Text>().color = color32;
         };
     }
 }

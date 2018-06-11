@@ -7,10 +7,9 @@ public class WindowSizeSet : MonoBehaviour {
 
    
     public Toggle full, window;   
-    string windowSize = "Full";
 	// Use this for initialization
 	void Start () {
-        if(windowSize=="Full")
+        if(GameSetting.main.windowSize=="Full")
         {
             full.isOn = true;
         }
@@ -30,11 +29,11 @@ public class WindowSizeSet : MonoBehaviour {
     public void on_fullActive()
     {
         PlayerSettings.defaultIsFullScreen = true;
-        windowSize = "Full";
+        GameSetting.main.windowSize ="Full";
     }
     public void on_windowActive()
     {
         PlayerSettings.defaultIsFullScreen = false;
-        windowSize = "Window";
+        GameSetting.main.windowSize = "Window";
     }
 }
