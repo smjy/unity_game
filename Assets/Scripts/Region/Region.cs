@@ -56,10 +56,10 @@ public abstract class Region : MonoBehaviour {
         public Event e;
         public int power;
     }
+    //RegionEffect 每个Region生成以下effectGenerator各一
     [System.Serializable] 
     public struct RegionEffect {
         public EffectGenerator eg;
-        public int power;
     }
     int d = 0;
     [Header("区域设定")]
@@ -173,25 +173,10 @@ public abstract class Region : MonoBehaviour {
         obj_events = new GameObject("RegionEvents");
         obj_events.transform.SetParent(transform);
 
-        //初始化区域特效
-        //概率分布为超几何分布
-        //TODO::BUG
-        int i = max_effects;
-        int sumpower = 0;
-        foreach(RegionEffect re in region_effects) {
-            sumpower += re.power;
-        }
-        while(i>0) {
-            int rpower = Mathf.FloorToInt(Random.value*sumpower);
-            foreach(RegionEffect re in region_effects) {
-                rpower -= re.power;
-                if (rpower<=0) {
-                    generateEffect(re);
-                    break;
-                }
-            }
-            i--;
-        }
+        
+
+        generateEffects();
+        generateEvents();
         
 	}
     //玩家进入时触发
@@ -199,8 +184,16 @@ public abstract class Region : MonoBehaviour {
     public void enter() {
 
     }
+    protected void generateEvents() {
 
-
+    }
+    protected void generateEffects() {
+        //初始化区域特效
+        //OPTIMIZE:现在只生成一个
+        foreach(RegionEffect re in region_effects) {
+            generateEffect(re);
+        }
+    }
     protected void generateEffect(RegionEffect re) {
         EffectGenerator eg = Instantiate(re.eg,obj_effects.transform);
         eg.setRegion(this);

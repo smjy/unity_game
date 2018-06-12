@@ -61,5 +61,5 @@ MonoBehaviour:
   max_events: 20
   region_effects:
   - eg: {fileID: 114144274517670204, guid: fbaeed25fe18c204191a41530f91327e, type: 2}
-    power: 5
+  - eg: {fileID: 114264983332561036, guid: b4b67f9ff84ec8c4a8a0d1fd172fe761, type: 2}
   max_effects: 5

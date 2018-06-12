@@ -55,8 +55,8 @@ MonoBehaviour:
   generate_outside: 1
   outside_max_distance: 800
   effects:
-  - {fileID: 114618047160488310, guid: fa4953e6abd45364f9eee1e47c0c0a50, type: 2}
-  - {fileID: 114791407176965334, guid: c12e95484520f124ebdffc1ad559aad2, type: 2}
+  - {fileID: 114201598930278050, guid: fa4953e6abd45364f9eee1e47c0c0a50, type: 2}
+  - {fileID: 114020129100917454, guid: c12e95484520f124ebdffc1ad559aad2, type: 2}
   generate_time: 1000
   scale_min: 0.5
   scale_max: 1.5
