@@ -25,7 +25,7 @@ public class ButtonStatus : MonoBehaviour {
         btnListener.OnMouseExit += delegate (GameObject gb) {
             Debug.Log("out");
             gb.GetComponent<Image>().sprite = normalMt;
-            Color32 color32= new Color32(0, 160, 233, 255);
+            Color32 color32 = new Color32(77, 50, 109, 255);
             gb.GetComponentInChildren<Text>().color = color32;
         };
 

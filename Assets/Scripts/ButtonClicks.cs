@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class ButtonClicks : MonoBehaviour {
     public GameObject setWindow;
-    public GameObject audioSetWindow;
-    public GameObject keySetWindow;
-    public GameObject interfaceSetWindow;
-    public GameObject gameSetWindow;
+    public GameObject audioSet;
+    public GameObject keySet;
+    public GameObject windowSet;
+    public GameObject gameSet;
 
 	public void on_setButton_click()
     {
@@ -23,40 +23,33 @@ public class ButtonClicks : MonoBehaviour {
 
     }
 
-    public void on_keyChoose_click()
-    {
-        if(Input.anyKeyDown)
-        {
-            //keyInput.GetComponent<Text>().text = Event.current.keyCode.ToString();
-        }
-    }
 
-    public void on_audioSet_click()
+    public void on_audioSet_Active()
     {
-        audioSetWindow.SetActive(true);
-        keySetWindow.SetActive(false);
-        interfaceSetWindow.SetActive(false);
-        gameSetWindow.SetActive(false);
+        audioSet.SetActive(true);
+        keySet.SetActive(false);
+        windowSet.SetActive(false);
+        gameSet.SetActive(false);
     }
-    public void on_keySet_click()
+    public void on_keySet_Active()
     {
-        audioSetWindow.SetActive(false);
-        keySetWindow.SetActive(true);
-        interfaceSetWindow.SetActive(false);
-        gameSetWindow.SetActive(false);
+        audioSet.SetActive(false);
+        keySet.SetActive(true);
+        windowSet.SetActive(false);
+        gameSet.SetActive(false);
     }
-    public void on_interfaceSet_click()
+    public void on_interfaceSet_Active()
     {
-        audioSetWindow.SetActive(false);
-        keySetWindow.SetActive(false);
-        interfaceSetWindow.SetActive(true);
-        gameSetWindow.SetActive(false);
+        audioSet.SetActive(false);
+        keySet.SetActive(false);
+        windowSet.SetActive(true);
+        gameSet.SetActive(false);
     }
-    public void on_gameSet_click()
+    public void on_gameSet_Active()
     {
-        audioSetWindow.SetActive(false);
-        keySetWindow.SetActive(false);
-        interfaceSetWindow.SetActive(false);
-        gameSetWindow.SetActive(true);
+        audioSet.SetActive(false);
+        keySet.SetActive(false);
+        windowSet.SetActive(false);
+        gameSet.SetActive(true);
     }
 }

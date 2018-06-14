@@ -39,24 +39,9 @@ public class keyMapSet : MonoBehaviour
     {
 
         static Dictionary<string, KeyCode> keySetting;
-        static string[] functionMaps = new string[4]
-        {
-            "Forward",
-            "Back",
-            "Left",
-            "Right",
+        static string[] functionMaps = GameSetting.main.functions;
 
-
-        };
-
-        static KeyCode[] defaults = new KeyCode[4]
-        {
-             KeyCode.W,
-             KeyCode.A,
-             KeyCode.S,
-             KeyCode.D,
-
-        };
+        static KeyCode[] defaults = GameSetting.main.keySetDefaults;
 
         static KeySetManager()
         {
@@ -67,7 +52,7 @@ public class keyMapSet : MonoBehaviour
         {
 
             keySetting = new Dictionary<string, KeyCode>();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < functionMaps.Length; i++)
             {
                 keySetting.Add(functionMaps[i], defaults[i]);
             }

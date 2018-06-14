@@ -12,9 +12,11 @@ public class WindowSizeSet : MonoBehaviour {
         if(GameSetting.main.windowSize=="Full")
         {
             full.isOn = true;
+            window.isOn = false;
         }
         else
         {
+            full.isOn = false;
             window.isOn = true;
         }
 		

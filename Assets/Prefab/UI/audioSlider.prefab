@@ -332,7 +332,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ff22c20ecf795d74b835b419e73f1460, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b51ec01cea528a74da6a5f3fa3f08909, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -371,7 +371,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4280fa973bf7d114db3487249c23ed8f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6d7c5c8c06433e43abab9eb6678f5a1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -514,7 +514,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fd07c07d91adb3f409e32f833726e3f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 73c696b61f9993a48ab5c21010b8776b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -533,8 +533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731c3157e0a881040aecb73f2490e781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverMt: {fileID: 21300000, guid: 09d5408c657104b4fbfe36aeafc0d634, type: 3}
-  normalMt: {fileID: 21300000, guid: ff22c20ecf795d74b835b419e73f1460, type: 3}
+  hoverMt: {fileID: 21300000, guid: 7d3c6796e741ff84897de2812e282e78, type: 3}
+  normalMt: {fileID: 21300000, guid: b51ec01cea528a74da6a5f3fa3f08909, type: 3}
 --- !u!114 &114830201791131254
 MonoBehaviour:
   m_ObjectHideFlags: 1
