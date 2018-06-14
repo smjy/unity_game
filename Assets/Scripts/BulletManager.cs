@@ -8,7 +8,7 @@ public class BulletManager : MonoBehaviour {
     public Transform carnoon;
     public Transform bullet_parent;
 
-    public float start_speed = 3f;
+    public float start_speed = 800f;
     public float speed_decrease = 0.05f;
     public float decrease_after = 2f;
     public float life = 6f;

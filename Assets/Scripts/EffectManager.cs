@@ -8,6 +8,9 @@ public class EffectManager : MonoBehaviour {
     public Transform effect_parent;
     public Transform map_effect_parent;
     public Effect entering_effect;
+    public Effect[] hit_effects;
+
+
 	private void Awake() {
         if (main == null)
             main = this;
@@ -32,4 +35,12 @@ public class EffectManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public Effect get_hit_effect() {
+        if (hit_effects.Length == 0) {
+            Debug.Log("error,no effects");
+            throw new UnityException("error,no effects");
+        }
+        return hit_effects[Random.Range(0,hit_effects.Length)];
+    }
 }

@@ -91,7 +91,7 @@ public class EffectGenerator : MonoBehaviour {
         if (time*Time.deltaTime*1000 > generate_time && region.has_user) {
             time = 0;
             if (effects.Length > 0 && current_effects.Count < max_effect) {
-                Debug.Log("Generate2!");
+                //Debug.Log("Generate2!");
                 generate(generate_outside);
             }
         }
