@@ -12,11 +12,11 @@ public class RigidAI : AI {
         base.Awake();
     }
 
-    protected virtual void initSpeed(Vector3 speed) {
+    public void initSpeed(Vector3 speed) {
         rb.velocity = speed;
     }
 
-    protected virtual void initRotationSpeed(Vector3 speed) {
+    public void initRotationSpeed(Vector3 speed) {
         rb.angularVelocity = speed;
     }
 }

@@ -11,4 +11,8 @@ public class AI : MonoBehaviour {
     protected virtual void Start() {
 
     }
+
+    protected virtual void FixedUpdate() {
+
+    }
 }
