@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33099061144896970}
   - component: {fileID: 23223877525840472}
   - component: {fileID: 54488017004880898}
-  - component: {fileID: 64966331088010372}
   - component: {fileID: 114020129100917454}
+  - component: {fileID: 65244624631382718}
   m_Layer: 0
   m_Name: DebrisEffect2
   m_TagString: Untagged
@@ -100,8 +100,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 72
   m_CollisionDetection: 0
---- !u!64 &64966331088010372
-MeshCollider:
+--- !u!65 &65244624631382718
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -109,11 +109,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 39b262a02891a9143a7a315d3f10cdb8, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.7597923, y: 19.858616, z: 31.032928}
+  m_Center: {x: 10.478029, y: -10.070692, z: 24.481537}
 --- !u!114 &114020129100917454
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lib;
 
 [RequireComponent(typeof(Rigidbody))]
 public class SimpleFloatingAI : RigidAI {
@@ -10,13 +11,35 @@ public class SimpleFloatingAI : RigidAI {
     public bool one_way = false;
     public float one_way_direction = 0f;
     public float change_time = 5f;
+    public float rotate_speed = 1f; //1s能转多少度
+    public float start_direction;
 
     int time = 50;
-    float direction_time = 1f;
-    Vector3 direction;
-    Vector3 target_direction;
-    Vector3 old_direction;
+    float direction;
+    float target_direction;
+
+    Vector3 zEuler(float dir) {
+        return new Vector3(Mathf.Cos(dir),Mathf.Sin(dir),0);
+    }
+    
+    Vector3 zEulerDegree(float dir) {
+        float dirRadian = dir * Mathf.Deg2Rad;
+        return new Vector3(Mathf.Cos(dirRadian),Mathf.Sin(dirRadian),0);
+    }
+    float zDir(Vector3 euler) {
+        if (euler.y > 0) return Mathf.Acos(euler.x);
+        if (euler.y == 0) return euler.x > 0 ? 0f : Mathf.PI;
+        return -Mathf.Acos(euler.x);
+    }
+
+    float fixDir(float dir) {
+        if (dir < 0) return dir + 360f;
+        if (dir > 360f) return dir - 360f;
+        return dir;
+    }
     protected override void Start() {
+
+       
         base.Start();
         float direction_radians;
         if (one_way) 
@@ -24,14 +47,19 @@ public class SimpleFloatingAI : RigidAI {
         else 
             direction_radians = Random.Range(0f,Mathf.PI*2);
 
-        direction = new Vector3(Mathf.Cos(direction_radians),Mathf.Sin(direction_radians),0);
+        direction = direction_radians * Mathf.Rad2Deg;
+        transform.eulerAngles = new Vector3(0,0,fixDir(direction-start_direction));
         target_direction = direction;
-        old_direction = direction;
+
     }
 
-
+    float getDirection() {
+        return fixDir(transform.eulerAngles.z + start_direction);
+    }
     protected override void FixedUpdate() {
-        rb.AddForce(force*direction);
+        direction = getDirection();
+        Vector3 direction_vector = zEulerDegree(direction);
+        rb.AddForce(force*direction_vector);
         float drag = force / (max_speed*max_speed);
         float v = rb.velocity.magnitude;
         Vector3 drag_force = (-rb.velocity).normalized*v*v*drag;
@@ -42,18 +70,21 @@ public class SimpleFloatingAI : RigidAI {
             time++;
             if (time > change_time*50) {
                 time = 0;
-                old_direction = direction;
-                float new_direction_radians = Random.Range(0f,Mathf.PI*2);          
-                target_direction = new Vector3(Mathf.Cos(new_direction_radians),Mathf.Sin(new_direction_radians),0);
+                target_direction = Random.Range(0f,360f);     
             }
 
-            if (time < direction_time * 50) 
-                direction = Vector3.Slerp(old_direction,target_direction,time/(direction_time*50));
+            if (direction != target_direction) {
+                float t = rotate_speed * 50f / 360f;
+                //t = Easing.EaseIn(t,EasingType.Sine);
+                direction = Mathf.LerpAngle(direction,target_direction,t);
+                transform.eulerAngles = new Vector3(0f,0f,fixDir(direction-start_direction));
             }
+            
+            
         }
         
 
-        
+    }
 
     
 }

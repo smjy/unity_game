@@ -55,7 +55,7 @@ public class EffectGenerator : MonoBehaviour {
             pos.x += radius*Mathf.Cos(angle);
             pos.y += radius*Mathf.Sin(angle);
             //特效生成到Effect/MapEffect空物体下 保证即使Region停用 Effect仍然留存
-            Effect e = Instantiate(effects[Random.Range(0,effects.Length-1)],pos,Random.rotation,EffectManager.main.map_effect_parent) as Effect;
+            Effect e = Instantiate(effects[Random.Range(0,effects.Length)],pos,Random.rotation,EffectManager.main.map_effect_parent) as Effect;
             Transform et = e.transform;
             et.localScale *= Random.Range(scale_min,scale_max);
             e.init(this);
