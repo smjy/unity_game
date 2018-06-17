@@ -12,31 +12,12 @@ public class SimpleFloatingAI : RigidAI {
     public float one_way_direction = 0f;
     public float change_time = 5f;
     public float rotate_speed = 1f; //1s能转多少度
-    public float start_direction;
+    public float start_direction = 0f;
 
     int time = 50;
     float direction;
     float target_direction;
 
-    Vector3 zEuler(float dir) {
-        return new Vector3(Mathf.Cos(dir),Mathf.Sin(dir),0);
-    }
-    
-    Vector3 zEulerDegree(float dir) {
-        float dirRadian = dir * Mathf.Deg2Rad;
-        return new Vector3(Mathf.Cos(dirRadian),Mathf.Sin(dirRadian),0);
-    }
-    float zDir(Vector3 euler) {
-        if (euler.y > 0) return Mathf.Acos(euler.x);
-        if (euler.y == 0) return euler.x > 0 ? 0f : Mathf.PI;
-        return -Mathf.Acos(euler.x);
-    }
-
-    float fixDir(float dir) {
-        if (dir < 0) return dir + 360f;
-        if (dir > 360f) return dir - 360f;
-        return dir;
-    }
     protected override void Start() {
 
        
