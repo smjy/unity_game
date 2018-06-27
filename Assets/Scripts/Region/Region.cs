@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #pragma warning disable 0414
-
+#pragma warning disable 0219
 public abstract class Region : MonoBehaviour {
 
     protected bool _visited = false; //主角是否进入过该区域

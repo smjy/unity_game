@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
     public int particles_num = 200;
     public Transform particle_parent;
     [Tooltip("环境所处Z轴")] public static float z_depth = 100f;
+    [Tooltip("物体最小Z轴可视")] public static float z_min = 30f;
+    [Tooltip("物体最大Z轴可视")] public static float z_max = 200f;
 
     // Use this for initialization
     void Start () {

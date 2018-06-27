@@ -26,11 +26,12 @@ public class Destructible : MonoBehaviour {
                 continue;
             }
             if (t.gameObject.GetComponent<BoxCollider>()!=null && t.gameObject!=gameObject) {
-                Debug.Log("Active1");
+                //Debug.Log("Active1");
                 GameObject g = t.gameObject;
                 Fade f = g.AddComponent<Fade>();
                 f.fade_after = 2f;
                 f.fade_time = 2f;
+                g.AddComponent<FadeInZ>();
                 Vector3 oldpos = t.position;
                 t.gameObject.GetComponent<BoxCollider>().enabled = true;
                 t.position = oldpos;

@@ -137,10 +137,10 @@ public class CursorController : MonoBehaviour {
                     }
                 }
 
-                if (Input.GetKeyDown(KeyCode.E)) {
+                if (Input.GetKeyDown(KeyCode.Z)) {
                     switchType(cursor_test);
                 }
-                if (Input.GetKeyDown(KeyCode.Q)) {
+                if (Input.GetKeyDown(KeyCode.C)) {
                     switchType(cursor_aim);
                 }
             } break;

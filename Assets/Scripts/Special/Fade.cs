@@ -25,7 +25,7 @@ public class Fade : MonoBehaviour {
             }
             Color c = mr.material.color;
             //可以同步操作alpha
-            if (c.a>=alpha) c.a = alpha;
+            if (c.a>alpha) c.a = alpha;
             mr.material.color = c;
             
         }
