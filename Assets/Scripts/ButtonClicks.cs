@@ -9,10 +9,13 @@ public class ButtonClicks : MonoBehaviour {
     public GameObject keySet;
     public GameObject windowSet;
     public GameObject gameSet;
+    public Animator anim;
+ 
 
 	public void on_setButton_click()
     {
         Debug.Log("设置按钮点击");
+        anim.Play("SWOpen");
         setWindow.SetActive(true);
 
     }

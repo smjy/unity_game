@@ -142,7 +142,6 @@ public class keyMapSet : MonoBehaviour
                         KeySetManager.setKey(FunctionNow, e.keyCode);
                         btnText.GetComponent<Text>().text = e.keyCode.ToString();
 
-
                     }
 
 
