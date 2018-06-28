@@ -5,7 +5,8 @@ using UnityEngine;
 public class MinimapManager : MonoBehaviour
 {
     public static MinimapManager _instance;
-    public GameObject iconDisplay;
+    public GameObject iconDisplayGO;
+    public GameObject icon1;
 	public static float scale;
 	public static float defaultScale = 90f;
 
@@ -25,8 +26,8 @@ public class MinimapManager : MonoBehaviour
 	}
     public void RegisterObj(Transform obj, GameObject iconPrefab)
     {
-        GameObject icon = Instantiate(iconPrefab, iconDisplay.transform);
-        icon.transform.parent = iconDisplay.transform;
+        GameObject icon = Instantiate(iconPrefab, iconDisplayGO.transform);
+        icon.transform.parent = iconDisplayGO.transform;
         icon.GetComponent<MinimapIconController>().target = obj;
     }
     public void RemoveObj(Transform obj)
