@@ -7,8 +7,11 @@ public class MinimapManager : MonoBehaviour
     public static MinimapManager _instance;
     public GameObject iconDisplayGO;
     public GameObject icon1;
-	public static float scale;
-	public static float defaultScale = 90f;
+    public static float scale;
+    public static float defaultScale = 60f;
+    public static float borderSize = 88f;
+    public static float minScale = 40f;
+    public static float maxScale = 150f;
 
     static public MinimapManager instance
     {
@@ -21,9 +24,10 @@ public class MinimapManager : MonoBehaviour
             return _instance;
         }
     }
-	static public void SetScale(float v,bool isAdd=false){
-		scale = Mathf.Clamp(isAdd?(scale+v):v,60f,150f);
-	}
+    static public void SetScale(float v, bool isAdd = false)
+    {
+        scale = Mathf.Clamp(isAdd ? (scale + v) : v, minScale, maxScale);
+    }
     public void RegisterObj(Transform obj, GameObject iconPrefab)
     {
         GameObject icon = Instantiate(iconPrefab, iconDisplayGO.transform);
@@ -40,9 +44,10 @@ public class MinimapManager : MonoBehaviour
 
     }
 
-	void Awake(){
-		scale = defaultScale;
-	}
+    void Awake()
+    {
+        scale = defaultScale;
+    }
     // Update is called once per frame
     void Update()
     {
