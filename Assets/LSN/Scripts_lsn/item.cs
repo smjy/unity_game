@@ -9,7 +9,7 @@ public class item : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         // sprite = GetComponent<Image>().sprite;
-        description = "ksfjsdfjljfalk";
+       description = name+"ksfjsdfjljfalk";
 	}
 	
 	// Update is called once per frame

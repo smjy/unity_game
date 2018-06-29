@@ -75,6 +75,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec24b6e8abf0d2e4a8b0f97ff5f6037f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nullImage: {fileID: 21300000, guid: 7ebcc9d740f1a944fad80bb0996b47f9, type: 3}
+  sprite: {fileID: 0}
+  NAME: 
+  isNull: 0
 --- !u!114 &114179671090109974
 MonoBehaviour:
   m_ObjectHideFlags: 1
