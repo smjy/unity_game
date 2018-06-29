@@ -13,11 +13,13 @@ public class MapManager : MonoBehaviour {
 
 	[Header("区域类型集合")]
 	[Tooltip("所有可用区域类型集合")] public Region[] available_regions;
+	[Tooltip("起始区域")] public Region start_region;
+	[Tooltip("虚空区域")] public Region empty_region;
 	
 	[Header("区域生成算法")]
 	[Tooltip("初始生成范围的网格矩形边长")] public int init_block_length = 5;
-	[Tooltip("主机接近已生成区域边境该距离后开始补充生成")] public int continue_length_when_close = 2;
-	[Tooltip("补充生成的圈数")] public int continue_block_length = 2;
+	[Tooltip("开始补充生成的主机抵达层数与已生成层数差值")] public int continue_length_when_close = 1;
+	[Tooltip("补充生成的圈数")] public int continue_block_length = 1;
 	float real_length;
 
 	public GameObject bound;
@@ -27,8 +29,12 @@ public class MapManager : MonoBehaviour {
 	int seed = 123; //根据种子生成地图
 	int x_seed = 1;
 	int y_seed = 1000;
+	Vector2 oldPlayerAt;
+	Vector2 olderPlayerAt;
 	Dictionary<Vector2,Region> Regions = new Dictionary<Vector2,Region>();
-	
+	HashSet<Vector2> visitedRegions = new HashSet<Vector2>(); //访问过的区域
+	int currDepth = 0;
+	bool enteredNewMap = false;
 	//地图生成局部种子设定: 已知全局种子和区块的x,y，则该区块的区域类型局部种子为全局种子+x*x_seed+y*y_seed
 	//区域类型设定: 已知x,y,四周区域类型，根据四周区域类型和深度depth生成权重 取权重最大者决定区域
 	//生成顺序如下图
@@ -49,10 +55,13 @@ public class MapManager : MonoBehaviour {
     }
 
 	void Start () {
+		oldPlayerAt = new Vector2(0,0);
 		Random.InitState(seed);
 		real_length = square_length - 2* square_indent;
 		PriorRegions();
-		GenerateMapWithinDepth(2);
+		GenerateMapWithinDepth(3);
+
+		playerAtRegion().has_user = true;
 
 	}
 
@@ -66,10 +75,36 @@ public class MapManager : MonoBehaviour {
 		return Regions[v];
 	}
 	
-	//预先决定的区域
-	void PriorRegions() {
-		
-		GenerateMapAt(0,0,available_regions[0]);
+	//玩家当前所在的位置
+	public Vector2 playerAt() {
+		int x,y;
+		Vector3 p = MainPlayer_Single.me.transform.position;
+		x = Mathf.FloorToInt(p.x/square_length+0.5f);
+		y = Mathf.FloorToInt(p.y/square_length+0.5f);
+		return new Vector2(x,y);
+	}
+	public int playerX() {
+		return Mathf.FloorToInt(MainPlayer_Single.me.transform.position.x/square_length+0.5f);
+	}
+	public int playerY() {
+		return Mathf.FloorToInt(MainPlayer_Single.me.transform.position.y/square_length+0.5f);
+	}
+	public int playerDepth() {
+		return xyToDepth(playerX(),playerY());
+	}
+	//玩家当前所在的区域
+	public Region playerAtRegion() {
+		return regionAt(playerAt());
+	}
+
+	//某位置上下左右包含某一区域的数量
+	public int surrounds(int x,int y,string region_name) {
+		int s = 0;
+		if (regionGeneratedAt(x+1,y) && regionAt(x+1,y).regionName == region_name) s++;
+		if (regionGeneratedAt(x-1,y) && regionAt(x-1,y).regionName == region_name) s++;
+		if (regionGeneratedAt(x,y+1) && regionAt(x,y+1).regionName == region_name) s++;
+		if (regionGeneratedAt(x,y-1) && regionAt(x,y-1).regionName == region_name) s++;
+		return s;
 	}
 	
 	//边界生成
@@ -87,6 +122,11 @@ public class MapManager : MonoBehaviour {
 		return mbc;
 	}
 
+
+	//预先决定的区域
+	void PriorRegions() {
+		GenerateMapAt(0,0,start_region);
+	}
 	//生成第depth环以内的区块
 	void GenerateMapWithinDepth(int depth) {
 		if (depth<1) return;
@@ -118,7 +158,14 @@ public class MapManager : MonoBehaviour {
 			} else y++;
 			if (y == depth) break;
 		}
+		currDepth = Mathf.Max(currDepth,depth);
 		
+	}
+	void GenerateMoreDepth() {
+		GenerateMapOfDepth(currDepth+1);
+	}
+	void GenerateMoreDepths(int depth) {
+		for (int i=0;i<depth;i++) GenerateMoreDepth();
 	}
 	//生成第x,y位置的区块 计算其区域并赋予
 	void GenerateMapAt(int x,int y,int depth) {
@@ -131,14 +178,14 @@ public class MapManager : MonoBehaviour {
 			Debug.Log("请设置生成区域数组!");
 			return;
 		}
-		int maxpower = 0;
-		Region mr = available_regions[0];
+		int maxpower = -1;
+		Region mr = empty_region;
+		int region_seed = seed + x * x_seed + y * y_seed;
 		foreach (Region region in available_regions) {
-			int p = region.getPower(x,y,depth,seed);
+			int p = region.getPower(x,y,depth,region_seed);
 			//Debug.Log(p);
 			if (p>maxpower) mr = region;
 		}
-
 		Region r = Instantiate(mr,region_parent) as Region;
 		r.addBlock(x,y);
 		Regions.Add(new Vector2(x,y),r);
@@ -159,11 +206,54 @@ public class MapManager : MonoBehaviour {
 		r.mapBoundsController = mbc;
 
 	}
+	int xyToDepth(int x,int y) {
+		return Mathf.Max(Mathf.Abs(x),Mathf.Abs(y))+1;
+	}
 
-
-
+	
 	// Update is called once per frame
 	void Update () {
-		
+
+		Vector2 pa = playerAt();
+		if (!visitedRegions.Contains(pa)) {
+			visitedRegions.Add(pa);
+			playerAtRegion().visited = true;
+		}
+
+		if (pa != oldPlayerAt) {
+			// if (!enteredNewMap) {
+			// 	enteredNewMap = true;
+			// } else {
+				
+			// }
+			Vector2 diff = pa - oldPlayerAt;
+			if (Mathf.Abs(diff.x) < 0.5) {
+				float directionY = diff.y / Mathf.Abs(diff.y);
+				Quaternion r = Quaternion.Euler(90,0,0);
+				Vector3 force = 20000f * new Vector3(0,directionY,0);
+				MainPlayer_Single.me.GetComponent<Rigidbody>().AddForce(force);
+				Instantiate(EffectManager.main.entering_effect,MainPlayer_Single.me.transform.position,r,EffectManager.main.effect_parent);
+			} else {
+				float directionX = diff.x / Mathf.Abs(diff.x);
+				Quaternion r = Quaternion.Euler(0,90,0);
+				Vector3 force = 20000f * new Vector3(0,directionX,0);
+				MainPlayer_Single.me.GetComponent<Rigidbody>().AddForce(force);
+				Instantiate(EffectManager.main.entering_effect,MainPlayer_Single.me.transform.position,r,EffectManager.main.effect_parent);
+			}
+			//玩家进入新区域
+			regionAt(oldPlayerAt).has_user = false;
+			playerAtRegion().has_user = true;
+
+			//切换activeRegions
+			regionAt(oldPlayerAt).enabled = false;
+			playerAtRegion().enabled = true;
+			oldPlayerAt = pa;
+
+
+		}
+
+		if (playerDepth() == currDepth-continue_length_when_close) {
+			GenerateMoreDepths(continue_block_length);
+		}
 	}
 }

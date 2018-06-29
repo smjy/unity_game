@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapBoundsController : MonoBehaviour {
 
 	public GameObject mapBoundSingle;
 	public GameObject mapBoundSingleMinimap;
 	
-	float left,right,top,bottom;
+	[HideInInspector] public float left,right,top,bottom;
 	// Use this for initialization
 	void Start () {	
 		
 	}
+	
+	
 	public void Init(float width,float height, float startx,float starty,Material bound_material,float width_multiplier = 1f) {
-
+		
 		// this.width = width;
 		// this.height = height;
 		this.left = startx;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+//弃用
 public class MainPlayer : NetworkBehaviour {
     // Use this for initialization
     public static MainPlayer me;

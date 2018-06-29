@@ -8,7 +8,7 @@ public class BulletManager : MonoBehaviour {
     public Transform carnoon;
     public Transform bullet_parent;
 
-    public float start_speed = 3f;
+    public float start_speed = 800f;
     public float speed_decrease = 0.05f;
     public float decrease_after = 2f;
     public float life = 6f;
@@ -20,12 +20,7 @@ public class BulletManager : MonoBehaviour {
 
     
 	void Start () {
-		Debug.Log(carnoon.rotation);
-		Debug.Log(carnoon.localRotation);
-        
-        Debug.Log(carnoon.eulerAngles);
 
-        Debug.Log(carnoon.localEulerAngles);
 	}
 	
 	// Update is called once per frame
@@ -53,8 +48,8 @@ public class BulletManager : MonoBehaviour {
         pos.z = 100f;
         Vector3 start_pos = MainPlayer_Single.me.transform.position;
         Vector3 direction = (pos - start_pos).normalized;
-        direction += Random.Range(0f, CursorFollow.main.accuracyRadius) * Random.onUnitSphere;
-        CursorFollow.main.addSpeed(kick);
+        direction += Random.Range(0f, CursorController.main.accuracyRadius) * Random.onUnitSphere;
+        CursorController.main.addSpeed(kick);
         create(start_pos + direction * 10f, direction);
     }
     void create(Vector3 position, Vector3 direction) {

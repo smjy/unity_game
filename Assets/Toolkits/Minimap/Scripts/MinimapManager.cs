@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MinimapManager : MonoBehaviour
 {
     public static MinimapManager _instance;
     public GameObject iconDisplayGO;
-    public GameObject icon1;
+    public GameObject iconCircle;
     public static float scale;
-    public static float defaultScale = 60f;
+    public static float defaultScale = 75f;
     public static float borderSize = 88f;
     public static float minScale = 40f;
     public static float maxScale = 150f;
@@ -34,6 +35,13 @@ public class MinimapManager : MonoBehaviour
         icon.transform.parent = iconDisplayGO.transform;
         icon.GetComponent<MinimapIconController>().target = obj;
     }
+    public void RegisterObj(Transform obj, GameObject iconPrefab,Color color)
+    {
+        GameObject icon = Instantiate(iconPrefab, iconDisplayGO.transform);
+        icon.transform.parent = iconDisplayGO.transform;
+        icon.GetComponent<Image>().color = color;
+        icon.GetComponent<MinimapIconController>().target = obj;
+    }
     public void RemoveObj(Transform obj)
     {
 
@@ -47,6 +55,7 @@ public class MinimapManager : MonoBehaviour
     void Awake()
     {
         scale = defaultScale;
+        _instance = FindObjectOfType<MinimapManager>();
     }
     // Update is called once per frame
     void Update()

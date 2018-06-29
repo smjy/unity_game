@@ -10,24 +10,41 @@ public class Particles : MonoBehaviour
     private float size;
     private float blur;
     private Color color;
-    public float minSize = 0.01f;
-    public float maxSize = 0.05f;
+    public float minSize = 0.03f;
+    public float maxSize = 0.09f;
+    public float boundSize = 500f;
     private SpriteRenderer sr;
+    Camera guideCamera;
+    float boundleft,boundright,boundup,bounddown;
     // Use this for initialization
     void Start()
     {
+
+        foreach(Camera c in Camera.allCameras) {
+            if (c.gameObject.name == "Guide Camera") {
+                Debug.Log("Guide Camera Found");
+                guideCamera = c;
+                break;
+            }
+        }
+        boundleft = -boundSize;
+        boundright = Screen.width + boundSize;
+        boundup = -boundSize;
+        bounddown = Screen.height + boundSize;
+
         sr = GetComponent<SpriteRenderer>();
         size = Random.Range(minSize, maxSize);
-        if (Random.Range(1, 11) < 2)
+        //if (Random.Range(1, 11) < 2)
+        if (true)
         {
 
-            color = DUlib.randColor();
-            sr.color = color;
+            color = DUlib.randMainColor();
+            sr.material.color = color;
         }
         float x = Random.Range(0f, Screen.width);
         float y = Random.Range(0f, Screen.height);
-        float z = Random.Range(100f, 150f);
-        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(x, y, z));
+        float z = Random.Range(100f, 250f);
+        Vector3 pos = guideCamera.ScreenToWorldPoint(new Vector3(x, y, z));
 
 
         transform.position = pos;
@@ -37,21 +54,21 @@ public class Particles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
 
-        if (pos.x >= 0 && pos.y >= 0 && pos.x <= Screen.width && pos.y <= Screen.height) return;
+        Vector3 pos = guideCamera.WorldToScreenPoint(transform.position);
+
+        if (pos.x >= boundleft && pos.y >= boundup && pos.x <= boundright && pos.y <= bounddown) return;
 
         if (pos.x < 0)
-            pos.x = Screen.width;
-        else if (pos.x > Screen.width)
-            pos.x = 0;
-        if (pos.y < 0)
-            pos.y = Screen.height;
-        else if (pos.y > Screen.height)
-            pos.y = 0;
+            pos.x = boundright;
+        else if (pos.x > boundright)
+            pos.x = boundleft;
+        if (pos.y < boundup)
+            pos.y = bounddown;
+        else if (pos.y > bounddown)
+            pos.y = boundup;
             
-        transform.position = Camera.main.ScreenToWorldPoint(pos);
+        transform.position = guideCamera.ScreenToWorldPoint(pos);
         
     }
 }

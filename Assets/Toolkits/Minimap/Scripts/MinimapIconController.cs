@@ -36,5 +36,6 @@ public class MinimapIconController : MonoBehaviour
         }
         transform.localPosition = new Vector2(Mathf.Clamp((pos.x - 0.5f) * posScale, -borderSize, borderSize),
                                               Mathf.Clamp((pos.y - 0.5f) * posScale, -borderSize, borderSize));
+        transform.localRotation = Quaternion.Euler(0,0, target.rotation.eulerAngles.z);
     }
 }

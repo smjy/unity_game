@@ -51,8 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cebb964fca84a54aa46847496f83307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  region_name: test
   bound_material: {fileID: 2100000, guid: 2f260be040a31a24fb420a08c5b7e123, type: 2}
   width_multiplier: 1
-  max_block: 3
-  block_param: 0.5
-  region_events: []
+  max_block: 2
+  region_events:
+  - e: {fileID: 0}
+    power: 0
+  - e: {fileID: 0}
+    power: 0
+  max_events: 20
+  region_effects: []
+  max_effects: 20

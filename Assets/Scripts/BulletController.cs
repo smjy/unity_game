@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour {
 
-    float speed_decrease;
+    Rigidbody rb;
+    float drag;
     float decrease_after;
     float life = 4f;
-    public bool isDestroy_DEBUG = false;
     Vector3 direction;
 
     int time;
     float speed;
-    public void Init(Vector3 d, float ss,float sd, float da, float l) {
+    void Awake() {
+        rb = GetComponent<Rigidbody>();
+    }
+    public void Init(Vector3 d, float ss,float dg, float da, float l) {
         direction = d;
-        speed_decrease = sd;
+        drag = dg;
         speed = ss;
         life = l;
         decrease_after = da;
+
+        rb.AddForce(direction*speed,ForceMode.VelocityChange);
     }
     void Start () {
    
@@ -26,10 +31,11 @@ public class BulletController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         time++;
-        if (time / 50f > decrease_after) speed = Mathf.Max(speed - speed_decrease, 0f);
-        if (time / 50f > life && isDestroy_DEBUG) Destroy(gameObject);
-        transform.Translate(speed*direction,Space.World);
+        if (time / 50f > decrease_after) rb.drag = drag;
+        if (time / 50f > life) Destroy(gameObject);
         
 
    	}
+
+   
 }
