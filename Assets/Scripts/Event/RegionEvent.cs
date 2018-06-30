@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 //事件基类
-public abstract class Event : MonoBehaviour {
+public abstract class RegionEvent : MonoBehaviour {
 
     
     public bool isGlobal = false; //是否为全局事件，如果是，则无需手动添加到region的prefab上
