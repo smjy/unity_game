@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23297156659279452}
   - component: {fileID: 114207218034113962}
   - component: {fileID: 114858891271787282}
+  - component: {fileID: 114256510643070874}
   m_Layer: 0
   m_Name: OutlineCubeTest
   m_TagString: Untagged
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1414400902647968}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -111,6 +112,19 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 0.84559584, g: 0.20225997, b: 0.9485294, a: 1}
   outlineWidth: 6.07
+--- !u!114 &114256510643070874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1414400902647968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47509641d07d7714fb7ab80f05078be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1811801869570136, guid: afaadc8b441a6b948a2dc05785821208, type: 2}
+  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114858891271787282
 MonoBehaviour:
   m_ObjectHideFlags: 1

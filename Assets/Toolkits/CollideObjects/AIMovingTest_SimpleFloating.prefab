@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23293763622628312}
   - component: {fileID: 54984264724004902}
   - component: {fileID: 114503909589016936}
+  - component: {fileID: 114183608318840858}
   - component: {fileID: 96780817985801540}
   m_Layer: 0
   m_Name: AIMovingTest_SimpleFloating
@@ -38,8 +39,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1501577285269710}
-  m_LocalRotation: {x: -0, y: -0, z: 0.8810426, w: 0.473037}
-  m_LocalPosition: {x: -44.723846, y: -1.4064441, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.1309996, y: 6.684, z: 0}
   m_LocalScale: {x: 0.38408312, y: 0.38408312, z: 0.38408312}
   m_Children: []
   m_Father: {fileID: 0}
@@ -194,6 +195,19 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!114 &114183608318840858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501577285269710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47509641d07d7714fb7ab80f05078be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1406455998597858, guid: 0e9aacabe60c14447abd333f30915c4d, type: 2}
+  color: {r: 0.83823526, g: 0.35131916, b: 0.35131916, a: 1}
 --- !u!114 &114503909589016936
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 54825281875160970}
   - component: {fileID: 96027965189295292}
   - component: {fileID: 114253410723113814}
+  - component: {fileID: 114972834822589682}
   m_Layer: 0
   m_Name: AIMovingTest_RestrictedFloating
   m_TagString: Untagged
@@ -99,8 +100,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1137578563675420}
-  m_LocalRotation: {x: -0, y: -0, z: 0.9972089, w: 0.07466162}
-  m_LocalPosition: {x: -6.3888803, y: 7.903685, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.752, y: 6.6840005, z: 0}
   m_LocalScale: {x: 0.3840833, y: 0.3840834, z: 0.3840834}
   m_Children:
   - {fileID: 4217654298215098}
@@ -273,6 +274,19 @@ MonoBehaviour:
   change_time: 5
   rotate_speed: 1
   start_direction: 90
+--- !u!114 &114972834822589682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1137578563675420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47509641d07d7714fb7ab80f05078be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1406455998597858, guid: 0e9aacabe60c14447abd333f30915c4d, type: 2}
+  color: {r: 0.18079588, g: 0.64705884, b: 0.26118606, a: 1}
 --- !u!136 &136963116481839054
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -346,7 +360,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -481150823
+  randomSeed: -1415640320
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3665,7 +3679,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1751441892
+  randomSeed: -1596091343
   InitialModule:
     serializedVersion: 3
     enabled: 1

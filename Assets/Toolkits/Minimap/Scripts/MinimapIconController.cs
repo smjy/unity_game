@@ -9,6 +9,8 @@ public class MinimapIconController : MonoBehaviour
     public Transform target;
     RectTransform rect;
 
+    public float borderSize;
+
     void Start()
     {
 
@@ -16,13 +18,24 @@ public class MinimapIconController : MonoBehaviour
     void Awake()
     {
         rect = GetComponent<RectTransform>();
+        this.borderSize = MinimapManager.borderSize;
     }
     // Update is called once per frame
     void Update()
     {
         float posScale = MinimapManager.scale;
-        rect.transform.localScale = new Vector3(1, 1, 1) * (posScale / MinimapManager.defaultScale);
         Vector2 pos = Camera.main.WorldToViewportPoint(target.transform.position);
-        transform.localPosition = new Vector2(Mathf.Clamp((pos.x - 0.5f) * posScale, -90, 90), Mathf.Clamp((pos.y - 0.5f) * posScale, -90, 90));
+        float dis = Mathf.Max(Mathf.Abs((pos.x - 0.5f) * posScale), Mathf.Abs((pos.y - 0.5f) * posScale));
+        if (dis > borderSize)
+        {
+            rect.transform.localScale = Vector3.one * (1.25f + Mathf.Max(-0.5f / 120 * dis, -0.75f)) * (posScale / MinimapManager.defaultScale);
+        }
+        else
+        {
+            rect.transform.localScale = Vector3.one * (posScale / MinimapManager.defaultScale);
+        }
+        transform.localPosition = new Vector2(Mathf.Clamp((pos.x - 0.5f) * posScale, -borderSize, borderSize),
+                                              Mathf.Clamp((pos.y - 0.5f) * posScale, -borderSize, borderSize));
+        transform.localRotation = Quaternion.Euler(0,0, target.rotation.eulerAngles.z);
     }
 }

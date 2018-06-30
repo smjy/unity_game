@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 135541104789685894}
   - component: {fileID: 23215629197106534}
   - component: {fileID: 114471383929495492}
+  - component: {fileID: 114284297318324138}
   m_Layer: 0
   m_Name: HitSphereTest
   m_TagString: Untagged
@@ -84,6 +85,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242012464772782}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114284297318324138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242012464772782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47509641d07d7714fb7ab80f05078be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1094630558037930, guid: 8d0de02594f360c4f9cdce58091c7db8, type: 2}
+  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114471383929495492
 MonoBehaviour:
   m_ObjectHideFlags: 1

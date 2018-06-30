@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54073301502764002}
   - component: {fileID: 96435426496704648}
   - component: {fileID: 114399080107093892}
+  - component: {fileID: 114096354729859970}
   m_Layer: 0
   m_Name: AIMovingTest_ContinuousFollowing
   m_TagString: Untagged
@@ -38,8 +39,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291695113911516}
-  m_LocalRotation: {x: -0, y: -0, z: 0.9973582, w: 0.072640896}
-  m_LocalPosition: {x: -6.6800356, y: 6.6802263, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.5420003, y: 5.2840004, z: 0}
   m_LocalScale: {x: 0.3840833, y: 0.3840834, z: 0.3840834}
   m_Children: []
   m_Father: {fileID: 0}
@@ -194,6 +195,19 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!114 &114096354729859970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291695113911516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47509641d07d7714fb7ab80f05078be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1406455998597858, guid: 0e9aacabe60c14447abd333f30915c4d, type: 2}
+  color: {r: 0.8455882, g: 0.72749746, b: 0.34196585, a: 1}
 --- !u!114 &114399080107093892
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -9,13 +9,12 @@ public class MinimapUI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Time.deltaTime);
+        //Debug.Log(Time.deltaTime);
         if (Time.time - clock > 3f)
         {
             MinimapManager.scale = Mathf.Lerp(MinimapManager.scale, MinimapManager.defaultScale, Time.deltaTime*3f);
