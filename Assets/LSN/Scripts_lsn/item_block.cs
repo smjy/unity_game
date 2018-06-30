@@ -16,9 +16,12 @@ public class item_block : MonoBehaviour {
     
     public bool isNull=true;
 	// Use this for initialization
-	void Start () {
+    [HideInInspector]
+	public void initial () {
         
         image = transform.Find("Image").GetComponent<Image>();
+
+        Debug.Log(gameObject.name+":" + (image == null));
         button = GetComponent<Button>();
         NUM = transform.Find("Text").GetComponent<Text>();
         NUM .text= "";

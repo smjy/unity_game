@@ -12,7 +12,7 @@ public class panel : MonoBehaviour
     int weaponsnum = 0;
     int fullblocks = 0;
     // Use this for initialization
-    void Start()
+    public void initial_panel()
     {
         weapons = new List<item>();
         blocks = new List<item_block>();
@@ -23,8 +23,9 @@ public class panel : MonoBehaviour
         {
             blocks.Add(transform.Find("item_block" + i).GetComponent<item_block>());
             //Debug.Log(blocks[i].name);
+            blocks[i].initial();
         }
-
+     
         item[] ng = FindObjectsOfType<item>();
         weaponsnum = ng.Length;
         for (int i = 0; i < ng.Length; i++)
@@ -32,8 +33,9 @@ public class panel : MonoBehaviour
             weapons.Add(ng[i]);
 
         }
+        Debug.Log(weaponsnum);
         initial();
-        
+       
     }
 
     // Update is called once per frame
@@ -49,16 +51,16 @@ public class panel : MonoBehaviour
        
         foreach (item T in weapons)
         {
+            Debug.Log(T.name);
             if (!T.stackable)
             {
                 if (fullblocks < 24)
                 {
-                    Debug.Log("111");
+                   
                     blocks[fullblocks].setBlockImage(T.sprite);   
                     blocks[fullblocks].setName(T.name);
                     blocks[fullblocks].setNum(1);
-                    fullblocks++;
-                    Debug.Log("222");
+                    fullblocks++;      
                 }
                 else
                 {
@@ -71,14 +73,11 @@ public class panel : MonoBehaviour
                 if (n == -1)
                 {
                     if (fullblocks < 24)
-                    {
-                        Debug.Log("333");
-
+                    {       
                         blocks[fullblocks].setBlockImage(T.sprite);
                         blocks[fullblocks].setName(T.name);
                         blocks[fullblocks].setNum(1);
-                        fullblocks++;
-                        Debug.Log("444");
+                        fullblocks++;                 
                     }
                     else
                     {
@@ -87,11 +86,11 @@ public class panel : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("444");
+                   
                     int temp = blocks[n].getnum();
                     temp++;
                     blocks[n].setNum(temp);
-                    Debug.Log("555");
+                   
 
                 }
             }
@@ -205,9 +204,6 @@ public class panel : MonoBehaviour
         if (num>1)
         {
             int n = findweapons(blocks[i].NAME);
-          
-            
-           
             weapons.RemoveAt(n);
             weaponsnum--;
             blocks[i].setNum(0);
