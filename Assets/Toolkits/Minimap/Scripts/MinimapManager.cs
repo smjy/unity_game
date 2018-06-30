@@ -8,6 +8,10 @@ public class MinimapManager : MonoBehaviour
     public static MinimapManager _instance;
     public GameObject iconDisplayGO;
     public GameObject iconCircle;
+    public GameObject iconRect;
+    public GameObject iconRectBorder;
+    public GameObject iconRectRound;
+    public Camera guideCamera;
     public static float scale;
     public static float defaultScale = 75f;
     public static float borderSize = 88f;
@@ -18,10 +22,6 @@ public class MinimapManager : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<MinimapManager>();
-            }
             return _instance;
         }
     }
@@ -29,19 +29,20 @@ public class MinimapManager : MonoBehaviour
     {
         scale = Mathf.Clamp(isAdd ? (scale + v) : v, minScale, maxScale);
     }
-    public void RegisterObj(Transform obj, GameObject iconPrefab)
+    public GameObject RegisterIcon(GameObject obj, GameObject iconPrefab)
     {
         GameObject icon = Instantiate(iconPrefab, iconDisplayGO.transform);
         icon.transform.parent = iconDisplayGO.transform;
-        icon.GetComponent<MinimapIconController>().target = obj;
+        icon.GetComponent<MinimapIconController>().SetTarget(obj);
+        return icon;
     }
-    public void RegisterObj(Transform obj, GameObject iconPrefab,Color color)
+    public void RegisterIcon(GameObject obj, GameObject iconPrefab,Color color)
     {
-        GameObject icon = Instantiate(iconPrefab, iconDisplayGO.transform);
-        icon.transform.parent = iconDisplayGO.transform;
+        GameObject icon = RegisterIcon(obj, iconPrefab);
         icon.GetComponent<Image>().color = color;
-        icon.GetComponent<MinimapIconController>().target = obj;
     }
+
+
     public void RemoveObj(Transform obj)
     {
 
@@ -55,7 +56,10 @@ public class MinimapManager : MonoBehaviour
     void Awake()
     {
         scale = defaultScale;
-        _instance = FindObjectOfType<MinimapManager>();
+        if(_instance==null){
+            _instance = FindObjectOfType<MinimapManager>();
+        }
+        guideCamera = GameObject.Find("Guide Camera").GetComponent<Camera>();
     }
     // Update is called once per frame
     void Update()

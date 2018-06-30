@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MinimapIconHook : MonoBehaviour
 {
-    public GameObject icon = MinimapManager.instance.iconCircle;
+    [Header("选择小地图要显示的图标")]
+    public GameObject icon;
+    [Header("选择小地图图标的颜色")]
     public Color color = new Color(1, 1, 1, 1);
 
     // Use this for initialization
@@ -14,8 +16,11 @@ public class MinimapIconHook : MonoBehaviour
     }
     void Awake()
     {
-		print(color.ToString());
-        MinimapManager.instance.RegisterObj(transform, icon, color);
+        if (icon == null)
+        {
+            icon = MinimapManager.instance.iconCircle;
+        }
+        MinimapManager.instance.RegisterIcon(gameObject, icon, color);
     }
     // Update is called once per frame
     void Update()

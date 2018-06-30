@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 23343677897811806}
   - component: {fileID: 54697129580462382}
   - component: {fileID: 114303248640008134}
+  - component: {fileID: 114227647792686686}
   m_Layer: 13
   m_Name: Character 1
   m_TagString: Player
@@ -473,7 +474,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &64151456598667418
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -488,6 +489,19 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114227647792686686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1789061776533530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47509641d07d7714fb7ab80f05078be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1293041122176350, guid: d155ad54b4edd894ab47b66e2229fb27, type: 2}
+  color: {r: 0.58131486, g: 0.12110729, b: 0.8235294, a: 1}
 --- !u!114 &114303248640008134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -499,9 +513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a66674b9614b841b940c1e43ab68e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 50000
-  maxSpeed: 500
-  friction_extra: 20000
+  forcePower: 0.5
+  maxSpeed: 100
   rb: {fileID: 0}
 --- !u!114 &114746728743957246
 MonoBehaviour:
@@ -517,8 +530,8 @@ MonoBehaviour:
   bullet: {fileID: 1891335605205834, guid: 6a98e3da58d30d148b8ca63a498cd63c, type: 2}
   carnoon: {fileID: 4295433739230926}
   bullet_parent: {fileID: 0}
-  start_speed: 800
-  speed_decrease: 0.12
+  start_speed: 400
+  speed_decrease: 0.5
   decrease_after: 0.1
   life: 3
   reload_time: 0.1
