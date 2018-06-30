@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1950692389177096}
+  m_IsPrefabParent: 1
+--- !u!1 &1950692389177096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4591861345803802}
+  - component: {fileID: 114090257881127090}
+  m_Layer: 0
+  m_Name: MapManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4591861345803802
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950692389177096}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114090257881127090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950692389177096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9cd005d05d5854090af44378de3a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  square_length: 2500
+  square_indent: 1
+  default_material: {fileID: 2100000, guid: 2f260be040a31a24fb420a08c5b7e123, type: 2}
+  available_regions:
+  - {fileID: 114221974973314050, guid: c7715fee6d2d2b94fa6145e043d0293c, type: 2}
+  start_region: {fileID: 114528655207404482, guid: 8db70c455cbf57d4e9c9fbbda44ece2f,
+    type: 2}
+  empty_region: {fileID: 114504002603499578, guid: e3c394c00ab4c034382f41e2bc909828,
+    type: 2}
+  init_block_length: 5
+  continue_length_when_close: 1
+  continue_block_length: 1
+  bound: {fileID: 1712472816664106, guid: 6d82742db1b746d4aab0fdb89d647a2f, type: 2}
+  bound_parent: {fileID: 0}
+  region_parent: {fileID: 0}
