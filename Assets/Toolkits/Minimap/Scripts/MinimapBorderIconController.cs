@@ -16,7 +16,7 @@ public class MinimapBorderIconController : MinimapIconController
     protected override void Update()
     {
         float posScale = MinimapManager.scale;
-        Vector2 pos = Camera.main.WorldToViewportPoint(new Vector3(
+        Vector2 pos = MinimapManager.instance.guideCamera.WorldToViewportPoint(new Vector3(
             (mapData.left + mapData.right) / 2,
             (mapData.top + mapData.bottom) / 2,
             100
