@@ -17,10 +17,9 @@ TagManager:
   - Hide
   - NoLight
   - Minimap
-  - 
-  - 
-  - 
-  - 
+  - HideInMinimap
+  - Bullets
+  - Character
   - 
   - 
   - 

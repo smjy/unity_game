@@ -5,9 +5,8 @@ using UnityEngine;
 public class MinimapUI : MonoBehaviour
 {
 
+    private float clock;
     // Use this for initialization
-    public MainPlayer_Single character;
-	public float rotateScale = 20f;
     void Start()
     {
     }
@@ -15,8 +14,24 @@ public class MinimapUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		float x = character.rb.velocity.y / character.maxSpeed * rotateScale;
-        float y = character.rb.velocity.x / character.maxSpeed * rotateScale;
-        transform.rotation = Quaternion.Euler(Mathf.Clamp(x,-15,15), Mathf.Clamp(y,-15,15), 0);
+        // Debug.Log(Time.deltaTime);
+        if (Time.time - clock > 3f)
+        {
+            MinimapManager.scale = Mathf.Lerp(MinimapManager.scale, MinimapManager.defaultScale, Time.deltaTime*3f);
+        }
+    }
+    void OnMouseOver()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            MinimapManager.SetScale(+5, true);
+            clock = Time.time;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            MinimapManager.SetScale(-5, true);
+            clock = Time.time;
+
+        }
     }
 }

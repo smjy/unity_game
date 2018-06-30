@@ -10,15 +10,13 @@ public class MapBoundSingle : MonoBehaviour {
 		
 	}
 	
-	public void Init(int boundtype = MapManager.BOUND_NORMAL) {
-		switch(boundtype) {
-			//TODO 边缘的类型(材质)
-			case MapManager.BOUND_NORMAL: {
-
-			} break;
-			
-		}
+	public void Init(Material bound_material,float width_multiplier = 1f) {
+		
 		LineRenderer lr = GetComponent<LineRenderer>();
+
+		lr.material = bound_material;
+		lr.widthMultiplier *= width_multiplier;
+
 		Vector3[] ps = new Vector3[2];
 		lr.GetPositions(ps);
 		if (ps.Length != 2) throw new UnityException("Linerenderer of MapBoundSingle must have 2 points on it.");

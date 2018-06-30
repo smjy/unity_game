@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4992553589806506}
   - component: {fileID: 114360282920256956}
+  - component: {fileID: 114158620152127392}
   m_Layer: 9
   m_Name: BoundFour
   m_TagString: Untagged
@@ -40,6 +41,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114158620152127392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1712472816664106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47509641d07d7714fb7ab80f05078be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1487788655594896, guid: 89b161cd82d40c84e82fb33461ad26d4, type: 2}
+  color: {r: 0.18382353, g: 0.6622718, b: 1, a: 0.1254902}
 --- !u!114 &114360282920256956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,3 +67,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapBoundSingle: {fileID: 1980520161707128, guid: 01404aa4724d74c4883c9dd0bc96d92e,
     type: 2}
+  mapBoundSingleMinimap: {fileID: 1368086836668054, guid: 21e22d4ef9f8ae5469ebf94823514ab5,
+    type: 2}
+  left: -1249
+  right: 1249
+  top: 1249
+  bottom: -1249

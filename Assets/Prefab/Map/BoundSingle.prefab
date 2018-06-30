@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4094825678254230}
   - component: {fileID: 120336787803133228}
   - component: {fileID: 114640578631561996}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: BoundSingle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 247df25af14cc7640998b04cc0194106, type: 2}
+  - {fileID: 2100000, guid: 2f260be040a31a24fb420a08c5b7e123, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
