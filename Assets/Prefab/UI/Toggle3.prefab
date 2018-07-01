@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224210015632845438}
   - component: {fileID: 114386866512649798}
+  - component: {fileID: 114817118593009884}
   m_Layer: 5
   m_Name: Toggle3
   m_TagString: Untagged
@@ -116,8 +117,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: c7677270e535e9749b938df19975cbf2, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -319,6 +320,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114817118593009884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1247790791000742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0e0af452b47f004d9a43e755731feeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222543291045070284
 CanvasRenderer:
   m_ObjectHideFlags: 1

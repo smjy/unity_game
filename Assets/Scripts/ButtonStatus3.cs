@@ -26,6 +26,11 @@ public class ButtonStatus3 : MonoBehaviour {
             
         };
 
-       
+        btnListener.OnClick += delegate (GameObject gb) {
+            
+            gb.GetComponentInChildren<AudioSource>().Play();
+        };
+
+
     }
 }

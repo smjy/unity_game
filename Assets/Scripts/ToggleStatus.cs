@@ -29,6 +29,11 @@ public class ToggleStatus : MonoBehaviour {
                 gb.GetComponentInChildren<Text>().color = color32;
            
         };
+
+        btnListener.OnClick += delegate (GameObject gb)
+         {
+             gb.GetComponentInChildren<AudioSource>().Play();
+         };
        
     }
 

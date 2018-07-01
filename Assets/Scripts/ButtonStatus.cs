@@ -34,6 +34,7 @@ public class ButtonStatus : MonoBehaviour {
             gb.GetComponent<Image>().sprite = normalMt;
             Color32 color32 = new Color32(77, 50, 109, 255);
             gb.GetComponentInChildren<Text>().color = color32;
+            gb.GetComponentInChildren<AudioSource>().Play();
         };
     }
 }

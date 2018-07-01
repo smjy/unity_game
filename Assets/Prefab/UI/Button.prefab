@@ -85,8 +85,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: c7677270e535e9749b938df19975cbf2, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -242,9 +242,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Button
-
-'
+  m_Text: "\u5F00\u59CB"
 --- !u!114 &114880788467834960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,7 +290,7 @@ RectTransform:
   m_GameObject: {fileID: 1032746165140142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8897942, y: 3.746286, z: 3.746286}
+  m_LocalScale: {x: 1.2050072, y: 1.9408952, z: 2.3887794}
   m_Children:
   - {fileID: 224906729826662338}
   - {fileID: 4432251996226056}
@@ -301,7 +299,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -752, y: 298}
+  m_AnchoredPosition: {x: 0.94128, y: 52.875}
   m_SizeDelta: {x: -1760, y: -1050}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224906729826662338
