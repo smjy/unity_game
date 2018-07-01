@@ -26,7 +26,7 @@ public class Effect : MonoBehaviour {
 	}
 	protected virtual void Update() {
 		if (disappear && isOutside()) {
-			Debug.Log("Effect Destroyed");
+			//Debug.Log("Effect Destroyed");
 			if (generator != null)
 				generator.remove(this);
 			else 

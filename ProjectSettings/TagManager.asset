@@ -37,7 +37,11 @@ TagManager:
   - 
   - 
   - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MaskTest
+    uniqueID: 3120467411
     locked: 0
