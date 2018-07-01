@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -289,10 +289,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 22445897}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.8084009, y: 0.08544485, z: -22.845861}
-  m_LocalScale: {x: 0.09423611, y: 0.16727547, z: 0.1672755}
+  m_LocalPosition: {x: 623.2526, y: 500.31094, z: -88.70344}
+  m_LocalScale: {x: 0.006120439, y: 0, z: 0.64947915}
   m_Children: []
-  m_Father: {fileID: 2118218402}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &22445899
@@ -1843,7 +1843,7 @@ Transform:
   - {fileID: 1294488889}
   - {fileID: 1456673855}
   m_Father: {fileID: 2118218402}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &230185863
 MonoBehaviour:
@@ -2385,7 +2385,7 @@ Transform:
   - {fileID: 1406636695}
   - {fileID: 537851152}
   m_Father: {fileID: 2118218402}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &316162138
 GameObject:
@@ -6171,7 +6171,7 @@ RectTransform:
   - {fileID: 1939624030}
   - {fileID: 2118218402}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6365,7 +6365,7 @@ Transform:
   - {fileID: 469293564}
   - {fileID: 1879835840}
   m_Father: {fileID: 2118218402}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1014160469
 GameObject:
@@ -8408,7 +8408,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1406636694
 GameObject:
@@ -9342,7 +9342,7 @@ Transform:
   - {fileID: 1232776969}
   - {fileID: 266784014}
   m_Father: {fileID: 2118218402}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1649439823
 GameObject:
@@ -9515,7 +9515,7 @@ VideoPlayer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1696491756}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: f7e611b963e5a54408c530a4710938f2, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: a90a618a4586ba94b9074f75e34003b7, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1963317433}
@@ -9528,12 +9528,14 @@ VideoPlayer:
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 1
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
   m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 1
@@ -9550,7 +9552,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1705801745
 GameObject:
@@ -10168,7 +10170,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1820830009
 GameObject:
@@ -11270,7 +11272,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1971129153
 GameObject:
@@ -12671,7 +12673,7 @@ Transform:
   - {fileID: 665139442}
   - {fileID: 670917720}
   m_Father: {fileID: 2118218402}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2101663054
 GameObject:
@@ -12806,7 +12808,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0, z: 5.978162}
   m_Children:
-  - {fileID: 22445898}
   - {fileID: 230185862}
   - {fileID: 294674642}
   - {fileID: 2101494863}
