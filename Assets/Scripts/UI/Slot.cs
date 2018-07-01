@@ -6,11 +6,25 @@ using UnityEngine;
 public class Slot : MonoBehaviour {
 
     Animator anim;
-   	private void Awake() {
+    protected string _slotname = "";
+    public string slotname {
+        get {
+            return _slotname;
+        }
+        set {
+            _slotname = value;
+        }
+    }
+   	protected virtual void Awake() {
         anim = GetComponent<Animator>();
     }
 
-    void Start() {
-        anim.Play("SlotOpen",1);
+
+    public void toggleUI() {
+        if (anim.GetBool("close")) {
+            anim.SetBool("close",false);
+        }else {
+            anim.SetBool("close",true);
+        }
     }
 }
