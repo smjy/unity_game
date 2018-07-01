@@ -54,7 +54,7 @@ public class panel : MonoBehaviour
             Debug.Log(T.name);
             if (!T.stackable)
             {
-                if (fullblocks < 24)
+                if (fullblocks < 23)
                 {
                    
                     blocks[fullblocks].setBlockImage(T.sprite);   
@@ -72,7 +72,7 @@ public class panel : MonoBehaviour
                 int n = findItem(T);
                 if (n == -1)
                 {
-                    if (fullblocks < 24)
+                    if (fullblocks < 23)
                     {       
                         blocks[fullblocks].setBlockImage(T.sprite);
                         blocks[fullblocks].setName(T.name);
