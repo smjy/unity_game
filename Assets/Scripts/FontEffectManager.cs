@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class FontEffectManager : MonoBehaviour {
 
     public static FontEffectManager main;
-    public Text target_text;
     public RectTransform target_transform;
     public GameObject word;
     public Transform font_parent;
@@ -34,7 +33,7 @@ public class FontEffectManager : MonoBehaviour {
         direction.Normalize();
         GameObject w = Instantiate(word,position,Random.rotation,font_parent);
         WordController wc = w.GetComponent<WordController>();
-        wc.Init(c, force * direction, force * 0.01f, target_text,target_transform);
+        wc.Init(c, force * direction, force * 0.01f, target_transform);
 
     }
 

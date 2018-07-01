@@ -7,7 +7,6 @@ public class WordController : MonoBehaviour {
 
     public float follow_time = 3f; //字符飞向UI所需时间
     public float wait_time = .8f; //字符初始漂浮的时间
-    Text target_text;
     RectTransform target_transform;
     Vector3 startSpeed;
     Vector3 torqueSpeed;
@@ -19,9 +18,8 @@ public class WordController : MonoBehaviour {
     int time;
 
     // Use this for initialization
-    public void Init(char c, Vector3 ss, float sd,Text tt,RectTransform tf) {
+    public void Init(char c, Vector3 ss, float sd,RectTransform tf) {
         GetComponent<TextMesh>().text = c.ToString();
-        target_text = tt;
         target_transform = tf;
         startSpeed = ss;
         speedDecrease = sd;
@@ -68,8 +66,9 @@ public class WordController : MonoBehaviour {
             transform.position = Vector3.Lerp(transform.position, target, frac);
             if ((transform.position - target).magnitude < 10f || time >= 50f * follow_time) {
                 //加钱
-                string t = target_text.GetComponent<Text>().text;
-                target_text.GetComponent<Text>().text = (int.Parse(t) + 1).ToString();
+                PlayerStat.main.code_blocks++;
+                SlotsManager.main.updateCodeBlock();
+
                 Destroy(gameObject);
             }
         }

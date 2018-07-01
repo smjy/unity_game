@@ -32,7 +32,8 @@ public class MinimapManager : MonoBehaviour
     public GameObject RegisterIcon(GameObject obj, GameObject iconPrefab)
     {
         GameObject icon = Instantiate(iconPrefab, iconDisplayGO.transform);
-        icon.transform.parent = iconDisplayGO.transform;
+        // fix console warning
+        icon.transform.SetParent(iconDisplayGO.transform);
         icon.GetComponent<MinimapIconController>().SetTarget(obj);
         return icon;
     }

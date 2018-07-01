@@ -34,7 +34,7 @@ public class MapManager : MonoBehaviour {
 	Dictionary<Vector2,Region> Regions = new Dictionary<Vector2,Region>();
 	HashSet<Vector2> visitedRegions = new HashSet<Vector2>(); //访问过的区域
 	int currDepth = 0;
-	bool enteredNewMap = false;
+	//bool enteredNewMap = false;
 	//地图生成局部种子设定: 已知全局种子和区块的x,y，则该区块的区域类型局部种子为全局种子+x*x_seed+y*y_seed
 	//区域类型设定: 已知x,y,四周区域类型，根据四周区域类型和深度depth生成权重 取权重最大者决定区域
 	//生成顺序如下图
