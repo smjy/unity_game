@@ -12,6 +12,7 @@ public class PlayerStat : MonoBehaviour {
 	[Tooltip("代码块")] public int code_blocks = 100;
     [Tooltip("内存")] public float memory = 1024;
 
+    [Tooltip("姓名")] public string player_name = "Player1337";
 	private void Awake() {
         if (main == null)
             main = this;

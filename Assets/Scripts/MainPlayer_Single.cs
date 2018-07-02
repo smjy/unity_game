@@ -34,8 +34,13 @@ public class MainPlayer_Single : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        Vector3 mv = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        Vector3 mv;
+        if (CommandInput.main.N()) {
+            mv = new Vector3(0,0,0);
+        } else {
+            mv = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        }
+     
         mv *= maxSpeed;
 
         rb.velocity = mv;

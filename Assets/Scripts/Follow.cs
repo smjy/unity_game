@@ -18,10 +18,12 @@ public class Follow : MonoBehaviour {
 
     void Update() {
         rotatestate = 0;
-        if (Input.GetKey(KeyCode.Q)) 
-            rotatestate --;
-        if (Input.GetKey(KeyCode.E))
-            rotatestate ++;  
+        if (CommandInput.main.Y()) {
+            if (Input.GetKey(KeyCode.Q)) 
+                rotatestate --;
+            if (Input.GetKey(KeyCode.E))
+                rotatestate ++;  
+        }
     }
     // Use this for initialization
     void FixedUpdate()
