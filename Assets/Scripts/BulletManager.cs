@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour {
 
     public GameObject bullet;
+    public GameObject carnoon_object;
     public Transform carnoon;
     public Transform bullet_parent;
 
@@ -20,7 +21,7 @@ public class BulletManager : MonoBehaviour {
 
     
 	void Start () {
-
+        carnoon_object.SetActive(true);
 	}
 	
 	// Update is called once per frame

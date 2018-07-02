@@ -995,6 +995,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &126921795 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1514189401013508, guid: 22277cd26280efb47a632d8611a72f04,
+    type: 2}
+  m_PrefabInternal: {fileID: 1998001244}
 --- !u!1 &140672691
 GameObject:
   m_ObjectHideFlags: 0
@@ -3581,7 +3586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &681628732
 Transform:
   m_ObjectHideFlags: 0
@@ -3668,12 +3673,13 @@ GameObject:
   - component: {fileID: 686630520}
   - component: {fileID: 686630519}
   - component: {fileID: 686630518}
+  - component: {fileID: 686630521}
   m_Layer: 0
   m_Name: GateCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &686630517
 Transform:
@@ -3745,6 +3751,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 686630516}
   m_Mesh: {fileID: 4300000, guid: 738050522d056b2449f41dfe9a7a7aef, type: 3}
+--- !u!114 &686630521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 686630516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b87208320300d841a5601a6b7532a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &714256687
 GameObject:
   m_ObjectHideFlags: 0
@@ -7483,6 +7500,16 @@ MonoBehaviour:
   black_fade: {fileID: 2068559364}
   slots: {fileID: 1075011994}
   slot_manager: {fileID: 1153538462}
+  color_system: {fileID: 1891650917195718, guid: 33dc342083054004c8f8c5c7f9e4a41a,
+    type: 2}
+  contrast_system: {fileID: 1525260689568458, guid: 02e927f733e4373438b28dc1af3ce6a9,
+    type: 2}
+  contrastResolve: 0.001
+  saturationResolve: 0.998
+  saturationMin: 0.97
+  contrastMax: 0.03
+  b_colorRecovered: 0
+  b_guideVisit: 0
 --- !u!1 &1656866589
 GameObject:
   m_ObjectHideFlags: 0
@@ -9098,6 +9125,19 @@ Prefab:
       propertyPath: bullet_parent
       value: 
       objectReference: {fileID: 350784983}
+    - target: {fileID: 1514189401013508, guid: 22277cd26280efb47a632d8611a72f04, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765081916405984, guid: 22277cd26280efb47a632d8611a72f04, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114746728743957246, guid: 22277cd26280efb47a632d8611a72f04,
+        type: 2}
+      propertyPath: carnoon_object
+      value: 
+      objectReference: {fileID: 126921795}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 22277cd26280efb47a632d8611a72f04, type: 2}
   m_IsPrefabParent: 0
