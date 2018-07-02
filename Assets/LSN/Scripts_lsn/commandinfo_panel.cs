@@ -9,16 +9,16 @@ public class commandinfo_panel : MonoBehaviour {
     public List<GameObject> COMMANDS;
     Animator anim;
     Text dispaly;
-    Transform content;
+    //Transform content;
     int command_num = 0;
     public GameObject cmd;
 	// Use this for initialization
 	void Start () {
         commands = new List<CommandInfo>();
         buttons = new List<Button>();
-        anim= anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         COMMANDS = new List<GameObject>();
-        content = transform.Find("ScrollView").Find("Viewport").Find("Content").GetComponent<Transform>();
+        //content = transform.Find("ScrollView").Find("Viewport").Find("Content").GetComponent<Transform>();
         dispaly = transform.Find("Text_descripiton").GetComponent<Text>();
         dispaly.text = "";
         findchild();//23

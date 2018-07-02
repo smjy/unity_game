@@ -6,7 +6,7 @@ public class item_block : MonoBehaviour {
 
     Image image;
     
-    Button button;
+    //Button button;
     public Sprite nullImage;
     [HideInInspector]
     public Sprite sprite;
@@ -22,7 +22,7 @@ public class item_block : MonoBehaviour {
         image = transform.Find("Image").GetComponent<Image>();
 
         Debug.Log(gameObject.name+":" + (image == null));
-        button = GetComponent<Button>();
+        //button = GetComponent<Button>();
         NUM = transform.Find("Text").GetComponent<Text>();
         NUM .text= "";
         isNull = true;

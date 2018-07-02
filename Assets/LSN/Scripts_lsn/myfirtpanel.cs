@@ -7,10 +7,6 @@ public class myfirtpanel : MonoBehaviour {
     public int max_item = 30;
     public List<item> items;
 
-
-
-
-
     public Event button;
     private Rect windowrect;
     public Image line;
@@ -19,7 +15,7 @@ public class myfirtpanel : MonoBehaviour {
     public int width1=800, height1,width2,height2;
     public GUIStyle la_2,la_3;
     int CLICKED = 0;
-    private Texture clicked=null;
+    //private Texture clicked=null;
     //public GUISkin t;
     List<GameObject> buttons;
     List<int> weapons_num,clothes_num;
@@ -29,23 +25,11 @@ public class myfirtpanel : MonoBehaviour {
     public GUIStyle w_1;
     public GUIStyle w_2;
     private int window_clicked = 0;
-    int changebuttons_id = 0;
+    //int changebuttons_id = 0;
     public int items_inline = 5;
     public bool show = false;
     List<bool> WhichWeapon;
-    // Use this for initialization
-    /*void initial()
-    {
-        
-        for (int i = 0; i < All_weapons; i++)
-        {
-            weapons_num.Add(0);
-        }
-        for (int i = 0; i < All_clothes; i++)
-        {
-            clothes_num.Add(0);
-        }
-    }*/
+
     void Start () {
         windowrect = new Rect(100, 100, 500,50);
         //initial();

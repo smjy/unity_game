@@ -37,12 +37,21 @@ public class FontEffectManager : MonoBehaviour {
 
     }
 
-	void Start () {
-        for (int i =0;i<30;i++) {
+    void createRandNum(int num) {
+        for (int i =0;i<num;i++) {
             char c = (char)Random.Range(0, 25);
             c += 'a';
             create(c, new Vector3(0, 0, 100), Random.onUnitSphere,Random.Range(default_force*0.7f, default_force*1.4f));
         }
+    }
+    void createRandNumAtPos(int num,Vector3 pos) {
+        for (int i =0;i<num;i++) {
+            char c = (char)Random.Range(0, 25);
+            c += 'a';
+            create(c, pos, Random.onUnitSphere,Random.Range(default_force*0.7f, default_force*1.4f));
+        }
+    }
+	void Start () {
         
 	}
 	
@@ -53,11 +62,7 @@ public class FontEffectManager : MonoBehaviour {
             Vector3 mp = Input.mousePosition;
             mp.z = 100f;
             Vector3 pos = Camera.main.ScreenToWorldPoint(mp);
-            for (int i = 0; i < 30; i++) {
-                char c = (char)Random.Range(0, 25);
-                c += 'a';
-                create(c, pos, Random.onUnitSphere, Random.Range(default_force * 0.7f, default_force * 1.4f));
-            }
+            createRandNumAtPos(10,pos);
         }
 
         

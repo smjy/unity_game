@@ -7,8 +7,7 @@ public class panel : MonoBehaviour
     [HideInInspector]
     public List<item_block> blocks;
     public List<item> weapons;
-    // public item_block block;
-    //public Sprite s;
+
     int weaponsnum = 0;
     int fullblocks = 0;
     // Use this for initialization

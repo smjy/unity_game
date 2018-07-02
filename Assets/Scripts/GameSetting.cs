@@ -16,23 +16,33 @@ public class GameSetting : MonoBehaviour {
         public string windowSize="Full"; //窗口尺寸
         public string pictureQuality; //画面质量
         public string language; //语言
-        public string[] functions = new string[5]
+        public string[] functions = new string[11]
        {
             "Forward",
             "Back",
             "Left",
             "Right",
-            "Function1"
-
-
+            "Left Leaning",
+            "Right Leaning",
+            "Command Input",
+            "Command Output",
+            "Item",
+            "Command Info",
+            "Menu"
        };
-       public  KeyCode[] keySetDefaults = new KeyCode[5]
+       public  KeyCode[] keySetDefaults = new KeyCode[11]
         {
              KeyCode.W,
              KeyCode.A,
              KeyCode.S,
              KeyCode.D,
-             KeyCode.F1
+             KeyCode.Q,
+             KeyCode.E,
+             KeyCode.Return,
+             KeyCode.Tab,
+             KeyCode.I,
+             KeyCode.C,
+             KeyCode.Escape
 
         };
 
@@ -47,6 +57,7 @@ public class GameSetting : MonoBehaviour {
                 //Destroy(gameObject);
             }
 
+            KeySetManager.InitializeDictionary();
         }
 
 }

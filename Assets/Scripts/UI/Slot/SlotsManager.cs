@@ -33,18 +33,14 @@ public class SlotsManager : MonoBehaviour {
     }
 
     void addSlot(MethodSlot s) {
-        Debug.Log("add1");
         MethodSlots.Add(s);
         setUISlots();
     }
     void addSlot(PropertySlot s) {
-        Debug.Log("add2");
         PropertySlots.Add(s);
         setUISlots();
     }
     void addPropertySlot(PropertySlot s) {
-        Debug.Log("add2"+(s == null));
-
         PropertySlots.Add(s);
         setUISlots();
     }

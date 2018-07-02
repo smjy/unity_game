@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class package : MonoBehaviour {
 
     panel package_panel;
-    int selected_index = -1;
+    //int selected_index = -1;
     Image display;
     Animator anim;
     Text text_description;
