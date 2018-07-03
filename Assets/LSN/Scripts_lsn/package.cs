@@ -26,7 +26,15 @@ public class package : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown(KeyCode.I)) {
+            if (anim.GetBool("open")) {
+                close();
+            } else {
+                anim.SetBool("open",true);
+                anim.SetBool("isout", false);
+            }
+            
+        }
 	}
 
     void additem(item i)
@@ -46,9 +54,10 @@ public class package : MonoBehaviour {
 
         } 
     }
-   public void close()
+    public void close()
     {
         anim.SetBool("isout", true);
+        anim.SetBool("open",false);
     }
    public void delete()
     {

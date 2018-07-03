@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33065106706505048}
   - component: {fileID: 135181901640448684}
   - component: {fileID: 23747264315604174}
+  - component: {fileID: 114309880571577626}
   m_Layer: 0
   m_Name: Tracker
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1560476789364748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.83, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1560476789364748}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114309880571577626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1560476789364748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca6e47da229958418ef3c47d706ed2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroy_after: 20
 --- !u!135 &135181901640448684
 SphereCollider:
   m_ObjectHideFlags: 1

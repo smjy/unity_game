@@ -7,6 +7,7 @@ public class commandinfo_panel : MonoBehaviour {
     public List<CommandInfo> commands;
     public List<Button> buttons;
     public List<GameObject> COMMANDS;
+    int start_count = 2;
     Animator anim;
     Text dispaly;
     //Transform content;
@@ -28,35 +29,38 @@ public class commandinfo_panel : MonoBehaviour {
     void findchild()
     {
        
-        for(int i=0;i<10;i++)
+        for(int i=0;i<start_count;i++)
         {
             COMMANDS.Add(GameObject.Find("command" + i));
           
             buttons.Add(COMMANDS[i].GetComponent<Button>());
             commands.Add(COMMANDS[i].GetComponent<CommandInfo>());
-            commands[i].initial();////35
+            commands[i].initial();
            
-           
-           /* COMMANDS[i].GetComponent<Button>().onClick.AddListener(delegate ()
-            {
-                this.OnClick(commands[command_num]);
-            });*/
             command_num++;
         }
     }
     //45
   // Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown(KeyCode.U)) {
+            if (anim.GetBool("open")) {
+                close();
+            } else {
+                anim.SetBool("open",true);
+                anim.SetBool("isout", false);
+            }
+            
+        }
 	}
     public void close()
     {
-        Debug.Log("close");
         anim.SetBool("isout", true);
+        anim.SetBool("open",false);
     }
     public void  OnClick(CommandInfo btn)
     {
-        Debug.Log("clicked");
+        //Debug.Log("clicked");
         //CommandInfo temp_commands = btn.GetComponent<CommandInfo>();
         // Text temp_btn = btn.GetComponent<Transform>().Find("Text").GetComponent<Text>();
         dispaly.text = btn.command_info;

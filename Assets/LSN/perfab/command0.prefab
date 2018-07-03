@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 114349037413650040}
   - component: {fileID: 114856735902093400}
   - component: {fileID: 114011175617656534}
-  - component: {fileID: 114186158788357812}
   m_Layer: 0
   m_Name: command0
   m_TagString: Untagged
@@ -82,11 +81,11 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: b07a4bd6cd81f1641879b0def741a8e5, type: 3}
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -95,20 +94,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Button
---- !u!114 &114186158788357812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1570001468232966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 355420387e06316499feddb56122b50d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  command_name: 
-  command_info: 
-  dispaly: {fileID: 0}
 --- !u!114 &114349037413650040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -174,7 +159,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114349037413650040}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114011175617656534}
+        m_MethodName: clicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!222 &222505568174727346

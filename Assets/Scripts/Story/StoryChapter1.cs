@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,15 +15,19 @@ public class StoryChapter1 : MonoBehaviour {
     public Transform story_object_parent;
     public Transform story_text_parent;
     public ParticleSystem gate;
+    public ParticleSystem distortion;
+    public ParticleSystem core;
     public Image black_fade;
     public AudioSource bgm;
+    public Animator black_img_anim;
     
     //解锁主manager
     public GameObject slots;
     public GameObject slot_manager;
     ColorAdjustEffect cae;
+    WaterWaveClickEffect wwce;
     public GameObject command_input;
-    
+    public StoryCircle sc;
     
     public GameObject color_system;
     public GameObject contrast_system;
@@ -58,14 +63,30 @@ public class StoryChapter1 : MonoBehaviour {
 
     //成功对话
     int t_help = 6;
+    int t_startHelp = 9;
+    int t_sayFollow = 11;
 
-    bool b_initSlot = false;
-    bool b_hitted = false;
+    //开始碰撞
+    int t_sayHit = 3;
+    int t_sayHit2 = 10;
+
+   
+    int temp_hittimes = 0;
+
+    //解放
+    int t_sayFinal = 6;
+    int t_sayFinal2 = 12;
+    int t_sayFinal3 = 18;
+    int t_sayFinal4 = 24;
+    [HideInInspector] public bool b_initSlot = false;
+    [HideInInspector] public bool b_hitted = false;
     [HideInInspector] public bool b_colorRecovered = false;
     [HideInInspector] public bool b_guideVisit = false;
     
-    bool b_initGuide = false;
+    [HideInInspector] public bool b_initGuide = false;
     [HideInInspector] public bool b_aftersay = false;
+    [HideInInspector] public bool b_reachBreakPos = false;
+    [HideInInspector] public bool b_broken = false;
 
     public static StoryChapter1 main;
     private void Awake() {
@@ -75,6 +96,7 @@ public class StoryChapter1 : MonoBehaviour {
             Destroy(gameObject);  
 
         cae = Camera.main.GetComponent<ColorAdjustEffect>();
+        wwce = Camera.main.GetComponent<WaterWaveClickEffect>();
 
     }
 
@@ -104,6 +126,43 @@ public class StoryChapter1 : MonoBehaviour {
         b_aftersay = true;
         timeFrame = 0;
 
+    }
+    public void reachBreakPos() {
+        b_reachBreakPos = true;
+        timeFrame = 0;
+        //guide_main.say("Hit here, the most fragile spot.");
+    }
+    void setCoreAlpha(float alpha) {
+        ParticleSystem.MainModule mm = core.main;
+        Color c = mm.startColor.color;
+        c.a = alpha;
+        mm.startColor = c;
+    
+    }
+    public void hitCircle(Vector3 hitpos) {
+        Vector3 vvs = Camera.main.WorldToScreenPoint(hitpos);
+        Vector2 vs = new Vector2(vvs.x,vvs.y);
+        wwce.exec(vs);
+
+        temp_hittimes ++;
+        if (temp_hittimes == 1) {
+            setCoreAlpha(0.2f);
+        } else if (temp_hittimes == 2) {
+            setCoreAlpha(0.4f);
+        } else if (temp_hittimes == 3) {
+            setCoreAlpha(0.6f);
+            guide_main.say("Oh! It's shaking!");
+        } else if (temp_hittimes == 4) {
+            breakCircle();
+            b_broken = true;
+            timeFrame = 0;
+        }
+    }
+    void breakCircle() {
+        DestroyAfter da = core.gameObject.AddComponent<DestroyAfter>();
+        guide_main.status = 5;
+        da.destroy_after = 10f;
+        sc.gameObject.SetActive(false);
     }
     public void setContrast(float contrast) {
         cae.contrast = contrast;
@@ -212,6 +271,7 @@ public class StoryChapter1 : MonoBehaviour {
                 guide_main.target_pos = coming_pos;
                 guide_main.out_pos = out_pos;
                 lockInput = true;
+                black_img_anim.Play("bi_show");
             }
 
             if (reach(t_sayHello)) {
@@ -225,19 +285,56 @@ public class StoryChapter1 : MonoBehaviour {
                 Instantiate(text_enterSay,story_text_parent);
                 command_input.SetActive(true);
                 lockInput = false;
+                black_img_anim.Play("bi_hide");
             }   
             else if (reach(t_sayNext)) {
                 guide_main.say("Hey, please say something.");
             }   
         }
-
-        //解锁阶段
-        if (b_aftersay) {
+        //变向
+        if (b_aftersay && !b_reachBreakPos) {
             if (reach(t_help)) {
                 guide_main.say("Don't worry.\n I can help you get out of there.");
                 guide_main.look_around = false;
-                Instantiate(text_endTest,story_text_parent);
+                
             } 
+            else if (reach(t_startHelp)) {
+                guide_main.findPos();
+            } 
+            if (reach(t_sayFollow)) {
+                guide_main.say("Follow me.");
+            } 
+        }
+
+        if (b_reachBreakPos && !b_broken) {
+            if (reach(t_sayHit)) {
+                guide_main.say("Hit here, the most fragile spot.");
+            }
+            else if (temp_hittimes == 0 && reach(t_sayHit2)) {
+                guide_main.say("I mean, just speeding up to me!");
+            }
+        }
+
+        if (b_broken) {
+            if (core != null) {
+                gate.transform.localScale *= 1.05f;
+                distortion.transform.localScale *= 1.02f;
+                core.transform.localScale *= 0.9f;
+            }
+
+            if (reach(t_sayFinal)) {
+                guide_main.say("Wow, that explosion was amazing right?");
+            }
+            else if (reach(t_sayFinal2)) {
+                guide_main.say("It was our destiny to meet, "+PlayerStat.main.player_name+".");
+            }
+            else if (reach(t_sayFinal3)) {
+                guide_main.say("Let me share you these.");
+            }
+            else if (reach(t_sayFinal4)) {
+                guide_main.say("You'll know how to deal with them, bye!");
+                Instantiate(text_endTest,story_text_parent);
+            }
         }
     }
 

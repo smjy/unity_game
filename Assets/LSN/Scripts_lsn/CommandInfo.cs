@@ -11,6 +11,7 @@ public class CommandInfo : MonoBehaviour {
 	public void initial () {
         NAME = transform.Find("Text").GetComponent<Text>();
         NAME.text = command_name;
+        Debug.Log("1");
 	}
 	
 	// Update is called once per frame

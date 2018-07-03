@@ -9,19 +9,31 @@ public class StoryCircle : MonoBehaviour {
 	bool first = false;
     bool second = false;
     
+    StoryChapter1 sc1 = null;
     
 	void OnCollisionEnter(Collision collision)
     {
+        if (sc1 == null) sc1 = StoryChapter1.main;
         if (collision.gameObject.GetComponent<MainPlayer_Single>()!=null) { 
             if (!first) {
                 first = true;
-                if (!StoryChapter1.main.b_colorRecovered)
-                    StoryChapter1.main.addColorSystem();
+                if (!sc1.b_colorRecovered)
+                    sc1.addColorSystem();
             }
 
-            if (first && StoryChapter1.main.b_colorRecovered && !second) {
+            if (first && sc1.b_colorRecovered && !second) {
                 second = true;
-                StoryChapter1.main.guideVisit();
+                sc1.guideVisit();
+            }
+
+            if (second && sc1.b_reachBreakPos) {
+                float imp = collision.impulse.magnitude;
+                imp -= 9200f;
+
+                if (imp > 0) {
+                    //Debug.Log(imp);
+                    sc1.hitCircle(collision.contacts[0].point);
+                }
             }
         }
     }

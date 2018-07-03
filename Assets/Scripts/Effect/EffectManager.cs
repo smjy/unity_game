@@ -10,6 +10,7 @@ public class EffectManager : MonoBehaviour {
     public Effect entering_effect;
     public Effect[] hit_effects;
 
+    public GameObject Tracker;
 
 	private void Awake() {
         if (main == null)
