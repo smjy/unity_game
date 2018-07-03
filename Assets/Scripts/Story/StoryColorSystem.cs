@@ -9,12 +9,7 @@ public class StoryColorSystem : MonoBehaviour {
 
     public GameObject effect1;
     public GameObject effect2;
-	Rigidbody rb;
 
-
-	void Awake() {
-		rb = GetComponent<Rigidbody>();
-	}
 	
 	void OnCollisionEnter(Collision collision)
     {
@@ -22,7 +17,7 @@ public class StoryColorSystem : MonoBehaviour {
 
             //Destroy(collision.gameObject);
             float imp = collision.impulse.magnitude;
-            imp -= 9000f;
+            imp -= 7000f;
             ContactPoint cp = collision.contacts[0];
             Vector3 toDirection = cp.point - transform.position;
             Quaternion r = Quaternion.FromToRotation(Vector3.forward,toDirection);
@@ -32,7 +27,7 @@ public class StoryColorSystem : MonoBehaviour {
                 Instantiate(effect1,transform);
                 // imp max 3000 3000/1000000 = 0.003 4times
                 
-                StoryChapter1.main.saturationResolve -= imp/500000f;
+                StoryChapter1.main.saturationResolve -= imp/550000f;
                 StoryChapter1.main.setSaturation(Mathf.Min(1f,imp/3000f));
                 //Debug.Log(StoryChapter1.main.saturationResolve);
 

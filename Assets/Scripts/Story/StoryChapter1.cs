@@ -5,34 +5,67 @@ using UnityEngine.UI;
 
 public class StoryChapter1 : MonoBehaviour {
 
-    public GameObject Guide;
+    [Header("调试模式")]
+    public bool debug_open = true;
+
+    [Header("剧情物体")]
+    public StoryGuideAI Guide;
+    StoryGuideAI guide_main;
     public Transform story_object_parent;
+    public Transform story_text_parent;
     public ParticleSystem gate;
     public Image black_fade;
-
-
+    public AudioSource bgm;
+    
+    //解锁主manager
     public GameObject slots;
     public GameObject slot_manager;
     ColorAdjustEffect cae;
-
-    int timeFrame = 0;
-
+    public GameObject command_input;
+    
+    
     public GameObject color_system;
     public GameObject contrast_system;
+
+    //指引文本
+    [Header("指引文本")]
+    public Text text_wasd;
+    public Text text_hitTheBall;
+    public Text text_enterSay;
+
+    public Text text_endTest;
 
     [HideInInspector] public float contrastResolve = 0.001f; 
     [HideInInspector] public float saturationResolve = 0.998f;
     [HideInInspector] public float saturationMin = 0.975f;
     [HideInInspector] public float contrastMax = 0.025f;
+
+    [HideInInspector] public bool in_story = true;
+    [HideInInspector] public bool lockInput = false;
+
     //章节时间点
+    int timeFrame = 0;
     bool first = false;
+    int t_hint1 = 40; //40秒还没撞球就出提示
     int t_startFade = 3;
     int t_startBlink = 5;
-    int t_initSlot = 10;
+
+    //向导出现
+    int t_sayHello = 7;
+    int t_sayWTF = 13;
+    int t_enterSay = 17;
+    int t_sayNext = 18;
+
+    //成功对话
+    int t_help = 6;
 
     bool b_initSlot = false;
+    bool b_hitted = false;
     [HideInInspector] public bool b_colorRecovered = false;
     [HideInInspector] public bool b_guideVisit = false;
+    
+    bool b_initGuide = false;
+    [HideInInspector] public bool b_aftersay = false;
 
     public static StoryChapter1 main;
     private void Awake() {
@@ -42,12 +75,36 @@ public class StoryChapter1 : MonoBehaviour {
             Destroy(gameObject);  
 
         cae = Camera.main.GetComponent<ColorAdjustEffect>();
-    }
-
-    void Start() {
 
     }
 
+  
+    bool reach(float rtime) {
+        return timeFrame == 50*rtime;
+    }
+    bool more(float rtime) {
+        return timeFrame > 50*rtime;
+    }
+    public void guideVisit() {
+        b_guideVisit = true;
+        timeFrame = 0;
+    }
+    public void saySomething(string str) {
+
+        if (b_aftersay) return;
+
+        if (str.Contains("Hello") && str.Contains("World")) {
+            guide_main.say("Oh,congrats! Hi world too!");
+        } else if (str.Contains("Fuck")) {
+            guide_main.say("Why Fuck? You are so rude.");
+        } else {
+            guide_main.say("Oh,congrats! Now you know how to speak.");
+        }
+
+        b_aftersay = true;
+        timeFrame = 0;
+
+    }
     public void setContrast(float contrast) {
         cae.contrast = contrast;
     }
@@ -56,13 +113,14 @@ public class StoryChapter1 : MonoBehaviour {
     }
     public void addColorSystem() {
         Vector3 pos = MainPlayer_Single.me.transform.position;
-        pos.x = -0.95f*pos.x;
-        pos.y = -0.95f*pos.y;
+        pos.x = -0.9f*pos.x;
+        pos.y = -0.9f*pos.y;
         pos.z = 100f;
         Instantiate(color_system,pos,Random.rotation,story_object_parent);
 
     }
     public void addContrastSystem() {
+        b_hitted = true;
         Vector3 pos = MainPlayer_Single.me.transform.position;
         pos.Normalize();
         pos.x = -230f*pos.x;
@@ -73,56 +131,113 @@ public class StoryChapter1 : MonoBehaviour {
     }
     void FixedUpdate() {
         timeFrame++;
-
+        if (debug_open) {
+            first = true;
+            debug_open = false;
+            cae.saturation = 1f;
+            cae.contrast = 1f;
+            b_colorRecovered = true;
+            //b_guideVisit = true;
+            b_hitted = true;
+            
+        }
         //时间展开
         if (!first) {
-            //black_fade.gameObject.SetActive(true);
+            black_fade.gameObject.SetActive(true);
             first = true;
             cae.contrast = 3f;
             cae.saturation = 0f;
         }
-        if (timeFrame == 50*t_startFade) {
-            //black_fade.GetComponent<StoryFade>().enabled = true;
-        } 
-        else if (timeFrame > 50*t_startBlink && !b_colorRecovered) {
-            
-            float f = Random.Range(0f,1f);
+        //被困部分
+        if (!b_guideVisit) {
+            if (reach(t_startFade)) {
+                Instantiate(text_wasd,story_text_parent);
+                black_fade.GetComponent<StoryFade>().enabled = true;
+            } 
+            else if (more(t_startBlink) && !b_colorRecovered) {
+                
+                float f = Random.Range(0f,1f);
 
-            if (contrastResolve < contrastMax) {
-                if (f< contrastResolve) {
-                    cae.contrast = Random.Range(0.5f,1.2f);
+                if (contrastResolve < contrastMax) {
+                    if (f< contrastResolve) {
+                        cae.contrast = Random.Range(0.5f,1.2f);
+                    } else {
+                        cae.contrast = 3f;
+                    }
                 } else {
-                    cae.contrast = 3f;
+                    cae.contrast = 1f;
                 }
-            } else {
-                cae.contrast = 1f;
+                
+                if (saturationResolve > saturationMin) {
+                    if (f > saturationResolve) {
+                        cae.saturation = Random.Range(0.8f,2f);
+                    } else {
+                        cae.saturation = 0f;
+                    }
+                } else {
+                    cae.saturation = 1f;
+                }
+
+                if (contrastResolve > contrastMax && saturationResolve < saturationMin) {
+                    b_colorRecovered = true;
+                }
             }
             
-            if (saturationResolve > saturationMin) {
-                if (f > saturationResolve) {
-                    cae.saturation = Random.Range(0.8f,2f);
-                } else {
-                    cae.saturation = 0f;
-                }
-            } else {
-                cae.saturation = 1f;
-            }
-
-            if (contrastResolve > contrastMax && saturationResolve < saturationMin) {
-                b_colorRecovered = true;
+            //提示部分
+            if (reach(t_hint1) && !b_hitted) {
+                Instantiate(text_hitTheBall,story_text_parent); 
             }
         }
-        
+        //开关部分
         if (b_initSlot) {
             slots.SetActive(true);
             slot_manager.SetActive(true);
 
             b_initSlot = false;
         }
+        //开始向导阶段
+        if (b_guideVisit && !b_aftersay) {
+            if (!b_initGuide) {
+                b_initGuide = true;
+                Debug.Log("visit!");
+                Vector3 player_pos = MainPlayer_Single.me.transform.position;
+                Vector3 init_pos = player_pos * 1.7f;
+                init_pos.z = 100f;
+                Vector3 coming_pos = player_pos * 1.2f;
+                coming_pos.z = 100f;
+                Vector3 out_pos = Random.onUnitSphere*8400f;
+                out_pos.z = 100f;
 
-        if (b_guideVisit) {
-            Debug.Log("visit!");
-            b_guideVisit = false;
+                guide_main = Instantiate(Guide,init_pos,Random.rotation,story_object_parent);
+                guide_main.target_pos = coming_pos;
+                guide_main.out_pos = out_pos;
+                lockInput = true;
+            }
+
+            if (reach(t_sayHello)) {
+                guide_main.say("Hello?");
+            } 
+            else if (reach(t_sayWTF)) {
+                guide_main.look_around = true;
+                guide_main.say("What happened to you? \n An Isolation Zone?");
+            }
+            else if (reach(t_enterSay)) {
+                Instantiate(text_enterSay,story_text_parent);
+                command_input.SetActive(true);
+                lockInput = false;
+            }   
+            else if (reach(t_sayNext)) {
+                guide_main.say("Hey, please say something.");
+            }   
+        }
+
+        //解锁阶段
+        if (b_aftersay) {
+            if (reach(t_help)) {
+                guide_main.say("Don't worry.\n I can help you get out of there.");
+                guide_main.look_around = false;
+                Instantiate(text_endTest,story_text_parent);
+            } 
         }
     }
 

@@ -20,6 +20,12 @@ public class CommandInputManager : MonoBehaviour {
 
         if (str.Trim().Length == 0) return;
 
+        str = str.Trim();
+
+        if (StoryChapter1.main.in_story) {
+            MainPlayer_Single.me.say(str);
+            StoryChapter1.main.saySomething(str);
+        }
         appendLine(str);
 
     }

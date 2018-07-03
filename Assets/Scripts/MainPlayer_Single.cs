@@ -7,10 +7,10 @@ public class MainPlayer_Single : MonoBehaviour
     // Use this for initialization
     public static MainPlayer_Single me;
     public float forcePower = .5f;
-
     public float maxSpeed = 500f;
     //public float friction_extra = 20f;
     //float friction;
+    public TextMesh say_text;
 
     [HideInInspector]
     public Rigidbody rb;
@@ -20,6 +20,15 @@ public class MainPlayer_Single : MonoBehaviour
         else if (me != this)
             Destroy(gameObject);  
     }
+
+    public void say(string str) {
+        Vector3 init_pos = transform.position;
+        init_pos.x += 7f;
+        init_pos.y += 10f;
+        TextMesh tm = Instantiate(say_text,init_pos,new Quaternion(),transform.parent);
+        tm.text = str;
+    }
+
     void Start()
     {
         transform.position = new Vector3(0, 0, 100);
@@ -35,7 +44,9 @@ public class MainPlayer_Single : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 mv;
-        if (CommandInput.main.N()) {
+        if (CommandInput.main != null && CommandInput.main.N()) {
+            mv = new Vector3(0,0,0);
+        } else if (StoryChapter1.main.lockInput) {
             mv = new Vector3(0,0,0);
         } else {
             mv = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 public class WindowSizeSet : MonoBehaviour {
 
    
@@ -30,12 +30,12 @@ public class WindowSizeSet : MonoBehaviour {
 
     public void on_fullActive()
     {
-        PlayerSettings.defaultIsFullScreen = true;
+        //PlayerSettings.defaultIsFullScreen = true;
         GameSetting.main.windowSize ="Full";
     }
     public void on_windowActive()
     {
-        PlayerSettings.defaultIsFullScreen = false;
+        //PlayerSettings.defaultIsFullScreen = false;
         GameSetting.main.windowSize = "Window";
     }
 }

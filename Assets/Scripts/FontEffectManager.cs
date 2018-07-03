@@ -58,7 +58,10 @@ public class FontEffectManager : MonoBehaviour {
 	void Update () {
         //测试鼠标点击生成
         //if (Input.GetMouseButtonDown(0)) {
-        if (CommandInput.main.Y() && Input.GetKeyDown(KeyCode.Space)) {
+        if (CommandInput.main != null && CommandInput.main.N()) {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.Space)) {
             Vector3 mp = Input.mousePosition;
             mp.z = 100f;
             Vector3 pos = Camera.main.ScreenToWorldPoint(mp);

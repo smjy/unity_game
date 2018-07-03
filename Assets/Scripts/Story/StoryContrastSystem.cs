@@ -9,12 +9,7 @@ public class StoryContrastSystem : MonoBehaviour {
 
     public GameObject effect1;
     public GameObject effect2;
-	Rigidbody rb;
 
-
-	void Awake() {
-		rb = GetComponent<Rigidbody>();
-	}
 	
 	void OnCollisionEnter(Collision collision)
     {
@@ -22,7 +17,7 @@ public class StoryContrastSystem : MonoBehaviour {
 
             //Destroy(collision.gameObject);
             float imp = collision.impulse.magnitude;
-            imp -= 9000f;
+            imp -= 7000f;
             ContactPoint cp = collision.contacts[0];
             Vector3 toDirection = cp.point - transform.position;
             Quaternion r = Quaternion.FromToRotation(Vector3.forward,toDirection);
@@ -32,7 +27,7 @@ public class StoryContrastSystem : MonoBehaviour {
                 Instantiate(effect1,transform);
 
                 
-                StoryChapter1.main.contrastResolve += imp/500000f;
+                StoryChapter1.main.contrastResolve += imp/550000f;
                 StoryChapter1.main.setContrast(Mathf.Max(1f,3f-imp/2000f));
 
                 if (StoryChapter1.main.contrastResolve > StoryChapter1.main.contrastMax) {

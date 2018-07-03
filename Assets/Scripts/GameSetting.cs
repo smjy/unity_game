@@ -43,7 +43,6 @@ public class GameSetting : MonoBehaviour {
              KeyCode.I,
              KeyCode.C,
              KeyCode.Escape
-
         };
 
     private void Awake()
