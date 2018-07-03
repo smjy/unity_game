@@ -26,13 +26,17 @@ public class panel : MonoBehaviour
         }
      
         item[] ng = FindObjectsOfType<item>();
-        weaponsnum = ng.Length;
+        
         for (int i = 0; i < ng.Length; i++)
         {
-            weapons.Add(ng[i]);
+            if (ng[i].transform.parent == package.main.wp) {
+                weapons.Add(ng[i]);
+                weaponsnum ++;
+            }
+            
 
         }
-        Debug.Log(weaponsnum);
+        //Debug.Log(weaponsnum);
         initial();
        
     }
@@ -104,12 +108,8 @@ public class panel : MonoBehaviour
     }
     public void addItem(item i)
     {
-        //满了
-        //弹出背包满了 社么也不做 return;
-        //判断可堆叠
-        //如果可以
-        //操作某一个itemBlock
-        //itemBLock.loadImage (item.image)
+        
+
         if (!i.stackable)
         {
             if (fullblocks < 30)
@@ -121,6 +121,8 @@ public class panel : MonoBehaviour
                 blocks[fullblocks].setNum(1);
                 weaponsnum++;
                 fullblocks++;
+
+                i.OnObtain();
             }
             else
             {
@@ -140,6 +142,8 @@ public class panel : MonoBehaviour
                     blocks[fullblocks].setNum(1);
                     weaponsnum++;
                     fullblocks++;
+
+                    i.OnObtain();
                 }
                 else
                 {
@@ -153,6 +157,8 @@ public class panel : MonoBehaviour
                 weapons.Add(i);
                 blocks[n].setNum(temp);
                 weaponsnum++;
+
+                i.OnObtain();
             }
         }
     }

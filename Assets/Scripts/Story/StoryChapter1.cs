@@ -14,6 +14,7 @@ public class StoryChapter1 : MonoBehaviour {
     StoryGuideAI guide_main;
     public Transform story_object_parent;
     public Transform story_text_parent;
+    public Transform story_text2_parent;
     public ParticleSystem gate;
     public ParticleSystem distortion;
     public ParticleSystem core;
@@ -21,6 +22,9 @@ public class StoryChapter1 : MonoBehaviour {
     public AudioSource bgm;
     public Animator black_img_anim;
     
+    public StartSpeed item_minimap;
+    public StartSpeed item_carnoon;
+
     //解锁主manager
     public GameObject slots;
     public GameObject slot_manager;
@@ -28,6 +32,7 @@ public class StoryChapter1 : MonoBehaviour {
     WaterWaveClickEffect wwce;
     public GameObject command_input;
     public StoryCircle sc;
+    public GameObject minimap_system;
     
     public GameObject color_system;
     public GameObject contrast_system;
@@ -37,6 +42,7 @@ public class StoryChapter1 : MonoBehaviour {
     public Text text_wasd;
     public Text text_hitTheBall;
     public Text text_enterSay;
+    public Text text_endChapter1;
 
     public Text text_endTest;
 
@@ -70,15 +76,16 @@ public class StoryChapter1 : MonoBehaviour {
     int t_sayHit = 3;
     int t_sayHit2 = 10;
 
-   
     int temp_hittimes = 0;
 
     //解放
-    int t_sayFinal = 6;
-    int t_sayFinal2 = 12;
-    int t_sayFinal3 = 18;
-    int t_sayFinal4 = 24;
-    [HideInInspector] public bool b_initSlot = false;
+    int t_sayFinal = 10;
+    int t_sayFinal2 = 17;
+    int t_sayFinal3 = 21;
+    int t_sayFinal4 = 30;
+    int t_endChapter = 38;
+
+    //开关变量
     [HideInInspector] public bool b_hitted = false;
     [HideInInspector] public bool b_colorRecovered = false;
     [HideInInspector] public bool b_guideVisit = false;
@@ -146,13 +153,13 @@ public class StoryChapter1 : MonoBehaviour {
 
         temp_hittimes ++;
         if (temp_hittimes == 1) {
-            setCoreAlpha(0.2f);
-        } else if (temp_hittimes == 2) {
-            setCoreAlpha(0.4f);
+            setCoreAlpha(0.3f);
         } else if (temp_hittimes == 3) {
             setCoreAlpha(0.6f);
+        } else if (temp_hittimes == 5) {
+            setCoreAlpha(0.8f);
             guide_main.say("Oh! It's shaking!");
-        } else if (temp_hittimes == 4) {
+        } else if (temp_hittimes == 7) {
             breakCircle();
             b_broken = true;
             timeFrame = 0;
@@ -163,6 +170,15 @@ public class StoryChapter1 : MonoBehaviour {
         guide_main.status = 5;
         da.destroy_after = 10f;
         sc.gameObject.SetActive(false);
+    }
+    void giveItem() {
+        StartSpeed ss1 = Instantiate(item_minimap,guide_main.transform.position, Random.rotation, story_object_parent);
+        StartSpeed ss2 = Instantiate(item_carnoon,guide_main.transform.position, Random.rotation, story_object_parent);
+        Vector3 vv = guide_main.transform.position - MainPlayer_Single.me.transform.position;
+        vv.Normalize();
+        vv+=Random.onUnitSphere*0.1f;
+        ss1.start_speed = vv*1.9f;
+        ss2.start_speed = vv* 2.3f;
     }
     public void setContrast(float contrast) {
         cae.contrast = contrast;
@@ -188,6 +204,18 @@ public class StoryChapter1 : MonoBehaviour {
         Instantiate(contrast_system,pos,Random.rotation,story_object_parent);
         
     }
+
+    public void activeMinimap() {
+        minimap_system.SetActive(true);
+    }
+    public void activeSlot() {
+        slots.SetActive(true);
+        slot_manager.SetActive(true);
+    }
+    public void activeCommandOutput() {
+        CommandOutput.main.active = true;
+    }
+    
     void FixedUpdate() {
         timeFrame++;
         if (debug_open) {
@@ -239,6 +267,7 @@ public class StoryChapter1 : MonoBehaviour {
 
                 if (contrastResolve > contrastMax && saturationResolve < saturationMin) {
                     b_colorRecovered = true;
+                    cae.enabled = false;
                 }
             }
             
@@ -247,13 +276,7 @@ public class StoryChapter1 : MonoBehaviour {
                 Instantiate(text_hitTheBall,story_text_parent); 
             }
         }
-        //开关部分
-        if (b_initSlot) {
-            slots.SetActive(true);
-            slot_manager.SetActive(true);
 
-            b_initSlot = false;
-        }
         //开始向导阶段
         if (b_guideVisit && !b_aftersay) {
             if (!b_initGuide) {
@@ -331,12 +354,25 @@ public class StoryChapter1 : MonoBehaviour {
             else if (reach(t_sayFinal3)) {
                 guide_main.say("Let me share you these.");
             }
+            else if (reach(t_sayFinal3 + 40)) {
+                giveItem();
+            }
             else if (reach(t_sayFinal4)) {
                 guide_main.say("You'll know how to deal with them, bye!");
-                Instantiate(text_endTest,story_text_parent);
+                entTest();
+            }
+            else if (reach(t_endChapter)) {
+                guide_main.status = 2;
+                Instantiate(text_endChapter1,story_text2_parent);
+                in_story = false;
+                b_broken = false;
+                activeSlot();
             }
         }
     }
 
+    void entTest() {
+        Instantiate(text_endTest,story_text_parent);
+    }
 
 }

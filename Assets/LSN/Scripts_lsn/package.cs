@@ -12,6 +12,16 @@ public class package : MonoBehaviour {
     Text text_name;
     public Sprite nodisplay;
     int selected = -1;
+    public static package main;
+    public Transform wp;
+
+    private void Awake() {
+        if (main == null)
+            main = this;
+        else if (main != this)
+            Destroy(gameObject);  
+    }
+
 	// Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
@@ -37,7 +47,7 @@ public class package : MonoBehaviour {
         }
 	}
 
-    void additem(item i)
+    public void additem(item i)
     {
         package_panel.addItem(i);
     }

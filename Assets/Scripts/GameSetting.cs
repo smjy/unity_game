@@ -17,7 +17,7 @@ public class GameSetting : MonoBehaviour {
         public string pictureQuality; //画面质量
         public string language; //语言
         public string[] functions = new string[11]
-       {
+        {
             "Forward",
             "Back",
             "Left",
@@ -30,7 +30,7 @@ public class GameSetting : MonoBehaviour {
             "Command Info",
             "Menu"
        };
-       public  KeyCode[] keySetDefaults = new KeyCode[11]
+       public KeyCode[] keySetDefaults = new KeyCode[11]
         {
              KeyCode.W,
              KeyCode.A,

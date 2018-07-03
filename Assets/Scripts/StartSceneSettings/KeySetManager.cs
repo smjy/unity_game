@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;//绑定按键与功能
 
 public static class KeySetManager {
 
-    static Dictionary<string, KeyCode> keySetting;
+    public static Dictionary<string, KeyCode> keySetting;
     static string[] functionMaps = GameSetting.main.functions;
 
     static KeyCode[] defaults = GameSetting.main.keySetDefaults;

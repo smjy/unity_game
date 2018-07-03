@@ -21,7 +21,7 @@ public class item_block : MonoBehaviour {
         
         image = transform.Find("Image").GetComponent<Image>();
 
-        Debug.Log(gameObject.name+":" + (image == null));
+        //Debug.Log(gameObject.name+":" + (image == null));
         //button = GetComponent<Button>();
         NUM = transform.Find("Text").GetComponent<Text>();
         NUM .text= "";
