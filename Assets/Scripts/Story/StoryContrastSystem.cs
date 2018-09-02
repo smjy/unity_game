@@ -22,6 +22,7 @@ public class StoryContrastSystem : MonoBehaviour {
             Vector3 toDirection = cp.point - transform.position;
             Quaternion r = Quaternion.FromToRotation(Vector3.forward,toDirection);
             Instantiate(EffectManager.main.get_hit_effect(),cp.point,r,EffectManager.main.effect_parent);
+            AudioClips.main.play(4);
             
             if (imp > 0) {
                 Instantiate(effect1,transform);
@@ -32,7 +33,7 @@ public class StoryContrastSystem : MonoBehaviour {
 
                 if (StoryChapter1.main.contrastResolve > StoryChapter1.main.contrastMax) {
                     DestroyAfter da = gameObject.AddComponent<DestroyAfter>();
-                    
+                    AudioClips.main.play(5);
                     da.destroy_after = 3f;
                     foreach (ParticleSystem ps in gameObject.GetComponentsInChildren<ParticleSystem>()) {
                         ps.Stop();

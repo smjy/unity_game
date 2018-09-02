@@ -13,6 +13,16 @@ public abstract class Region : MonoBehaviour {
     protected GameObject obj_effects;
     protected GameObject obj_events;
         
+    void Awake() {
+        //生成子空物体
+        obj_effects =  new GameObject("RegionEffects");
+        obj_effects.transform.SetParent(transform);
+        obj_events = new GameObject("RegionEvents");
+        obj_events.transform.SetParent(transform);
+    }
+    public Transform getObjEvents() {
+        return obj_events.transform;
+    }
     public HashSet<Vector2> blockList {
         get {
             return _blockList;
@@ -68,8 +78,8 @@ public abstract class Region : MonoBehaviour {
     [SerializeField] [Tooltip("区域边界粗细倍数")] float width_multiplier = 1;
     [SerializeField] [Tooltip("区域区块数量最大值(0为不限制)")] int max_block = 3;
     //[SerializeField] [Tooltip("区域区块数量靠近最大值的概率阈值")] float max_block_param = 0.5f; //弃用，因为逻辑冲突
-    [SerializeField] [Tooltip("区域包含事件及权重")] RegionEvent[] region_events;
-    [SerializeField] [Tooltip("区域包含事件最大值")] int max_events = 20;
+    //[SerializeField] [Tooltip("区域包含事件及权重")] RegionEvent[] region_events;
+    //[SerializeField] [Tooltip("区域包含事件最大值")] int max_events = 20;
 
     [SerializeField] [Tooltip("区域包含背景特效及权重")] RegionEffect[] region_effects;
     [SerializeField] [Tooltip("区域包含背景特效最大值")] int max_effects = 20;
@@ -167,11 +177,7 @@ public abstract class Region : MonoBehaviour {
     
     protected virtual void Start () {
 
-        //生成子空物体
-        obj_effects =  new GameObject("RegionEffects");
-        obj_effects.transform.SetParent(transform);
-        obj_events = new GameObject("RegionEvents");
-        obj_events.transform.SetParent(transform);
+        
 
         
 

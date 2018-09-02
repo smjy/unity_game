@@ -33,6 +33,8 @@ public class  FollowObtainIO : ItemObject {
                 Destroy (transform.GetChild (i).gameObject);
             }
             package.main.additem(ii);
+
+            AudioClips.main.play(6);
             Destroy(this);
         }
     }

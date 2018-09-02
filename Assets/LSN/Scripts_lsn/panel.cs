@@ -33,8 +33,6 @@ public class panel : MonoBehaviour
                 weapons.Add(ng[i]);
                 weaponsnum ++;
             }
-            
-
         }
         //Debug.Log(weaponsnum);
         initial();
@@ -49,7 +47,7 @@ public class panel : MonoBehaviour
     }
     void initial()
     {
-        Debug.Log("weapons count:"+weapons.Count);
+        //Debug.Log("weapons count:"+weapons.Count);
         fullblocks = 0;
        
         foreach (item T in weapons)

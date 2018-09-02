@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4267476214602108}
   - component: {fileID: 114528655207404482}
+  - component: {fileID: 114820183443982990}
   m_Layer: 0
   m_Name: StartRegion
   m_TagString: Untagged
@@ -55,11 +56,25 @@ MonoBehaviour:
   bound_material: {fileID: 2100000, guid: b5a175220f69ed2489956a163ada30eb, type: 2}
   width_multiplier: 3
   max_block: 1
-  region_events:
-  - e: {fileID: 0}
-    power: 0
-  max_events: 20
   region_effects:
   - eg: {fileID: 114144274517670204, guid: fbaeed25fe18c204191a41530f91327e, type: 2}
   - eg: {fileID: 114264983332561036, guid: b4b67f9ff84ec8c4a8a0d1fd172fe761, type: 2}
   max_effects: 5
+--- !u!114 &114820183443982990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1006202146142524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce300f4fe2be154bbfa02e140cdf65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RegionObjEvents:
+  - obj: {fileID: 1895477280356014, guid: eef6ed79a3dac0344a17ac7f7c3c0189, type: 2}
+    max_num: 4
+  - obj: {fileID: 1873386421324332, guid: 7aa7d35a7bd508d4181dd7b581d69cef, type: 2}
+    max_num: 4
+  currObjs: []
+  outside_max_distance: 0

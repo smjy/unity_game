@@ -34,7 +34,6 @@ public class FontEffectManager : MonoBehaviour {
         GameObject w = Instantiate(word,position,Random.rotation,font_parent);
         WordController wc = w.GetComponent<WordController>();
         wc.Init(c, force * direction, force * 0.01f, target_transform);
-
     }
 
     void createRandNum(int num) {
@@ -44,7 +43,7 @@ public class FontEffectManager : MonoBehaviour {
             create(c, new Vector3(0, 0, 100), Random.onUnitSphere,Random.Range(default_force*0.7f, default_force*1.4f));
         }
     }
-    void createRandNumAtPos(int num,Vector3 pos) {
+    public void createRandNumAtPos(int num,Vector3 pos) {
         for (int i =0;i<num;i++) {
             char c = (char)Random.Range(0, 25);
             c += 'a';
@@ -67,11 +66,5 @@ public class FontEffectManager : MonoBehaviour {
             Vector3 pos = Camera.main.ScreenToWorldPoint(mp);
             createRandNumAtPos(10,pos);
         }
-
-        
-
-        
     }
-
-   
 }

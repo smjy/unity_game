@@ -37,10 +37,11 @@ public class MinimapManager : MonoBehaviour
         icon.GetComponent<MinimapIconController>().SetTarget(obj);
         return icon;
     }
-    public void RegisterIcon(GameObject obj, GameObject iconPrefab,Color color)
+    public GameObject RegisterIcon(GameObject obj, GameObject iconPrefab,Color color)
     {
         GameObject icon = RegisterIcon(obj, iconPrefab);
         icon.GetComponent<Image>().color = color;
+        return icon;
     }
 
 

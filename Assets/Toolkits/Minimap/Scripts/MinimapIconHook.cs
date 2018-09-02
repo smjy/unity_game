@@ -8,7 +8,7 @@ public class MinimapIconHook : MonoBehaviour
     public GameObject icon;
     [Header("选择小地图图标的颜色")]
     public Color color = new Color(1, 1, 1, 1);
-
+    GameObject myicon;
     // Use this for initialization
     void Start()
     {
@@ -20,11 +20,17 @@ public class MinimapIconHook : MonoBehaviour
         {
             icon = MinimapManager.instance.iconCircle;
         }
-        MinimapManager.instance.RegisterIcon(gameObject, icon, color);
+        myicon =MinimapManager.instance.RegisterIcon(gameObject, icon, color);
     }
     // Update is called once per frame
     void Update()
     {
 
+    }
+    public void iconDestroy() {
+        Destroy(myicon);
+    }
+    void OnDestroy() {
+        Destroy(myicon);
     }
 }

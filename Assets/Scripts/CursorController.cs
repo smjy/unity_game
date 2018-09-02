@@ -89,7 +89,7 @@ public class CursorController : MonoBehaviour {
     }
 
     void Start () {
-        currentType = cursor_aim;
+        currentType = cursor_test;
         nextType = null;
         setCursorTypeActive(currentType,true);
 
@@ -104,17 +104,14 @@ public class CursorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (KeySetManager.GetKeyDown("Menu")) {
             Cursor.visible = !Cursor.visible;
         }
         newpos = Input.mousePosition;
         if (oldpos.z > -500) diff = newpos - oldpos;
         oldpos = newpos;
         r.anchoredPosition = new Vector2(newpos.x,newpos.y);
-        
-
-        
-
+    
         switch(switchStatus) {
             case 0: {
                 float mouseSpeed = diff.magnitude;
@@ -137,12 +134,13 @@ public class CursorController : MonoBehaviour {
                     }
                 }
 
-                if (Input.GetKeyDown(KeyCode.Z)) {
-                    switchType(cursor_test);
-                }
-                if (Input.GetKeyDown(KeyCode.C)) {
-                    switchType(cursor_aim);
-                }
+                // 切换光标
+                // if (Input.GetKeyDown(KeyCode.Z)) {
+                //     switchType(cursor_test);
+                // }
+                // if (Input.GetKeyDown(KeyCode.C)) {
+                //     switchType(cursor_aim);
+                // }
             } break;
             case 1: {
                 
@@ -180,8 +178,7 @@ public class CursorController : MonoBehaviour {
         }
 		//Input.mousePosition
 	}
-
-    
+   
     public void switchType(CursorType to) {
 
         if (currentType == to) return;
@@ -196,7 +193,6 @@ public class CursorController : MonoBehaviour {
     public void addSpeed(float kick) {
         currSpeed = Mathf.Clamp(currSpeed + kick*currentType.clickThreshold, 0f, 1f);
     }
-
 
     static void setCursorTypeActive(CursorType ct,bool b) {
         foreach(CursorSprite csp in ct.cursorSprites) {

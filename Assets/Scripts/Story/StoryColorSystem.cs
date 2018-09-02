@@ -23,6 +23,7 @@ public class StoryColorSystem : MonoBehaviour {
             Quaternion r = Quaternion.FromToRotation(Vector3.forward,toDirection);
             Instantiate(EffectManager.main.get_hit_effect(),cp.point,r,EffectManager.main.effect_parent);
             
+            AudioClips.main.play(4);
             if (imp > 0) {
                 Instantiate(effect1,transform);
                 // imp max 3000 3000/1000000 = 0.003 4times
@@ -33,7 +34,7 @@ public class StoryColorSystem : MonoBehaviour {
 
                 if (StoryChapter1.main.saturationResolve < StoryChapter1.main.saturationMin) {
                     DestroyAfter da = gameObject.AddComponent<DestroyAfter>();
-                    
+                    AudioClips.main.play(5);
                     da.destroy_after = 3f;
                     foreach (ParticleSystem ps in gameObject.GetComponentsInChildren<ParticleSystem>()) {
                         ps.Stop();

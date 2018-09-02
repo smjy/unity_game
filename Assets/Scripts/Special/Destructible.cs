@@ -10,16 +10,27 @@ public class Destructible : MonoBehaviour {
     public float upwards = 4f;
     
     Vector3 oldPos2;
-
+    AudioSource asc;
     void Start() {
         oldPos2 = transform.position;
+        if (GetComponent<AudioSource>()!=null) {
+            asc = GetComponent<AudioSource>();
+            Debug.Log("1");
+        }
+        else       
+            asc = AudioClips.main.ass;
     }
     public void trigger() {
         
-        GetComponent<BoxCollider>().enabled = false;
+        GetComponent<Collider>().enabled = false;
         Transform[] ts = GetComponentsInChildren<Transform>();
-        
+        FontEffectManager.main.createRandNumAtPos(Random.Range(1,6),transform.position);
+        gameObject.AddComponent<DestroyAfter>().destroy_after = 4f;
+        if (GetComponent<MinimapIconHook>()!=null) {
+            GetComponent<MinimapIconHook>().iconDestroy();
+        }
         Vector3 currVelocity = GetComponent<Rigidbody>().velocity;
+        asc.PlayOneShot(AudioClips.main.ac[9]);
         foreach (Transform t in ts) {
             if (t.gameObject.GetComponent<Destructible_remove>()!=null) {
                 Destroy(t.gameObject);

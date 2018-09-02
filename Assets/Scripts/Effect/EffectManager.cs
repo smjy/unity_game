@@ -7,7 +7,9 @@ public class EffectManager : MonoBehaviour {
     public static float screenRadius;
     public Transform effect_parent;
     public Transform map_effect_parent;
+
     public Effect entering_effect;
+    public Effect distortion_effect;
     public Effect[] hit_effects;
 
     public GameObject Tracker;

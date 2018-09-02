@@ -22,6 +22,8 @@ public class MapManager : MonoBehaviour {
 	[Tooltip("补充生成的圈数")] public int continue_block_length = 1;
 	float real_length;
 
+	
+
 	public GameObject bound;
 	public Transform bound_parent;
 	public Transform region_parent;
@@ -239,6 +241,15 @@ public class MapManager : MonoBehaviour {
 				Vector3 force = 20000f * new Vector3(0,directionX,0);
 				MainPlayer_Single.me.GetComponent<Rigidbody>().AddForce(force);
 				Instantiate(EffectManager.main.entering_effect,MainPlayer_Single.me.transform.position,r,EffectManager.main.effect_parent);
+			}
+
+			Vector3 screenpos = Camera.main.WorldToScreenPoint(MainPlayer_Single.me.transform.position);
+			Vector2 vpos = new Vector2(screenpos.x,screenpos.y);
+			Camera.main.GetComponent<WaterWaveClickEffect>().exec(vpos);
+			Instantiate(EffectManager.main.distortion_effect,MainPlayer_Single.me.transform.position,new Quaternion(),EffectManager.main.effect_parent);
+
+			if (playerAtRegion().GetType() != typeof(StartRegion)) {
+				StoryChapter1.main.switchBG();
 			}
 			//玩家进入新区域
 			regionAt(oldPlayerAt).has_user = false;

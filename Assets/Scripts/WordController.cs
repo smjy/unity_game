@@ -57,6 +57,7 @@ public class WordController : MonoBehaviour {
 
             Vector3 ap = following.anchoredPosition;
             ap.z = 100;
+            ap.y+=Screen.height;
             Vector3 target = Camera.main.ScreenToWorldPoint(ap);
 
             Vector3 direction = (target - transform.position).normalized;

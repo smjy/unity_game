@@ -31,8 +31,12 @@ public class StoryCircle : MonoBehaviour {
                 imp -= 9200f;
 
                 if (imp > 0) {
-                    //Debug.Log(imp);
-                    sc1.hitCircle(collision.contacts[0].point);
+                    float dis = Vector3.Distance(sc1.guide_main.transform.position,collision.contacts[0].point);
+                    if (dis < 40f) {
+                        sc1.hitCircle(collision.contacts[0].point);
+                    } else {
+                        sc1.notthere();
+                    }            
                 }
             }
         }

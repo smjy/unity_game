@@ -14,7 +14,8 @@ public class SlotsManager : MonoBehaviour {
     public MethodSlot slot_method;
 
     public IntPropertySlot code_blocks;
-    
+    bool code_block_activated = false;
+
     private List<PropertySlot> PropertySlots = new List<PropertySlot>();
     private List<MethodSlot> MethodSlots = new List<MethodSlot>();
     
@@ -27,8 +28,8 @@ public class SlotsManager : MonoBehaviour {
         code_blocks.slotname = "codeBlock";
         code_blocks.value = PlayerStat.main.code_blocks;
 
-        createIntPropertySlot("UserProperty",10);
-        createMethodSlot("UserMethod");
+        //createIntPropertySlot("UserProperty",10);
+        //createMethodSlot("UserMethod");
         setUISlots();
     }
 
@@ -88,11 +89,17 @@ public class SlotsManager : MonoBehaviour {
         return "";
     }
 
-    public void updateCodeBlock() {
+    public void updateCodeBlock() {   
+        if (!code_block_activated) activateCodeBlock();    
         code_blocks.value = PlayerStat.main.code_blocks;
-        code_blocks.updateValue();
+        code_blocks.updateValue();      
     }
-
+    public void activateCodeBlock() {
+        code_blocks.gameObject.SetActive(true);
+        code_block_activated = true;
+        code_blocks.gameObject.GetComponent<Animator>().Play("Slot1_show");
+        setUISlots();
+    }
     public int getIntProperty(string name) {
         foreach (PropertySlot ps in PropertySlots) {
             if (ps.slotname == "name" && ps is IntPropertySlot) {
@@ -121,9 +128,13 @@ public class SlotsManager : MonoBehaviour {
 
     void setUISlots() {
         int start = 0;
-        //系统Slots
-        setUISlot(code_blocks,start);
-        start++;
+
+        if (code_block_activated) {
+            //系统Slots
+            setUISlot(code_blocks,start);
+            start++;
+        }
+        
 
         //PropertySlots
         foreach (PropertySlot ps in PropertySlots) {

@@ -52,7 +52,7 @@ public class StoryGuideAI : RigidAI {
         float new_direction = curr_direction + Random.Range(30f,50f);
         break_pos = radius*zEulerDegree(new_direction);
         break_pos.z = 100f;
-        Instantiate(EffectManager.main.Tracker,break_pos,Random.rotation);
+        //Instantiate(EffectManager.main.Tracker,break_pos,Random.rotation);
         status = 3;
     }
 

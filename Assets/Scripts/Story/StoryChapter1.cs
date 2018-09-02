@@ -11,7 +11,7 @@ public class StoryChapter1 : MonoBehaviour {
 
     [Header("剧情物体")]
     public StoryGuideAI Guide;
-    StoryGuideAI guide_main;
+    [HideInInspector] public StoryGuideAI guide_main;
     public Transform story_object_parent;
     public Transform story_text_parent;
     public Transform story_text2_parent;
@@ -36,13 +36,18 @@ public class StoryChapter1 : MonoBehaviour {
     
     public GameObject color_system;
     public GameObject contrast_system;
+    public GameObject bullet_manager;
 
+    public GameObject bg1;
+    public GameObject bg2;
+    
     //指引文本
     [Header("指引文本")]
     public Text text_wasd;
     public Text text_hitTheBall;
     public Text text_enterSay;
     public Text text_endChapter1;
+    public Text text_qe;
 
     public Text text_endTest;
 
@@ -84,6 +89,7 @@ public class StoryChapter1 : MonoBehaviour {
     int t_sayFinal3 = 21;
     int t_sayFinal4 = 30;
     int t_endChapter = 38;
+    int t_sayWhere = 52;
 
     //开关变量
     [HideInInspector] public bool b_hitted = false;
@@ -94,6 +100,7 @@ public class StoryChapter1 : MonoBehaviour {
     [HideInInspector] public bool b_aftersay = false;
     [HideInInspector] public bool b_reachBreakPos = false;
     [HideInInspector] public bool b_broken = false;
+    [HideInInspector] public bool b_end = false;
 
     public static StoryChapter1 main;
     private void Awake() {
@@ -107,7 +114,7 @@ public class StoryChapter1 : MonoBehaviour {
 
     }
 
-  
+    
     bool reach(float rtime) {
         return timeFrame == 50*rtime;
     }
@@ -146,11 +153,29 @@ public class StoryChapter1 : MonoBehaviour {
         mm.startColor = c;
     
     }
+    public void switchBG() {
+        SpriteFadeInOut sfio1 = bg2.AddComponent<SpriteFadeInOut>();
+        sfio1.fade_in_time = 0;
+        sfio1.stay_time = 0;
+        sfio1.fade_out_time = 0;
+        sfio1.destroy_after_faded = false;
+        bg1.SetActive(true);
+        SpriteFadeInOut sfio2 = bg1.AddComponent<SpriteFadeInOut>();
+        sfio2.fade_in_time = 5;
+        sfio2.stay_time = int.MaxValue-1;
+        sfio2.destroy_after_faded = false;
+
+    }
+    public void notthere() {
+        string[] wds = new string[5]{"Hey, not so far!","Here,here!","Hit where I'm forward","Damn, not there!","...Don't hit there."};
+        guide_main.say(wds[Random.Range(0,5)]);
+    }
     public void hitCircle(Vector3 hitpos) {
         Vector3 vvs = Camera.main.WorldToScreenPoint(hitpos);
         Vector2 vs = new Vector2(vvs.x,vvs.y);
         wwce.exec(vs);
-
+        AudioClips.main.play(Random.Range(0,4));
+        
         temp_hittimes ++;
         if (temp_hittimes == 1) {
             setCoreAlpha(0.3f);
@@ -166,19 +191,34 @@ public class StoryChapter1 : MonoBehaviour {
         }
     }
     void breakCircle() {
-        DestroyAfter da = core.gameObject.AddComponent<DestroyAfter>();
+        DestroyAfter da = gate.gameObject.AddComponent<DestroyAfter>();
         guide_main.status = 5;
         da.destroy_after = 10f;
         sc.gameObject.SetActive(false);
+        AudioClips.main.play(8);
     }
     void giveItem() {
-        StartSpeed ss1 = Instantiate(item_minimap,guide_main.transform.position, Random.rotation, story_object_parent);
-        StartSpeed ss2 = Instantiate(item_carnoon,guide_main.transform.position, Random.rotation, story_object_parent);
+        StartSpeed ss1 = Instantiate(item_minimap,guide_main.transform.position, new Quaternion(), story_object_parent);
+        StartSpeed ss2 = Instantiate(item_carnoon,guide_main.transform.position, new Quaternion(), story_object_parent);
+        //Debug.Log(ss1.transform.position);
         Vector3 vv = guide_main.transform.position - MainPlayer_Single.me.transform.position;
         vv.Normalize();
-        vv+=Random.onUnitSphere*0.1f;
+        vv *= 10f;
+        vv+=Random.onUnitSphere*5f;
         ss1.start_speed = vv*1.9f;
-        ss2.start_speed = vv* 2.3f;
+        ss2.start_speed = vv* 3f;
+    }
+
+    void giveItemDebug() {
+        Vector3 pos = MainPlayer_Single.me.transform.position;
+        pos += new Vector3(50f,0,0);
+        StartSpeed ss1 = Instantiate(item_minimap,pos, new Quaternion(), story_object_parent);
+        StartSpeed ss2 = Instantiate(item_carnoon,pos, new Quaternion(), story_object_parent);
+        Vector3 vv = Random.onUnitSphere;
+        vv *= 10f;
+        vv+=Random.onUnitSphere*5f;
+        ss1.start_speed = vv*1.9f;
+        ss2.start_speed = vv* 3f;
     }
     public void setContrast(float contrast) {
         cae.contrast = contrast;
@@ -209,11 +249,14 @@ public class StoryChapter1 : MonoBehaviour {
         minimap_system.SetActive(true);
     }
     public void activeSlot() {
-        slots.SetActive(true);
-        slot_manager.SetActive(true);
+        //slots.SetActive(true);
+        //slot_manager.SetActive(true);
     }
     public void activeCommandOutput() {
         CommandOutput.main.active = true;
+    }
+    public void activeCarnoon() {
+        bullet_manager.SetActive(true);
     }
     
     void FixedUpdate() {
@@ -224,8 +267,18 @@ public class StoryChapter1 : MonoBehaviour {
             cae.saturation = 1f;
             cae.contrast = 1f;
             b_colorRecovered = true;
-            //b_guideVisit = true;
+            
             b_hitted = true;
+            b_guideVisit = true;
+            b_aftersay = true;
+            b_reachBreakPos = true;
+            b_broken = true;
+            b_end = true;
+
+            
+            giveItemDebug();
+            Destroy(gate.gameObject);
+            sc.gameObject.SetActive(false);
             
         }
         //时间展开
@@ -328,7 +381,7 @@ public class StoryChapter1 : MonoBehaviour {
                 guide_main.say("Follow me.");
             } 
         }
-
+        //开始脱困
         if (b_reachBreakPos && !b_broken) {
             if (reach(t_sayHit)) {
                 guide_main.say("Hit here, the most fragile spot.");
@@ -337,8 +390,8 @@ public class StoryChapter1 : MonoBehaviour {
                 guide_main.say("I mean, just speeding up to me!");
             }
         }
-
-        if (b_broken) {
+        //成功脱困
+        if (b_broken && !b_end) {
             if (core != null) {
                 gate.transform.localScale *= 1.05f;
                 distortion.transform.localScale *= 1.02f;
@@ -354,24 +407,27 @@ public class StoryChapter1 : MonoBehaviour {
             else if (reach(t_sayFinal3)) {
                 guide_main.say("Let me share you these.");
             }
-            else if (reach(t_sayFinal3 + 40)) {
+            else if (reach(t_sayFinal3 + 1)) {
                 giveItem();
             }
             else if (reach(t_sayFinal4)) {
                 guide_main.say("You'll know how to deal with them, bye!");
-                entTest();
+                endTest();
             }
             else if (reach(t_endChapter)) {
                 guide_main.status = 2;
                 Instantiate(text_endChapter1,story_text2_parent);
                 in_story = false;
                 b_broken = false;
-                activeSlot();
+                activeCommandOutput();
             }
+            else if (reach(t_sayWhere)) {
+                MainPlayer_Single.me.say("Ok. Seems I have to figure out \n where I'm going now.");
+            }  
         }
     }
 
-    void entTest() {
+    void endTest() {
         Instantiate(text_endTest,story_text_parent);
     }
 

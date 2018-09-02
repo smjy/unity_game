@@ -17,13 +17,19 @@ public class BulletManager : MonoBehaviour {
     public float reload_time = 0.3f; //second
     public float kick = 0.7f; //后坐力
     int time = 0;
+    MethodSlot ms;
 	// Use this for initialization
 
     
-	void Start () {
+	void Awake () {
         carnoon_object.SetActive(true);
+        
 	}
 	
+    void Start() {
+         ms = SlotsManager.main.createMethodSlot("Shoot");
+         CursorController.main.switchType(CursorController.main.cursor_aim);
+    }
 	// Update is called once per frame
 	void Update () {
         if (time < reload_time / Time.deltaTime) time++;
@@ -31,6 +37,7 @@ public class BulletManager : MonoBehaviour {
             shoot();
             time = 0;
         }
+        
         Vector3 mv = Input.mousePosition;
         mv.z = 100f;
         Vector3 diff = Camera.main.ScreenToWorldPoint(mv)-MainPlayer_Single.me.transform.position;
@@ -51,6 +58,7 @@ public class BulletManager : MonoBehaviour {
         Vector3 direction = (pos - start_pos).normalized;
         direction += Random.Range(0f, CursorController.main.accuracyRadius) * Random.onUnitSphere;
         CursorController.main.addSpeed(kick);
+        AudioClips.main.play(7);
         create(start_pos + direction * 10f, direction);
     }
     void create(Vector3 position, Vector3 direction) {

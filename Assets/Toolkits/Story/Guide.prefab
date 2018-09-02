@@ -171,7 +171,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!114 &114693480983889618
 MonoBehaviour:
@@ -188,6 +188,7 @@ MonoBehaviour:
   say_text: {fileID: 102217179485079164, guid: 1e1c634f0df3bdc4c8666495808f23d3, type: 2}
   target_pos: {x: 0, y: 0, z: 0}
   out_pos: {x: 0, y: 0, z: 0}
+  look_around: 0
   nofollow_distance: 50
   max_speed: 40
   force: 4000
